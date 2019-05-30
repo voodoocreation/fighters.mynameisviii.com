@@ -1,0 +1,26 @@
+@import "../../../scss/variables";
+
+.ButtonBar {
+  display: flex;
+  align-items: center;
+
+  &::before,
+  &::after {
+    display: block;
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+  }
+
+  &::before {
+    background: linear-gradient(to left, $text-color, rgba($text-color, 0));
+  }
+
+  &::after {
+    background: linear-gradient(to right, $text-color, rgba($text-color, 0));
+  }
+
+  .Button {
+    margin: 0 ($spacing / 2);
+  }
+}

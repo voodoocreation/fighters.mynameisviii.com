@@ -1,0 +1,433 @@
+slug: mortal-kombat-ii
+title: Mortal Kombat II
+imageUrl: /static/games/mortal-kombat-ii/thumbnail.jpg
+
+characters:
+  - name: Liu Kang
+    imageUrl: /static/games/mortal-kombat-ii/profile-liu-kang.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Flying Kick
+            combo: F,F,HK
+          - name: Bicycle Kick
+            conditions: Hold for three seconds
+            combo: Hold LK
+          - name: Fireball
+            combo: F,F,HP
+          - name: Low Fireball
+            combo: F,F,LP
+      - name: Finishers
+        moves:
+          - name: Uppercut Fatality
+            conditions: Close
+            combo: Hold BL,F,U,B,D,F
+          - name: Dragon Fatality
+            conditions: Close
+            combo: D,F,B,B,HK
+          - name: Stage Fatality
+            conditions: Close
+            combo: B,F,F,LK
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: F,B,B,B,LK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,D,F,B,LK
+
+  - name: Kung Lao
+    imageUrl: /static/games/mortal-kombat-ii/profile-kung-lao.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Teleport
+            combo: D,U
+          - name: Hat Throw
+            combo: B,F,LP
+          - name: Air Kick
+            conditions: In mid-air
+            combo: D+HK
+          - name: Whirlwind Spin
+            combo: U,U,LK
+      - name: Finishers
+        moves:
+          - name: Slice Fatality
+            conditions: One step away
+            combo: F,F,F,F,LK
+          - name: Hat Throw Fatality
+            conditions: Far away
+            combo: Hold LP,B,B,F
+          - name: Hat Throw to Neck Fatality
+            conditions: During Hat Throw Fatality
+            combo: U
+          - name: Stage Fatality
+            conditions: Close
+            combo: F,F,F,HP
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: B,B,B,D,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: B,B,F,F,HK
+
+  - name: Johnny Cage
+    imageUrl: /static/games/mortal-kombat-ii/profile-johnny-cage.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Drop Kick
+            conditions: Close
+            combo: K
+          - name: Green Ball
+            combo: B,D,F,LP
+          - name: High Green Ball
+            combo: F,D,B,HP
+          - name: Shadow Uppercut
+            combo: B,D,B,HP
+          - name: Shadow Kick
+            combo: B,F,LK
+          - name: Ball Breaker
+            combo: LP+BL
+      - name: Finishers
+        moves:
+          - name: Torso Fatality
+            conditions: Close
+            combo: D,D,F,F,LP
+          - name: Head Punch Fatality
+            conditions: Close
+            combo: F,F,D,U
+          - name: Three Head Punch Fatality
+            conditions: During Head Punch Fatality
+            combo: Hold D+LP+BL+LK
+          - name: Stage Fatality
+            conditions: Close
+            combo: D,D,D,HK
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: D,D,D,D,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: B,B,B,HK
+
+  - name: Reptile
+    imageUrl: /static/games/mortal-kombat-ii/profile-reptile.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Slide
+            combo: B+LP+BL+LK
+          - name: Spit Acid
+            combo: F,F,HP
+          - name: Power Ball
+            combo: B,B,HP+LP
+          - name: Invisibility
+            combo: U,U,D,HP
+      - name: Finishers
+        moves:
+          - name: Tongue Fatality
+            conditions: Half screen
+            combo: B,B,D,LP
+          - name: Invisible Slice Fatality
+            conditions: Close, whilst invisible
+            combo: F,F,D,HK
+          - name: Stage Fatality
+            conditions: Close
+            combo: D,F,F,BL
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: B,B,D,LK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,B,B,LK
+
+  - name: Sub-Zero
+    imageUrl: /static/games/mortal-kombat-ii/profile-sub-zero.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Slide
+            combo: B+LP+BL+LK
+          - name: Freeze
+            combo: D,F,LP
+          - name: Ground Freeze
+            combo: D,B,LK
+      - name: Finishers
+        moves:
+          - name: Deep-Freeze Fatality (Part 1)
+            conditions: At sweep range
+            combo: F,F,D,HK
+          - name: Deep-Freeze Fatality (Part 2)
+            conditions: Close
+            combo: F,D,F,F,HP
+          - name: Ice Ball Fatality
+            conditions: Far away
+            combo: Hold LP,B,B,D,F
+          - name: Stage Fatality
+            conditions: Close
+            combo: D,F,F,BL
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: B,B,D,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,B,B,HK
+
+  - name: Shang Tsung
+    imageUrl: /static/games/mortal-kombat-ii/profile-shang-tsung.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Flaming Skull
+            combo: B,B,HP
+          - name: Two Flaming Skulls
+            combo: B,B,F,HP
+          - name: Three Flaming Skulls
+            combo: B,B,F,F,HP
+      - name: Morph into other characters
+        moves:
+          - name: Liu Kang
+            combo: B,F,F,BL
+          - name: Kung Lao
+            combo: B,D,B,HK
+          - name: Johnny Cage
+            combo: B,B,D,LP
+          - name: Reptile
+            combo: U,D+HP
+          - name: Sub-Zero
+            combo: F,D,F,HP
+          - name: Kitana
+            combo: BL,BL,BL
+          - name: Jax
+            combo: D,F,B,HK
+          - name: Mileena
+            conditions: Hold for three seconds
+            combo: Hold HP
+          - name: Baraka
+            combo: D,D,LK
+          - name: Scorpion
+            combo: U,U
+          - name: Raiden
+            combo: D,B,F,LK
+      - name: Finishers
+        moves:
+          - name: Inner-Ear Fatality
+            conditions: Close, hold for 3 seconds
+            combo: Hold HK
+          - name: Life Force Fatality
+            conditions: Close
+            combo: U,D,U,LK
+          - name: Kintaro Fatality
+            conditions: One step away, after holding for the entire round
+            combo: Hold LP
+          - name: Stage Fatality
+            conditions: Close
+            combo: Hold BL,D,D,U,D
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: B,B,D,F,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: B,F,D,HK
+
+  - name: Kitana
+    imageUrl: /static/games/mortal-kombat-ii/profile-kitana.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Fan Slice
+            combo: B+HP
+          - name: Fan Throw
+            conditions: Can be done in mid-air
+            combo: F,F,HP+LP
+          - name: Fan Lift
+            combo: B,B,B,HP
+          - name: Air Attack
+            combo: F,D,B,HP
+      - name: Finishers
+        moves:
+          - name: Kiss of Death Fatality
+            conditions: Close
+            combo: Hold LK,F,F,D,F
+          - name: Fan Fatality
+            conditions: Close
+            combo: BL,BL,BL,HK
+          - name: Stage Fatality
+            conditions: Close
+            combo: F,D,F,HK
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: D,D,D,U,LK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,D,D,LK
+
+  - name: Jax
+    imageUrl: /static/games/mortal-kombat-ii/profile-jax.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Earthquake
+            conditions: Hold for three seconds
+            combo: Hold LK
+          - name: Gotcha Grab
+            combo: F,F,LP
+          - name: Grab Punch
+            conditions: In Gotcha Grab, press repeatedly
+            combo: LP
+          - name: Multi-Slam
+            conditions: While throwing, press repeatedly
+            combo: HP
+          - name: Energy Wave
+            combo: F,D,B,HK
+          - name: Back Breaker
+            conditions: Close, in mid-air
+            combo: BL
+      - name: Finishers
+        moves:
+          - name: Head Pop Fatality
+            conditions: Close
+            combo: Hold LP,F,F,F
+          - name: Arm Rip Fatality
+            conditions: One step away
+            combo: BL,BL,BL,BL,LP
+          - name: Stage Fatality
+            conditions: Close
+            combo: U,U,D,LK
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: D,D,U,U,LK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,U,D,U,LK
+
+  - name: Mileena
+    imageUrl: /static/games/mortal-kombat-ii/profile-mileena.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Ground Roll
+            combo: B,B,D,HK
+          - name: Teleport Kick
+            combo: F,F,LK
+          - name: Sai Throw
+            conditions: Hold for three seconds
+            combo: Hold HP
+      - name: Finishers
+        moves:
+          - name: Stab Fatality
+            conditions: Close
+            combo: F,B,F,LP
+          - name: Inhale Fatality
+            conditions: Close, hold for three seconds
+            combo: Hold HK
+          - name: Stage Fatality
+            conditions: Close
+            combo: F,D,F,LK
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: D,D,D,U,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,D,D,HK
+
+  - name: Baraka
+    imageUrl: /static/games/mortal-kombat-ii/profile-baraka.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Double Kick
+            conditions: Close
+            combo: HK,HK
+          - name: Blue Bolt
+            combo: D,B,HP
+          - name: Blade Slice
+            combo: B+HP
+          - name: Blade Fury
+            combo: B,B,B,LP
+      - name: Finishers
+        moves:
+          - name: Head Chop Fatality
+            conditions: Close
+            combo: B,B,B,B,HP
+          - name: Stab Fatality
+            conditions: Close
+            combo: B,F,D,F,LP
+          - name: Stage Fatality
+            conditions: Close
+            combo: F,F,D,HK
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: U,F,F,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: F,F,F,HK
+
+  - name: Scorpion
+    imageUrl: /static/games/mortal-kombat-ii/profile-scorpion.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Spear
+            combo: B,B,LP
+          - name: Air Throw
+            conditions: Close, in mid-air
+            combo: BL
+          - name: Teleport Punch
+            combo: D,B,HP
+          - name: Leg Grab
+            combo: F,D,B,LK
+      - name: Finishers
+        moves:
+          - name: Toasty! Fatality
+            conditions: At sweep range
+            combo: Hold BL,U,U,HP
+          - name: Toasty!! Fatality
+            conditions: Far
+            combo: Hold BL,D,D,U,U,HP
+          - name: Slice Fatality
+            conditions: Close
+            combo: Hold HP,D,F,F,F
+          - name: Stage Fatality
+            conditions: Close
+            combo: D,F,F,BL
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: B,B,D,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,B,B,HK
+
+  - name: Raiden
+    imageUrl: /static/games/mortal-kombat-ii/profile-raiden.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Teleport
+            combo: D,U
+          - name: Flying Attack
+            combo: B,B,F
+          - name: Lightning
+            combo: D,F,LP
+          - name: Electrocution
+            conditions: Close, hold for four seconds
+            combo: Hold HP
+      - name: Finishers
+        moves:
+          - name: Shock Fatality
+            conditions: Close, hold for five seconds
+            combo: Hold LK
+          - name: Shock Explode Fatality
+            conditions: During Shock Fatality, press repeatedly
+            combo: BL+LK
+          - name: Uppercut Fatality
+            conditions: Close, hold for 8 seconds
+            combo: Hold HP
+          - name: Stage Fatality
+            conditions: Close
+            combo: Hold BL,U,U,U,HP
+          - name: Friendship
+            conditions: After not throwing any punches
+            combo: D,B,F,HK
+          - name: Babality
+            conditions: After not throwing any punches
+            combo: D,D,U,HK

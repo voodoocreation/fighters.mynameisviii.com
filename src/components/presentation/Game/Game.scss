@@ -1,0 +1,43 @@
+@import "../../../scss/variables", "../../../scss/mixins";
+
+.Game {
+  &--characters--items {
+    display: flex;
+  }
+
+  @include screen-below($screen-xs-max) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &--characters {
+      flex-grow: 1;
+      border: $transparent-border-color 1px solid;
+      background: $panel-1-bg;
+      overflow: auto;
+      scroll-behavior: smooth;
+
+      &--items {
+        height: 100%;
+      }
+
+      &.isTouching {
+        scroll-behavior: initial;
+      }
+    }
+  }
+
+  @include screen-above($screen-sm-min) {
+    &--characters {
+      max-width: $screen-md-min;
+      margin: auto;
+
+      &--items {
+        flex-wrap: wrap;
+        width: auto !important;
+        margin: -($spacing-half);
+        padding-bottom: $spacing;
+      }
+    }
+  }
+}

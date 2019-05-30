@@ -1,0 +1,28 @@
+@mixin hide-visually {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@mixin screen-below($max) {
+  @media screen and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin screen-between($min, $max) {
+  @media screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin screen-above($min) {
+  @media screen and (min-width: $min) {
+    @content;
+  }
+}

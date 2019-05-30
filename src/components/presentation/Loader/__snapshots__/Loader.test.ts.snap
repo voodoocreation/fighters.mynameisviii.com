@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[presentation] <Loader /> renders correctly 1`] = `
+<span
+  class="Loader TestLoader"
+>
+  <div
+    class="Loader--animation"
+  >
+    <span />
+    <span />
+    <span />
+  </div>
+</span>
+`;

@@ -1,0 +1,10 @@
+@import "./variables", "./mixins";
+
+.isHidden {
+  @include hide-visually();
+}
+
+.container {
+  max-width: $screen-md-min;
+  margin: auto;
+}

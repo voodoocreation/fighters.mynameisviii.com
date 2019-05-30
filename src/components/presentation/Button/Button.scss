@@ -1,0 +1,23 @@
+@import "../../../scss/variables";
+
+.Button.isStyled {
+  display: inline-block;
+  line-height: 1.1;
+  text-decoration: none;
+  padding: $spacing-half $spacing;
+  border: #fff 1px solid;
+  border-radius: 3px;
+  background: $panel-1-bg;
+
+  svg {
+    margin-right: $spacing-quarter;
+    margin-bottom: -2.5%;
+  }
+
+  &:hover,
+  &:focus {
+    color: $panel-2-bg;
+    text-shadow: none;
+    background: $text-color;
+  }
+}

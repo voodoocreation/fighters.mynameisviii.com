@@ -1,0 +1,13 @@
+@import "../../../scss/variables", "../../../scss/mixins";
+
+.ToastContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  max-height: 100%;
+  z-index: 2;
+
+  @include screen-below($screen-xs-max) {
+    padding-bottom: ($nav-height + $spacing);
+  }
+}

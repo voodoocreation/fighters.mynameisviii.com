@@ -1,0 +1,28 @@
+$text-color: #fff;
+$link-color: #fff;
+$link-color-hover: #fff;
+$link-decoration: underline;
+
+$spacing: 20px;
+$spacing-2x: ($spacing * 2);
+$spacing-half: ($spacing / 2);
+$spacing-quarter: ($spacing / 4);
+
+$bg-color: #000;
+$bg-image: url("/static/bg.jpg") 50% no-repeat fixed;
+
+$panel-base-color: #000;
+$panel-1-bg: rgba($panel-base-color, 0.7);
+$panel-2-bg: rgba($panel-base-color, 0.9);
+$transparent-border-color: rgba($text-color, 0.2);
+
+$nav-height: 56px;
+
+$screen-xs-min: 480px;
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+$screen-xxs-max: $screen-xs-min - 1;
+$screen-xs-max: $screen-sm-min - 1;
+$screen-sm-max: $screen-md-min - 1;
+$screen-md-max: $screen-lg-min - 1;

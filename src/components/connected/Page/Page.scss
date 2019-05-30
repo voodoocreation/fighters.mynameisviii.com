@@ -1,0 +1,13 @@
+@import "../../../scss/variables";
+
+.Page {
+  height: 100%;
+
+  &--body {
+    height: 100%;
+
+    > * {
+      padding-bottom: $nav-height + $spacing;
+    }
+  }
+}

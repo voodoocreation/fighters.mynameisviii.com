@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[presentation] <CharacterListing /> matches snapshot 1`] = `
+<article
+  class="CharacterListing"
+>
+  <a
+    href="#character-name"
+  >
+    <img
+      alt="View moves for Character Name from Game title"
+      src="imageUrl"
+    />
+  </a>
+</article>
+`;

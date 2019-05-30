@@ -1,0 +1,35 @@
+@import "../../../scss/variables", "../../../scss/mixins";
+
+.Home {
+  section {
+    margin-bottom: $spacing;
+    padding: $spacing;
+    border: $transparent-border-color 1px solid;
+    background: $panel-1-bg;
+  }
+
+  @include screen-below($screen-xxs-max) {
+    .Logo {
+      margin-bottom: $spacing;
+      opacity: 0.8;
+    }
+  }
+
+  @include screen-above($screen-xs-min) {
+    .Logo {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: $spacing-2x;
+      opacity: 0.3;
+      z-index: -1;
+
+      svg {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[presentation] <GameListing /> when the listing is selected matches snapshot 1`] = `
+<article
+  class="GameListing"
+>
+  <span>
+    <img
+      alt="View all moves for Test Game"
+      src="imageUrl"
+    />
+  </span>
+</article>
+`;
+
+exports[`[presentation] <GameListing /> when the listing isn't selected matches snapshot 1`] = `
+<article
+  class="GameListing"
+>
+  <a
+    href="/games/test-game"
+  >
+    <img
+      alt="View all moves for Test Game"
+      src="imageUrl"
+    />
+  </a>
+</article>
+`;

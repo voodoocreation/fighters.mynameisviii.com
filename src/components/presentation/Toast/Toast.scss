@@ -1,0 +1,35 @@
+@import "../../../scss/variables";
+
+.Toast {
+  font-size: 16px;
+  margin: $spacing;
+  border: $transparent-border-color 1px solid;
+  border-radius: 3px;
+  background: $panel-2-bg;
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+  box-shadow: $bg-color 0 0 20px, $bg-color 0 0 10px;
+
+  p {
+    margin: 0 0 $spacing-half;
+  }
+
+  &--content {
+    display: flex;
+  }
+
+  &--message {
+    padding: $spacing 0 $spacing $spacing;
+  }
+
+  &--closeButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: $spacing;
+  }
+
+  &.isHidden {
+    opacity: 0;
+  }
+}

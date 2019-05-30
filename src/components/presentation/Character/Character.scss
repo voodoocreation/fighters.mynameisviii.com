@@ -1,0 +1,94 @@
+@import "../../../scss/variables", "../../../scss/mixins";
+
+.Character {
+  position: relative;
+  flex-basis: 100%;
+
+  h2 {
+    padding: $spacing;
+    margin: 0;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  &--image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: transparent 50% no-repeat;
+    background-size: cover;
+    filter: blur(10px);
+    opacity: 0.2;
+    z-index: 0;
+  }
+
+  &--content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &--moveset {
+    padding: 0 $spacing $spacing-half;
+
+    dl {
+      margin: 0;
+    }
+
+    dd {
+      margin: 0 0 $spacing-half;
+    }
+
+    + *::before {
+      display: block;
+      width: 30%;
+      height: 1px;
+      content: "";
+      margin: 0 auto $spacing-half;
+      background: linear-gradient(to right, rgba($text-color, 0), rgba($text-color, 0.7), rgba($text-color, 0));
+    }
+
+    &:last-child {
+      padding-bottom: $spacing;
+    }
+  }
+
+  @include screen-below($screen-xs-max) {
+    &--content {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: auto;
+    }
+  }
+
+  @include screen-above($screen-sm-min) {
+    flex-basis: 50%;
+    padding: $spacing-half;
+
+    &--image {
+      top: $spacing;
+      right: $spacing;
+      bottom: $spacing;
+      left: $spacing;
+      opacity: 0.6;
+    }
+
+    &--content {
+      height: 100%;
+      border: $transparent-border-color 1px solid;
+      background: $panel-1-bg;
+    }
+  }
+}
+
+.Move--conditions {
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-style: italic;
+}

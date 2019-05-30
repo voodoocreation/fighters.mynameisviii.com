@@ -1,0 +1,113 @@
+slug: mortal-kombat
+title: Mortal Kombat
+imageUrl: /static/games/mortal-kombat/thumbnail.jpg
+
+characters:
+  - name: Johnny Cage
+    imageUrl: /static/games/mortal-kombat/profile-johnny-cage.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Green Bolt
+            combo: B,F,LP
+          - name: Shadow Kick
+            combo: B,F,LK
+          - name: Ball Breaker
+            combo: BL+LP
+      - name: Finishers
+        moves:
+          - name: Fatality
+            conditions: Close
+            combo: F,F,F,HP
+
+  - name: Kano
+    imageUrl: /static/games/mortal-kombat/profile-kano.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Spin Attack
+            combo: F,D,B,U,F
+          - name: Knife Toss
+            combo: Hold BL,B,F
+      - name: Finishers
+        moves:
+          - name: Fatality
+            conditions: Close
+            combo: B,D,F,LP
+
+  - name: Raiden
+    imageUrl: /static/games/mortal-kombat/profile-raiden.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Teleport
+            combo: D,U
+          - name: Lightning
+            combo: D,F,LP
+          - name: Torpedo
+            combo: B,B,F
+      - name: Finishers
+        moves:
+          - name: Fatality
+            conditions: Close
+            combo: F,B,B,B,HP
+
+  - name: Liu Kang
+    imageUrl: /static/games/mortal-kombat/profile-liu-kang.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Fireball
+            combo: F,F,HP
+          - name: Flying Kick
+            combo: F,F,HK
+      - name: Finishers
+        moves:
+          - name: Fatality
+            combo: F,D,B,U,F
+
+  - name: Scorpion
+    imageUrl: /static/games/mortal-kombat/profile-scorpion.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Spear
+            combo: B,B,LP
+          - name: Teleport
+            combo: D,B,HP
+      - name: Finishers
+        moves:
+          - name: Fatality
+            conditions: At sweep range
+            combo: Hold BL,U,U
+
+  - name: Sub-Zero
+    imageUrl: /static/games/mortal-kombat/profile-sub-zero.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Freeze
+            combo: D,F,LP
+          - name: Slide
+            combo: B+LP+BL+LK
+      - name: Finishers
+        moves:
+          - name: Fatality
+            conditions: Close
+            combo: F,D,F,HP
+
+  - name: Sonya
+    imageUrl: /static/games/mortal-kombat/profile-sonya.jpg
+    movesets:
+      - name: Special moves
+        moves:
+          - name: Ring Toss
+            combo: LP,B,LP
+          - name: Leg Grab
+            combo: D+BL+LP+LK
+          - name: Square Flight
+            combo: F,B,HP
+      - name: Finishers
+        moves:
+          - name: Fatality
+            combo: F,F,B,B,BL

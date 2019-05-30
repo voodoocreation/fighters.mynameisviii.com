@@ -1,0 +1,11 @@
+@import "../../../scss/variables";
+
+.ErrorPage {
+  &--content {
+    text-align: center;
+    margin-bottom: $spacing;
+    padding: $spacing;
+    border: $transparent-border-color 1px solid;
+    background: $panel-1-bg;
+  }
+}

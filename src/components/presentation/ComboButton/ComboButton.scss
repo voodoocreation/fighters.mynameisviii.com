@@ -1,0 +1,52 @@
+@import "../../../scss/variables";
+
+.ComboButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  vertical-align: middle;
+  text-shadow: none;
+  margin-right: $spacing-quarter;
+  border: $text-color 2px solid;
+  border-radius: 100%;
+
+  &--text {
+    padding-top: 3px;
+  }
+
+  &.isHeld {
+    color: $bg-color;
+    background: $text-color;
+  }
+
+  &--lp,
+  &--hp {
+    color: #f99;
+    border-color: #f99;
+
+    &.isHeld {
+      background: #f99;
+    }
+  }
+
+  &--lk,
+  &--hk {
+    color: #99f;
+    border-color: #99f;
+
+    &.isHeld {
+      background: #99f;
+    }
+  }
+
+  &.isSeparator {
+    width: auto;
+    border: none;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}

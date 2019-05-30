@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[presentation] <Character /> matches snapshot 1`] = `
+<article
+  class="Character Character--character-name"
+>
+  <div
+    class="Character--image"
+    style="background-image:url(imageUrl)"
+  />
+  <div
+    class="Character--content"
+  >
+    <h2
+      id="character-name"
+    >
+      Character Name
+    </h2>
+    <section
+      class="Character--moveset"
+    >
+      <h3>
+        Moveset with conditions
+      </h3>
+      <dl>
+        <dl>
+          <span>
+            Move 1
+          </span>
+           
+          <span
+            class="Move--conditions"
+          >
+            conditions
+          </span>
+        </dl>
+        <dd
+          class="Move--combo"
+        >
+          <div
+            class="Combo"
+          >
+            <span
+              class="ComboButton ComboButton--d"
+            >
+              <svg
+                class="ComboButton--icon"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ComboButton ComboButton--f"
+            >
+              <svg
+                class="ComboButton--icon"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ComboButton ComboButton--lp"
+            >
+              <span
+                class="ComboButton--text"
+              >
+                LP
+              </span>
+            </span>
+          </div>
+        </dd>
+      </dl>
+    </section>
+    <section
+      class="Character--moveset"
+    >
+      <h3>
+        Moveset without conditions
+      </h3>
+      <dl>
+        <dl>
+          <span>
+            Move 2
+          </span>
+           
+        </dl>
+        <dd
+          class="Move--combo"
+        >
+          <div
+            class="Combo"
+          >
+            <span
+              class="ComboButton ComboButton--d"
+            >
+              <svg
+                class="ComboButton--icon"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ComboButton ComboButton--f"
+            >
+              <svg
+                class="ComboButton--icon"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"
+                />
+              </svg>
+            </span>
+            <span
+              class="ComboButton ComboButton--lp"
+            >
+              <span
+                class="ComboButton--text"
+              >
+                LP
+              </span>
+            </span>
+          </div>
+        </dd>
+      </dl>
+    </section>
+  </div>
+</article>
+`;

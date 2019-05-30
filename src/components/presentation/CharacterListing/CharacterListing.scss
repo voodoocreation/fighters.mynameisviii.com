@@ -1,0 +1,18 @@
+@import "../../../scss/variables", "../../../scss/mixins";
+
+.CharacterListing {
+  flex-basis: 33.333333%;
+  padding: $spacing-quarter;
+
+  img {
+    width: 100%;
+  }
+
+  @include screen-above($screen-xs-min) {
+    flex-basis: 25%;
+  }
+
+  @include screen-above($screen-sm-min) {
+    flex-basis: 20%;
+  }
+}

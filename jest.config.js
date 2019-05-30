@@ -1,0 +1,28 @@
+module.exports = {
+  bail: true,
+  collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}", "!**/node_modules/**"],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100
+    }
+  },
+  moduleDirectories: ["node_modules"],
+  moduleFileExtensions: ["js", "jsx", "ts", "tsx", "yaml", "yml", "json"],
+  moduleNameMapper: {
+    "\\.(scss)$": "<rootDir>/src/__mocks__/dummyMock.js",
+    "\\.(jpg|jpeg|gif|png|svg)$": "<rootDir>/src/__mocks__/dummyMock.js"
+  },
+  roots: ["<rootDir>/src"],
+  setupTestFrameworkScriptFile: "<rootDir>/jest.setup.js",
+  snapshotSerializers: ["enzyme-to-json/serializer"],
+  testURL: "http://localhost",
+  transform: {
+    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
+    "^.+\\.(yaml|yml)$": "yaml-jest"
+  },
+  testMatch: ["**/*.test.(js|jsx|ts|tsx)"],
+  verbose: true
+};
