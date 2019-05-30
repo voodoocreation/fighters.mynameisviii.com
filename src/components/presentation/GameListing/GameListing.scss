@@ -4,6 +4,10 @@
   flex-basis: 100%;
   padding: $spacing-quarter;
 
+  &.isSelected {
+    opacity: 0.5;
+  }
+
   @include screen-above($screen-sm-min) {
     flex-basis: 50%;
   }

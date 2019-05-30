@@ -1,3 +1,4 @@
+import cn from "classnames";
 import * as React from "react";
 import { InjectedIntlProps, injectIntl } from "react-intl";
 
@@ -21,7 +22,7 @@ class GameListing extends React.Component<IProps> {
     const { formatMessage } = this.props.intl;
 
     return (
-      <article className="GameListing">
+      <article className={cn("GameListing", { isSelected })}>
         <Link
           route={!isSelected ? `/games/${this.props.slug}` : undefined}
           onClick={this.props.onClick}

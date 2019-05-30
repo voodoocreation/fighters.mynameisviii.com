@@ -100,19 +100,9 @@ describe("[transformers] Data", () => {
         process.env.NODE_ENV = "production";
       });
 
-      it("prefixes with http://{process.env.DOMAIN} when it's defined", () => {
-        process.env.DOMAIN = "fighters.mynameisviii.com";
-
+      it("prefixes with http://fighters.mynameisviii.com", () => {
         expect(data.absoluteUrl("/games/game-slug")).toEqual(
           "https://fighters.mynameisviii.com/games/game-slug"
-        );
-      });
-
-      it("prefixes with http://{window.location.host} when process.env.DOMAIN is undefined", () => {
-        process.env.DOMAIN = undefined;
-
-        expect(data.absoluteUrl("/games/game-slug")).toEqual(
-          "https://localhost/games/game-slug"
         );
       });
     });

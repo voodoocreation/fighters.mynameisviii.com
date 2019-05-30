@@ -61,10 +61,5 @@ export const absoluteUrl = (path: string) => {
     return `http://localhost:${port}${path}`;
   }
 
-  const domain =
-    process.env.DOMAIN !== "undefined"
-      ? process.env.DOMAIN
-      : window.location.host;
-
-  return `https://${domain}${path}`;
+  return `https://fighters.mynameisviii.com${path}`;
 };

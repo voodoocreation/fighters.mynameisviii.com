@@ -2,7 +2,7 @@
 
 exports[`[presentation] <GameListing /> when the listing is selected matches snapshot 1`] = `
 <article
-  class="GameListing"
+  class="GameListing isSelected"
 >
   <span>
     <img

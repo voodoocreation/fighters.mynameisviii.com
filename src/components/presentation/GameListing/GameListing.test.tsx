@@ -30,6 +30,10 @@ describe("[presentation] <GameListing />", () => {
       jest.clearAllMocks();
     });
 
+    it("renders without the isSelected class", () => {
+      expect(actual.find(".isSelected")).toHaveLength(0);
+    });
+
     it("renders correct link route", () => {
       expect(actual.find("Link").prop("route")).toBe("/games/test-game");
     });
@@ -58,6 +62,10 @@ describe("[presentation] <GameListing />", () => {
 
     beforeAll(() => {
       jest.clearAllMocks();
+    });
+
+    it("renders with the isSelected class", () => {
+      expect(actual.find(".isSelected")).toHaveLength(1);
     });
 
     it("renders correct link route", () => {

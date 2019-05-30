@@ -55,7 +55,7 @@ class IndexRoute extends React.Component<IProps, IState> {
           <meta property="og:title" content={pageTitle} />
           <meta property="og:description" content={pageDescription} />
           <meta property="og:url" content={absoluteUrl("/")} />
-          <meta property="og:image" content="/static/index-og.jpg" />
+          <meta property="og:image" content={absoluteUrl("/static/index-og.jpg")} />
         </Head>
 
         <div className="container">

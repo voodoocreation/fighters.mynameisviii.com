@@ -59,7 +59,7 @@ class GameRoute extends React.Component<IProps> {
           <meta property="og:description" content={pageDescription} />
           <meta
             property="og:url"
-            content={absoluteUrl(`/games/${game.slug}`)}
+            content={absoluteUrl(`/games/${game.slug}/`)}
           />
           <meta property="og:image" content={absoluteUrl(game.imageUrl)} />
         </Head>
