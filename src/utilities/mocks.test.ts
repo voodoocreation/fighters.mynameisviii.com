@@ -1,7 +1,42 @@
 import { failure, success } from "../models/root.models";
-import { mockWithData, mockWithError, mockWithPayload } from "./mockResponse";
+import {
+  createMockElement,
+  findMockCall,
+  mockWithData,
+  mockWithError,
+  mockWithPayload
+} from "./mocks";
 
 describe("[utilities] Mock response", () => {
+  it("createMockElement returns a fake object with default dimensions", () => {
+    expect(createMockElement().getBoundingClientRect()).toEqual({
+      bottom: 0,
+      left: 0,
+      right: 0,
+      top: 0
+    });
+  });
+
+  it("createMockElement returns a fake object with provided dimensions", () => {
+    expect(createMockElement(100, 100, 10, 10).getBoundingClientRect()).toEqual(
+      {
+        bottom: 110,
+        left: 10,
+        right: 110,
+        top: 10
+      }
+    );
+  });
+
+  it("findMockCall returns the expected mock call", () => {
+    const mockFunction = jest.fn((str: string) => str);
+
+    mockFunction("First call");
+    mockFunction("Second call");
+
+    expect(findMockCall(mockFunction, "Second call")).toEqual(["Second call"]);
+  });
+
   it("mockWithData creates a mock that returns a success object", () => {
     const data = { test: "Successful" };
     const mockResponse = mockWithData(data);

@@ -1,7 +1,8 @@
 import { failure, success } from "../models/response.models";
-import { mockWithError } from "../utilities/mockResponse";
+import { mockWithError } from "../utilities/mocks";
 import * as apiMethods from "./api/root.api";
 import { createApi } from "./configureApi";
+import { TRequest } from "./configureHttpClient";
 import { configurePorts, configureTestPorts } from "./configurePorts";
 
 describe("[services] Ports", () => {

@@ -1,3 +1,5 @@
+import { createMockElement } from "../utilities/mocks";
+
 import * as dom from "./dom";
 
 const g: any = global;
@@ -9,16 +11,16 @@ const { body } = document;
 describe("[helpers] DOM", () => {
   describe("isInViewport()", () => {
     const inside: any = {
-      bottomLeft: g.mockElement(200, 200, sHeight - 200),
-      bottomRight: g.mockElement(200, 200, sHeight - 200, sWidth - 200),
-      topLeft: g.mockElement(200, 200),
-      topRight: g.mockElement(200, 200, 0, sWidth - 200)
+      bottomLeft: createMockElement(200, 200, sHeight - 200),
+      bottomRight: createMockElement(200, 200, sHeight - 200, sWidth - 200),
+      topLeft: createMockElement(200, 200),
+      topRight: createMockElement(200, 200, 0, sWidth - 200)
     };
     const outside: any = {
-      bottomLeft: g.mockElement(200, 200, sHeight - 199),
-      bottomRight: g.mockElement(200, 200, sHeight - 199, sWidth - 199),
-      topLeft: g.mockElement(200, 200, -1, -1),
-      topRight: g.mockElement(200, 200, -1, sWidth - 199)
+      bottomLeft: createMockElement(200, 200, sHeight - 199),
+      bottomRight: createMockElement(200, 200, sHeight - 199, sWidth - 199),
+      topLeft: createMockElement(200, 200, -1, -1),
+      topRight: createMockElement(200, 200, -1, sWidth - 199)
     };
 
     it("returns false when an element isn't provided", () => {
@@ -79,16 +81,16 @@ describe("[helpers] DOM", () => {
 
   describe("isAlmostInViewport()", () => {
     const inside: any = {
-      bottomLeft: g.mockElement(200, 200, sHeight + 199, -399),
-      bottomRight: g.mockElement(200, 200, sHeight + 199, sWidth + 199),
-      topLeft: g.mockElement(200, 200, -399, -399),
-      topRight: g.mockElement(200, 200, -399, sWidth + 199)
+      bottomLeft: createMockElement(200, 200, sHeight + 199, -399),
+      bottomRight: createMockElement(200, 200, sHeight + 199, sWidth + 199),
+      topLeft: createMockElement(200, 200, -399, -399),
+      topRight: createMockElement(200, 200, -399, sWidth + 199)
     };
     const outside: any = {
-      bottomLeft: g.mockElement(200, 200, sHeight + 200, -400),
-      bottomRight: g.mockElement(200, 200, sHeight + 200, sWidth + 200),
-      topLeft: g.mockElement(200, 200, -400, -400),
-      topRight: g.mockElement(200, 200, -400, sWidth + 200)
+      bottomLeft: createMockElement(200, 200, sHeight + 200, -400),
+      bottomRight: createMockElement(200, 200, sHeight + 200, sWidth + 200),
+      topLeft: createMockElement(200, 200, -400, -400),
+      topRight: createMockElement(200, 200, -400, sWidth + 200)
     };
 
     it("returns false when an element isn't provided", () => {

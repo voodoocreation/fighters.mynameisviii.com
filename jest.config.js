@@ -16,7 +16,7 @@ module.exports = {
     "\\.(jpg|jpeg|gif|png|svg)$": "<rootDir>/src/__mocks__/dummyMock.js"
   },
   roots: ["<rootDir>/src"],
-  setupTestFrameworkScriptFile: "<rootDir>/jest.setup.js",
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   snapshotSerializers: ["enzyme-to-json/serializer"],
   testURL: "http://localhost",
   transform: {

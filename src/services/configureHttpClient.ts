@@ -1,9 +1,18 @@
-import axios from "axios";
+import axios, { Method } from "axios";
 import { camelizeKeys } from "humps";
 
 interface IOptions {
   apiUrl?: string;
 }
+
+interface IRequestOptions {
+  url: string;
+  method?: Method;
+  body?: any;
+  shouldCamelizeKeys?: boolean;
+}
+
+export type TRequest = (options: IRequestOptions) => Promise<any>;
 
 export const configureHttpClient = (config: IOptions = {}) => async ({
   url,
@@ -12,7 +21,7 @@ export const configureHttpClient = (config: IOptions = {}) => async ({
 }: IRequestOptions) => {
   try {
     const response = await axios({
-      baseURL: config.apiUrl,
+      baseURL: config.apiUrl || "",
       data: body,
       headers: {
         "Content-Type": "application/json; charset=utf-8"

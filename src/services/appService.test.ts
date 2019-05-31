@@ -1,5 +1,4 @@
 import createServiceWorkerEnv from "service-worker-mock";
-// tslint:disable-next-line:no-submodule-imports
 
 const g: any = global;
 const s: any = self;

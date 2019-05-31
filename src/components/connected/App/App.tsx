@@ -1,6 +1,7 @@
 import { NextContext } from "next";
 import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
+import { DefaultQuery } from "next-server/router";
 import NextApp, {
   AppProps,
   Container,
@@ -25,9 +26,11 @@ import "../../../scss/index.scss";
 
 addLocaleData([...en]);
 
-export type TContext<Q extends TQuery> = NextContext<Q> & { store: TStore };
+export type TContext<Q extends DefaultQuery> = NextContext<Q> & {
+  store: TStore;
+};
 
-export type TAppContext<Q extends TQuery> = NextAppContext & {
+export type TAppContext<Q extends DefaultQuery> = NextAppContext & {
   ctx: TContext<Q>;
   store: TStore;
 };
@@ -214,6 +217,6 @@ class App<P extends IProps> extends NextApp<P> {
   };
 }
 
-const AppWrapped = withRedux(createStore)(withReduxSaga({ async: true })(App));
+const AppWrapped = withRedux(createStore)(withReduxSaga(App));
 
 export default AppWrapped;

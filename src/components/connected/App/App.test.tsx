@@ -2,6 +2,8 @@ import { mount } from "enzyme";
 import merge from "lodash.merge";
 import * as React from "react";
 
+import { findMockCall } from "../../../utilities/mocks";
+
 import App from "./App";
 
 jest.mock("serviceworker-webpack-plugin/lib/runtime", () => ({
@@ -298,7 +300,7 @@ describe("[connected] <App />", () => {
 
     it("binds the 'message' event listener to the service worker", () => {
       expect(
-        g.findMockCall(navigator.serviceWorker.addEventListener, "message")
+        findMockCall(navigator.serviceWorker.addEventListener, "message")
       ).toBeDefined();
     });
 
@@ -318,7 +320,7 @@ describe("[connected] <App />", () => {
 
     it("unbinds the 'message' event listener from the service worker", () => {
       expect(
-        g.findMockCall(navigator.serviceWorker.removeEventListener, "message")
+        findMockCall(navigator.serviceWorker.removeEventListener, "message")
       ).toBeDefined();
     });
 

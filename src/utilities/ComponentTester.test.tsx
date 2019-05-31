@@ -121,7 +121,7 @@ describe("[utilities] ComponentTester", () => {
     });
 
     it("returns the correct result shape", () => {
-      expect(Object.keys(component.render())).toEqual(["actual", "props"]);
+      expect(Object.keys(component.shallow())).toEqual(["actual", "props"]);
     });
 
     it("renders correctly with default values", () => {
@@ -175,7 +175,7 @@ describe("[utilities] ComponentTester", () => {
       });
 
     it("returns the correct result shape", () => {
-      expect(Object.keys(component.render())).toEqual([
+      expect(Object.keys(component.shallow())).toEqual([
         "actual",
         "dispatch",
         "ports",

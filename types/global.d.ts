@@ -8,7 +8,6 @@ declare module "*.yaml";
 
 declare module "jest-mock-axios";
 declare module "lodash.merge";
-declare module "next-redux-saga";
 declare module "react-relative-time";
 declare module "serviceworker-webpack-plugin/lib/runtime";
 declare module "service-worker-mock";
@@ -33,18 +32,7 @@ interface Window {
   Promise: any;
 }
 
-type TQuery = Record<string, string | string[] | undefined>;
-
 type TCurriedReturn<T> = T extends (...args: any[]) => infer R ? R : any;
-
-interface IRequestOptions {
-  url: string;
-  method?: string;
-  body?: any;
-  shouldCamelizeKeys?: boolean;
-}
-
-type TRequest = (options: IRequestOptions) => Promise<any>;
 
 interface IServiceWorkerMessage {
   type: string;

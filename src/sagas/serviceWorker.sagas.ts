@@ -5,7 +5,7 @@ import * as actions from "../actions/root.actions";
 
 export const cachePageOnTransitionSaga = () =>
   function*() {
-    yield takeLatest(actions.changeRoute.done, function*(
+    yield takeLatest(actions.changeRoute.done.type, function*(
       action: Action<Success<string, undefined>>
     ) {
       if ("serviceWorker" in navigator && navigator.serviceWorker) {

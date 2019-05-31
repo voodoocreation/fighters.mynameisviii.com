@@ -1,5 +1,6 @@
-import { mockWithPayload } from "../utilities/mockResponse";
+import { mockWithPayload } from "../utilities/mocks";
 import * as apiMethods from "./api/root.api";
+import { TRequest } from "./configureHttpClient";
 
 export const createApi = (request: TRequest) => {
   const bindMethods = <M>(methods: M) => {

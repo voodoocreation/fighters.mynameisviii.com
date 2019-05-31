@@ -8,7 +8,6 @@ import injectIntlIntoPage from "../../../helpers/injectIntlIntoPage";
 import { IGame } from "../../../models/game.models";
 import { IRootReducers } from "../../../reducers/root.reducers";
 import { absoluteUrl } from "../../../transformers/data.transformers";
-import { TContext } from "../../connected/App/App";
 
 import ErrorPage from "../../presentation/ErrorPage/ErrorPage";
 import Game from "../../presentation/Game/Game";
@@ -22,7 +21,7 @@ interface IProps extends InjectedIntlProps {
 }
 
 class GameRoute extends React.Component<IProps> {
-  public static async getInitialProps(context: TContext<{ slug: string }>) {
+  public static async getInitialProps(context: any) {
     const { query, store } = context;
 
     store.dispatch(actions.setCurrentGameSlug(query.slug));

@@ -2,21 +2,6 @@
 
 exports[`[connected] <Document /> renders correctly when NODE_ENV=development 1`] = `
 Array [
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/index.js"
-    rel="preload"
-  />,
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/_app.js"
-    rel="preload"
-  />,
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/_error.js"
-    rel="preload"
-  />,
   null,
   null,
   <meta
@@ -68,13 +53,22 @@ Array [
     content="#ffffff"
     name="theme-color"
   />,
+  <link
+    as="script"
+    href="/assetPrefix/_next/static/buildId/pages/index.js?ts=1514718000000"
+    rel="preload"
+  />,
+  <link
+    as="script"
+    href="/assetPrefix/_next/static/buildId/pages/_app.js?ts=1514718000000"
+    rel="preload"
+  />,
   <noscript>
     &lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P9CMQN4" height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;
   </noscript>,
   <div
     id="__next"
   />,
-  null,
   null,
   null,
   null,
@@ -83,21 +77,6 @@ Array [
 
 exports[`[connected] <Document /> renders currectly when NODE_ENV=production 1`] = `
 Array [
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/index.js"
-    rel="preload"
-  />,
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/_app.js"
-    rel="preload"
-  />,
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/_error.js"
-    rel="preload"
-  />,
   null,
   null,
   <meta
@@ -149,13 +128,22 @@ Array [
     content="#ffffff"
     name="theme-color"
   />,
+  <link
+    as="script"
+    href="/assetPrefix/_next/static/buildId/pages/index.js"
+    rel="preload"
+  />,
+  <link
+    as="script"
+    href="/assetPrefix/_next/static/buildId/pages/_app.js"
+    rel="preload"
+  />,
   <noscript>
     &lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P9CMQN4" height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;
   </noscript>,
   <div
     id="__next"
   />,
-  null,
   null,
   null,
   null,
@@ -164,21 +152,6 @@ Array [
 
 exports[`[connected] <Document /> renders currectly when locale is missing 1`] = `
 Array [
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/index.js"
-    rel="preload"
-  />,
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/_app.js"
-    rel="preload"
-  />,
-  <link
-    as="script"
-    href="/assetPrefix/_next/static/buildId/pages/_error.js"
-    rel="preload"
-  />,
   null,
   null,
   <meta
@@ -230,13 +203,22 @@ Array [
     content="#ffffff"
     name="theme-color"
   />,
+  <link
+    as="script"
+    href="/assetPrefix/_next/static/buildId/pages/index.js?ts=1514718000000"
+    rel="preload"
+  />,
+  <link
+    as="script"
+    href="/assetPrefix/_next/static/buildId/pages/_app.js?ts=1514718000000"
+    rel="preload"
+  />,
   <noscript>
     &lt;iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P9CMQN4" height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;
   </noscript>,
   <div
     id="__next"
   />,
-  null,
   null,
   null,
   null,

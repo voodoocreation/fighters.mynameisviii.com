@@ -1,5 +1,6 @@
 import * as apiMethods from "./api/root.api";
 import { createApi, createMockApi } from "./configureApi";
+import { TRequest } from "./configureHttpClient";
 
 describe("[services] API", () => {
   const httpClient: TRequest = () => new Promise(resolve => resolve());

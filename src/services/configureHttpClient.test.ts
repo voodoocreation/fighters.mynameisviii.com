@@ -59,7 +59,7 @@ describe("[services] HTTP client", () => {
 
     it("sends the request with the correct options", () => {
       expect(axios).toHaveBeenCalledWith({
-        baseURL: undefined,
+        baseURL: "",
         data: undefined,
         headers,
         method: "GET",

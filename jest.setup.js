@@ -7,26 +7,13 @@ Enzyme.configure({ adapter: new Adapter() });
 
 MockDate.set("2018-01-01T00:00:00", 0);
 
-global.dataLayer = [];
-global.location.assign = jest.fn();
-global.requestAnimationFrame = callback => setTimeout(callback, 0);
-global.scrollTo = jest.fn();
-
-global.findMockCall = (mockFn, ...args) =>
-  mockFn.mock.calls.find(call =>
-    args.reduce((acc, curr, index) => acc && call[index] === curr, true)
-  );
-global.mockElement = (width = 0, height = 0, top = 0, left = 0) => ({
-  getBoundingClientRect: () => ({
-    bottom: top + height,
-    left,
-    right: left + width,
-    top
-  })
-});
-
 const serviceWorkerEvents = {};
 beforeAll(() => {
+  global.dataLayer = [];
+  global.location.assign = jest.fn();
+  global.requestAnimationFrame = callback => setTimeout(callback, 0);
+  global.scrollTo = jest.fn();
+
   Object.defineProperty(global.navigator, "serviceWorker", {
     value: {
       addEventListener: jest.fn((event, handler) => {

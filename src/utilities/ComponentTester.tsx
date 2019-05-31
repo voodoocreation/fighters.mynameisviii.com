@@ -190,7 +190,7 @@ export default class ComponentTester<
       this.reduxState
     );
 
-    const ports: unknown = configureTestPorts(mergedPorts);
+    const ports = configureTestPorts(mergedPorts);
 
     const middlewares = [this.reduxHistoryMiddleware];
 
