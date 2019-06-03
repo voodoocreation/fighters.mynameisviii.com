@@ -2005,6 +2005,19 @@ autoprefixer@^9.5.1:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
+autoprefixer@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.6.0.tgz#0111c6bde2ad20c6f17995a33fad7cf6854b4c87"
+  integrity sha512-kuip9YilBqhirhHEGHaBTZKXL//xxGnzvsD0FtBQa6z+A69qZD6s/BAX9VzDF1i9VKDquTJDQaPLSEhOnL6FvQ==
+  dependencies:
+    browserslist "^4.6.1"
+    caniuse-lite "^1.0.30000971"
+    chalk "^2.4.2"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^7.0.16"
+    postcss-value-parser "^3.3.1"
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -2417,7 +2430,7 @@ browserslist@^4.0.0, browserslist@^4.1.0:
     electron-to-chromium "^1.3.92"
     node-releases "^1.1.1"
 
-browserslist@^4.5.4:
+browserslist@^4.5.4, browserslist@^4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.6.1.tgz#ee5059b1aec18cbec9d055d6cb5e24ae50343a9b"
   integrity sha512-1MC18ooMPRG2UuVFJTHFIAkk6mpByJfxCrnUyvSlu/hyQSFHMrlhM02SzNuCV+quTP4CKmqtOMAIjrifrpBJXQ==
@@ -8347,7 +8360,7 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.2, postcss@^7.0.5:
     source-map "^0.6.1"
     supports-color "^5.5.0"
 
-postcss@^7.0.14, postcss@^7.0.7:
+postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.7:
   version "7.0.16"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.16.tgz#48f64f1b4b558cb8b52c88987724359acb010da2"
   integrity sha512-MOo8zNSlIqh22Uaa3drkdIAgUGEL+AD1ESiSdmElLUmE2uVDo1QloiT/IfW9qRw8Gw+Y/w69UVMGwbufMSftxA==
@@ -8933,10 +8946,10 @@ redux-devtools-extension@^2.13.8:
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
   integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
 
-redux-saga-tester@^1.0.460:
-  version "1.0.460"
-  resolved "https://registry.yarnpkg.com/redux-saga-tester/-/redux-saga-tester-1.0.460.tgz#d3827dc626536cf4e43314dd87db7f3ae2e8ef7d"
-  integrity sha512-eQBvIsbuCNvBp6R0H+zbsNY7KZiQBl1ews9seFhAuc+M6qqvjVrR4Xbhy2/v28VVmOcPIoDpHm+K/sBscZKzOg==
+redux-saga-tester@^1.0.464:
+  version "1.0.464"
+  resolved "https://registry.yarnpkg.com/redux-saga-tester/-/redux-saga-tester-1.0.464.tgz#e4998782adcf36f8f7cf557bec6c621782fb0ed6"
+  integrity sha512-ncl7z3ESUBO2Pd8dLcKNAyYrzNvD/p5XY1Lj+rfeHlY5uJL/1SDwTGRgcGtuV/saSIum2IspV47kpzR14NE6ag==
   dependencies:
     babel-runtime "^6.11.6"
 
@@ -10102,10 +10115,10 @@ stylelint-order@^3.0.0:
     postcss "^7.0.14"
     postcss-sorting "^5.0.0"
 
-stylelint-scss@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-3.7.0.tgz#19080a5e6584fb98a6398049d588fb591517e4e0"
-  integrity sha512-0rShnDCa/ilrtj6hp3XE4j/1Abb7+AYOkav5VCazVGoOG1Gh6S4uoMRifhBdnBVKvmXpuPEzKrClyVrt5clt2w==
+stylelint-scss@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-3.8.0.tgz#fc372306c2105b461d0c162199e65f0c09fada2a"
+  integrity sha512-J55tNmxXEh/ymhz5BiscIiUcHgPmJ2Nv+0+zgnqTqdQBe1URQbrdjlAyK3xq+7i2nVpWr2wlRj25SjoonZFcHg==
   dependencies:
     lodash "^4.17.11"
     postcss-media-query-parser "^0.2.3"

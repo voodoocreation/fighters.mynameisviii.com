@@ -7,6 +7,10 @@
   max-height: 100%;
   z-index: 2;
 
+  @include screen-below($screen-xxs-max) {
+    right: 0;
+  }
+
   @include screen-below($screen-xs-max) {
     padding-bottom: ($nav-height + $spacing);
   }

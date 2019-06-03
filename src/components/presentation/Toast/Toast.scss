@@ -1,4 +1,4 @@
-@import "../../../scss/variables";
+@import "../../../scss/variables", "../../../scss/mixins";
 
 .Toast {
   font-size: 16px;
@@ -19,6 +19,7 @@
   }
 
   &--message {
+    flex-grow: 1;
     padding: $spacing 0 $spacing $spacing;
   }
 

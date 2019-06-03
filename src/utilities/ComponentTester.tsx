@@ -16,11 +16,6 @@ import { configureStore } from "../store/root.store";
 
 export type TRenderMethods = (...args: any[]) => any;
 
-interface IReduxHistory {
-  getActions: () => AnyAction[];
-  reset: () => void;
-}
-
 interface IConnectedReturn<
   M extends TRenderMethods,
   P extends React.ComponentProps<any> = React.ComponentProps<any>
@@ -29,7 +24,6 @@ interface IConnectedReturn<
   dispatch: Dispatch<AnyAction>;
   ports: ITestPorts;
   props: Required<P>;
-  reduxHistory: IReduxHistory;
   store: () => IRootReducers;
 }
 
@@ -53,19 +47,11 @@ export default class ComponentTester<
   protected defaultReduxState: DeepPartial<IRootReducers> = {};
 
   // Properties that are cleared whenever shallow/mount/render are called
-  protected actionHistory: AnyAction[] = [];
+  protected reduxHistory: AnyAction[] = [];
   protected children?: React.ReactNode;
   protected ports: DeepPartial<ITestPorts> = {};
   protected props: Partial<P> = {};
   protected reduxState: DeepPartial<IRootReducers> = {};
-
-  // Redux history
-  protected reduxHistory: IReduxHistory = {
-    getActions: () => this.actionHistory,
-    reset: () => {
-      this.actionHistory = [];
-    }
-  };
 
   constructor(
     protected readonly Component: C,
@@ -123,6 +109,12 @@ export default class ComponentTester<
     return this;
   }
 
+  public getReduxHistory = () => this.reduxHistory;
+
+  public resetReduxHistory = () => {
+    this.reduxHistory = [];
+  };
+
   public shallow = () => this.renderWithMethod(shallow);
 
   public mount = () => this.renderWithMethod(mount);
@@ -155,7 +147,6 @@ export default class ComponentTester<
         dispatch: store.dispatch,
         ports,
         props: mergedProps,
-        reduxHistory: this.reduxHistory,
         store: () => store.getState()
       };
     } else {
@@ -176,12 +167,12 @@ export default class ComponentTester<
   };
 
   protected reduxHistoryMiddleware: Middleware = () => next => action => {
-    this.actionHistory.push(action);
+    this.reduxHistory.push(action);
     return next(action);
   };
 
   protected configureStore = () => {
-    this.reduxHistory.reset();
+    this.resetReduxHistory();
 
     const mergedPorts = merge({}, this.defaultPorts, this.ports);
     const mergedReduxState: DeepPartial<IRootReducers> = merge(

@@ -180,13 +180,12 @@ describe("[utilities] ComponentTester", () => {
         "dispatch",
         "ports",
         "props",
-        "reduxHistory",
         "store"
       ]);
     });
 
     it("mounts correctly with default values", () => {
-      const { actual, ports, props, reduxHistory, store } = component.mount();
+      const { actual, ports, props, store } = component.mount();
 
       expect(ports.features).toEqual([default1]);
       expect(props.test2).toBe(default2);
@@ -206,12 +205,12 @@ describe("[utilities] ComponentTester", () => {
       ).toBe(`${default2}`);
 
       expect(
-        reduxHistory.getActions().filter(actions.setCurrentGameSlug.match)
+        component.getReduxHistory().filter(actions.setCurrentGameSlug.match)
       ).toHaveLength(1);
     });
 
     it("mounts correctly with values from test", () => {
-      const { actual, ports, props, reduxHistory, store } = component
+      const { actual, ports, props, store } = component
         .withReduxState({
           page: {
             currentRoute: test1
@@ -243,12 +242,12 @@ describe("[utilities] ComponentTester", () => {
       ).toBe(`${test2}`);
 
       expect(
-        reduxHistory.getActions().filter(actions.setCurrentGameSlug.match)
+        component.getReduxHistory().filter(actions.setCurrentGameSlug.match)
       ).toHaveLength(1);
     });
 
     it("clears test values after previous test and mounts with defaults again", () => {
-      const { actual, ports, props, reduxHistory, store } = component.mount();
+      const { actual, ports, props, store } = component.mount();
 
       expect(ports.features).toEqual([default1]);
       expect(props.test2).toBe(default2);
@@ -268,35 +267,35 @@ describe("[utilities] ComponentTester", () => {
       ).toBe(`${default2}`);
 
       expect(
-        reduxHistory.getActions().filter(actions.setCurrentGameSlug.match)
+        component.getReduxHistory().filter(actions.setCurrentGameSlug.match)
       ).toHaveLength(1);
     });
 
     it("resets the redux history correctly", () => {
-      const { reduxHistory } = component.mount();
+      component.mount();
 
       expect(
-        reduxHistory.getActions().filter(actions.setCurrentGameSlug.match)
+        component.getReduxHistory().filter(actions.setCurrentGameSlug.match)
       ).toHaveLength(1);
 
-      reduxHistory.reset();
+      component.resetReduxHistory();
 
       expect(
-        reduxHistory.getActions().filter(actions.setCurrentGameSlug.match)
+        component.getReduxHistory().filter(actions.setCurrentGameSlug.match)
       ).toHaveLength(0);
     });
 
     describe("when testing redux history across several tests", () => {
       it("has the expected actions from the first mount", () => {
-        const result1 = component.mount();
+        component.mount();
 
-        expect(result1.reduxHistory.getActions()).toHaveLength(1);
+        expect(component.getReduxHistory()).toHaveLength(1);
       });
 
       it("resets the actions history and has the expected actions from the second mount", () => {
-        const result1 = component.mount();
+        component.mount();
 
-        expect(result1.reduxHistory.getActions()).toHaveLength(1);
+        expect(component.getReduxHistory()).toHaveLength(1);
       });
     });
   });
