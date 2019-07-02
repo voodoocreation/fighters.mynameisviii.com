@@ -1,11 +1,14 @@
 import { mount, render, shallow } from "enzyme";
 import merge from "lodash.merge";
 import * as React from "react";
+import { IntlProvider, intlShape } from "react-intl";
+import { IntlProvider as ReduxIntlProvider } from "react-intl-redux";
 import { Provider } from "react-redux";
 import { DeepPartial, Dispatch, Middleware } from "redux";
 import { AnyAction } from "typescript-fsa";
 
-import { IRootReducers } from "../reducers/root.reducers";
+import messages from "../locales/en-NZ.json";
+import { IStoreState } from "../reducers/root.reducers";
 import {
   configureTestPorts,
   IPorts,
@@ -20,19 +23,19 @@ interface IConnectedReturn<
   M extends TRenderMethods,
   P extends React.ComponentProps<any> = React.ComponentProps<any>
 > {
-  actual: ReturnType<M>;
   dispatch: Dispatch<AnyAction>;
   ports: ITestPorts;
   props: Required<P>;
-  store: () => IRootReducers;
+  store: () => IStoreState;
+  wrapper: ReturnType<M>;
 }
 
 interface IReturn<
   M extends TRenderMethods,
   P extends React.ComponentProps<any> = React.ComponentProps<any>
 > {
-  actual: ReturnType<M>;
   props: Required<P>;
+  wrapper: ReturnType<M>;
 }
 
 export default class ComponentTester<
@@ -44,14 +47,14 @@ export default class ComponentTester<
   protected defaultChildren?: React.ReactNode;
   protected defaultPorts: DeepPartial<ITestPorts> = {};
   protected defaultProps: Partial<P> = {};
-  protected defaultReduxState: DeepPartial<IRootReducers> = {};
+  protected defaultReduxState: DeepPartial<IStoreState> = {};
 
   // Properties that are cleared whenever shallow/mount/render are called
   protected reduxHistory: AnyAction[] = [];
   protected children?: React.ReactNode;
   protected ports: DeepPartial<ITestPorts> = {};
   protected props: Partial<P> = {};
-  protected reduxState: DeepPartial<IRootReducers> = {};
+  protected reduxState: DeepPartial<IStoreState> = {};
 
   constructor(
     protected readonly Component: C,
@@ -79,7 +82,7 @@ export default class ComponentTester<
     return this;
   }
 
-  public withDefaultReduxState(state: DeepPartial<IRootReducers>) {
+  public withDefaultReduxState(state: DeepPartial<IStoreState>) {
     this.defaultReduxState = state;
 
     return this;
@@ -103,7 +106,7 @@ export default class ComponentTester<
     return this;
   }
 
-  public withReduxState(reduxState: DeepPartial<IRootReducers>) {
+  public withReduxState(reduxState: DeepPartial<IStoreState>) {
     this.reduxState = reduxState;
 
     return this;
@@ -122,39 +125,61 @@ export default class ComponentTester<
   public render = () => this.renderWithMethod(render);
 
   protected renderWithMethod = <M extends TRenderMethods>(method: M) => {
-    const mergedProps: P = merge(
+    const mergedProps = merge(
       {
         children: this.children || this.defaultChildren
       },
       this.defaultProps,
       this.props
-    );
+    ) as P;
 
-    let actual: ReturnType<M>;
+    let wrapper: ReturnType<M>;
     let result: IConnectedReturn<M, P> | IReturn<M, P>;
 
     if (this.isConnected) {
       const { ports, store } = this.configureStore();
 
-      actual = method(
+      wrapper = method(
         <Provider store={store}>
-          <this.Component {...mergedProps} />
+          <ReduxIntlProvider
+            defaultLocale="en-NZ"
+            textComponent={React.Fragment}
+          >
+            <this.Component {...mergedProps} />
+          </ReduxIntlProvider>
         </Provider>
       );
 
       result = {
-        actual,
         dispatch: store.dispatch,
         ports,
         props: mergedProps,
-        store: () => store.getState()
+        store: () => store.getState(),
+        wrapper
       };
     } else {
-      actual = method(<this.Component {...mergedProps} />);
+      const intlProvider = new IntlProvider(
+        {
+          defaultLocale: "en-NZ",
+          locale: "en-NZ",
+          messages,
+          textComponent: React.Fragment
+        },
+        {}
+      );
+      const { intl } = intlProvider.getChildContext();
+
+      wrapper = method(
+        React.cloneElement(<this.Component {...mergedProps} />, { intl }),
+        {
+          childContextTypes: { intl: intlShape },
+          context: { intl }
+        }
+      );
 
       result = {
-        actual,
-        props: mergedProps
+        props: mergedProps,
+        wrapper
       };
     }
 
@@ -174,14 +199,18 @@ export default class ComponentTester<
   protected configureStore = () => {
     this.resetReduxHistory();
 
-    const mergedPorts = merge({}, this.defaultPorts, this.ports);
-    const mergedReduxState: DeepPartial<IRootReducers> = merge(
+    const mergedPorts = merge(
+      {},
+      this.defaultPorts,
+      this.ports
+    ) as ITestPortsParam;
+    const mergedReduxState: DeepPartial<IStoreState> = merge(
       {},
       this.defaultReduxState,
       this.reduxState
     );
 
-    const ports = configureTestPorts(mergedPorts);
+    const ports: any = configureTestPorts(mergedPorts);
 
     const middlewares = [this.reduxHistoryMiddleware];
 

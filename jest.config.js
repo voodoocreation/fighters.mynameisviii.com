@@ -9,20 +9,28 @@ module.exports = {
       statements: 100
     }
   },
+  globals: {
+    "ts-jest": {
+      tsConfig: {
+        target: "es6"
+      }
+    }
+  },
   moduleDirectories: ["node_modules"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "yaml", "yml", "json"],
   moduleNameMapper: {
-    "\\.(scss)$": "<rootDir>/src/__mocks__/dummyMock.js",
-    "\\.(jpg|jpeg|gif|png|svg)$": "<rootDir>/src/__mocks__/dummyMock.js"
+    "\\.(scss)$": "<rootDir>/src/__mocks__/dummyMock.ts",
+    "\\.(jpg|jpeg|gif|png|svg)$": "<rootDir>/src/__mocks__/dummyMock.ts"
   },
   roots: ["<rootDir>/src"],
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   snapshotSerializers: ["enzyme-to-json/serializer"],
+  testEnvironment: "jsdom",
+  testMatch: ["**/*.test.(js|jsx|ts|tsx)"],
   testURL: "http://localhost",
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
     "^.+\\.(yaml|yml)$": "yaml-jest"
   },
-  testMatch: ["**/*.test.(js|jsx|ts|tsx)"],
   verbose: true
 };

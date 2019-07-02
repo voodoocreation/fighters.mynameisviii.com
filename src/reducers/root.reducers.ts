@@ -1,34 +1,39 @@
+import { IntlState } from "react-intl-redux";
 import { combineReducers } from "redux";
 
+import app, {
+  initialState as appInitialState,
+  IState as IAppState
+} from "./app.reducers";
 import features, {
-  IFeaturesReducers,
-  initialState as featuresInitialState
+  initialState as featuresInitialState,
+  IState as IFeaturesState
 } from "./features.reducers";
 import games, {
-  IGamesReducers,
-  initialState as gamesInitialState
+  initialState as gamesInitialState,
+  IState as IGamesState
 } from "./games.reducers";
-import page, {
-  initialState as pageInitialState,
-  IPageReducers
-} from "./page.reducers";
+import intl, { initialState as intlInitialState } from "./intl.reducers";
 
-export interface IRootReducers {
-  features: IFeaturesReducers;
-  games: IGamesReducers;
-  page: IPageReducers;
+export interface IStoreState {
+  app: IAppState;
+  features: IFeaturesState;
+  games: IGamesState;
+  intl: IntlState;
 }
 
 const rootReducer = combineReducers({
+  app,
   features,
   games,
-  page
+  intl
 });
 
 export default rootReducer;
 
-export const initialState = {
+export const initialState: IStoreState = {
+  app: appInitialState,
   features: featuresInitialState,
   games: gamesInitialState,
-  page: pageInitialState
+  intl: intlInitialState
 };

@@ -66,9 +66,9 @@ describe("[store] Redux store", () => {
 
   it("merges in initial state correctly", () => {
     const store = createStore({
-      page: { isLoading: true }
+      app: { isLoading: true }
     });
 
-    expect(store.getState().page.isLoading).toBe(true);
+    expect(store.getState().app.isLoading).toBe(true);
   });
 });

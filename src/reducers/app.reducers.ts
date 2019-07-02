@@ -3,7 +3,7 @@ import { reducerWithInitialState } from "typescript-fsa-reducers";
 import * as actions from "../actions/root.actions";
 import { error, IError } from "../models/root.models";
 
-export interface IPageReducers {
+export interface IState {
   currentRoute: string | undefined;
   error: IError | undefined;
   hasNewVersion: boolean;
@@ -12,7 +12,7 @@ export interface IPageReducers {
   transitioningTo: string | undefined;
 }
 
-export const initialState: IPageReducers = {
+export const initialState: IState = {
   currentRoute: undefined,
   error: undefined,
   hasNewVersion: false,

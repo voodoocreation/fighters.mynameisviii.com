@@ -20,15 +20,15 @@ const component = new ComponentTester(CharacterListing).withDefaultProps({
 });
 
 describe("[presentation] <CharacterListing />", () => {
-  const { actual, props } = component.mount();
+  const { props, wrapper } = component.mount();
 
   it("renders with the correct link href when unselected", () => {
-    expect(actual.find("Link").prop("href")).toBe("#character-name");
+    expect(wrapper.find("Link").prop("href")).toBe("#character-name");
   });
 
   describe("when clicking the listing", () => {
     it("clicks the link", () => {
-      actual.find("Link").simulate("click");
+      wrapper.find("Link").simulate("click");
     });
 
     it("calls the onClick prop", () => {
@@ -37,6 +37,6 @@ describe("[presentation] <CharacterListing />", () => {
   });
 
   it("matches snapshot", () => {
-    expect(actual.render()).toMatchSnapshot();
+    expect(wrapper.render()).toMatchSnapshot();
   });
 });

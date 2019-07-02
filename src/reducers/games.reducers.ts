@@ -5,12 +5,12 @@ import { IGame } from "../models/game.models";
 
 import * as actions from "../actions/root.actions";
 
-export interface IGamesReducers {
+export interface IState {
   currentSlug: string;
   items: IGame[];
 }
 
-export const initialState: IGamesReducers = {
+export const initialState: IState = {
   currentSlug: "",
   items
 };
@@ -20,6 +20,7 @@ export default reducerWithInitialState(initialState)
     ...state,
     currentSlug: payload
   }))
+
   .case(actions.changeRoute.started, state => ({
     ...state,
     currentSlug: ""

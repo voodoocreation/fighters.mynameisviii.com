@@ -22,12 +22,12 @@ const component = new ComponentTester(Game).withDefaultProps(testGame);
 
 describe("[presentation] <Game />", () => {
   const scrollToMock = jest.fn();
-  const { actual } = component.mount();
+  const { wrapper } = component.mount();
 
   jest.useFakeTimers();
 
   beforeAll(() => {
-    Object.defineProperties(actual.find(".Game--characters").instance(), {
+    Object.defineProperties(wrapper.find(".Game--characters").instance(), {
       clientWidth: {
         value: 200
       },
@@ -44,15 +44,15 @@ describe("[presentation] <Game />", () => {
   });
 
   it("renders all characters", () => {
-    expect(actual.find("Character")).toHaveLength(testGame.characters.length);
+    expect(wrapper.find("Character")).toHaveLength(testGame.characters.length);
   });
 
   it("renders the character list with the correct width", () => {
-    expect(actual.find(".Game--characters--items").prop("style")).toMatchObject(
-      {
-        width: `${100 * testGame.characters.length}%`
-      }
-    );
+    expect(
+      wrapper.find(".Game--characters--items").prop("style")
+    ).toMatchObject({
+      width: `${100 * testGame.characters.length}%`
+    });
   });
 
   describe("when scrolling characters on a desktop", () => {
@@ -61,8 +61,8 @@ describe("[presentation] <Game />", () => {
     });
 
     it("performs two scrolls in quick succession", () => {
-      actual.find(".Game--characters").simulate("scroll");
-      actual.find(".Game--characters").simulate("scroll");
+      wrapper.find(".Game--characters").simulate("scroll");
+      wrapper.find(".Game--characters").simulate("scroll");
     });
 
     it("doesn't update current location hash yet", () => {
@@ -92,26 +92,26 @@ describe("[presentation] <Game />", () => {
     });
 
     it("begins touch event", () => {
-      actual.find(".Game--characters").simulate("touchstart");
+      wrapper.find(".Game--characters").simulate("touchstart");
     });
 
     it("renders with isTouching class", () => {
-      expect(actual.find(".Game--characters").hasClass("isTouching")).toBe(
+      expect(wrapper.find(".Game--characters").hasClass("isTouching")).toBe(
         true
       );
     });
 
     it("scrolls container", () => {
-      actual.find(".Game--characters").simulate("scroll");
+      wrapper.find(".Game--characters").simulate("scroll");
       jest.runTimersToTime(100);
     });
 
     it("finishes touch event", () => {
-      actual.find(".Game--characters").simulate("touchend");
+      wrapper.find(".Game--characters").simulate("touchend");
     });
 
     it("renders without isTouching class", () => {
-      expect(actual.find(".Game--characters").hasClass("isTouching")).toBe(
+      expect(wrapper.find(".Game--characters").hasClass("isTouching")).toBe(
         false
       );
     });

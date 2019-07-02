@@ -1,8 +1,8 @@
-import reducer, { initialState } from "./page.reducers";
+import reducer, { initialState } from "./app.reducers";
 
 import * as actions from "../actions/root.actions";
 
-describe("[reducers] Page", () => {
+describe("[reducers] App", () => {
   it("reduces actions.setCurrentRoute correctly", () => {
     const route = "/";
     const state = reducer(initialState, actions.setCurrentRoute(route));
@@ -23,7 +23,7 @@ describe("[reducers] Page", () => {
       const params = "/";
       const state = reducer(
         initialState,
-        actions.changeRoute.done({ params, result: null })
+        actions.changeRoute.done({ params, result: {} })
       );
 
       expect(state.isLoading).toBe(false);
@@ -49,5 +49,11 @@ describe("[reducers] Page", () => {
     const state = reducer(initialState, actions.setHasNewVersion(true));
 
     expect(state.hasNewVersion).toEqual(true);
+  });
+
+  it("reduces actions.setIsInInstalledApp correctly", () => {
+    const state = reducer(initialState, actions.setIsInInstalledApp(true));
+
+    expect(state.isInInstalledApp).toEqual(true);
   });
 });

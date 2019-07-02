@@ -34,23 +34,23 @@ const component = new ComponentTester(Character).withDefaultProps(
 );
 
 describe("[presentation] <Character />", () => {
-  const { actual } = component.render();
+  const { wrapper } = component.render();
 
   it("renders the correct id on the heading", () => {
-    expect(actual.find("h2").attr("id")).toBe("character-name");
+    expect(wrapper.find("h2").attr("id")).toBe("character-name");
   });
 
   it("renders all movesets", () => {
-    expect(actual.find(".Character--moveset")).toHaveLength(
+    expect(wrapper.find(".Character--moveset")).toHaveLength(
       testCharacter.movesets.length
     );
   });
 
   it("only renders the conditions for the moves that have them", () => {
-    expect(actual.find(".Move--conditions")).toHaveLength(1);
+    expect(wrapper.find(".Move--conditions")).toHaveLength(1);
   });
 
   it("matches snapshot", () => {
-    expect(actual).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

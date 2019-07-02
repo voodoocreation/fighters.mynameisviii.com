@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const Logo: React.FC<{}> = () => (
+const Logo: React.FC = () => (
   <div className="Logo">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 909.25 773">
       <style

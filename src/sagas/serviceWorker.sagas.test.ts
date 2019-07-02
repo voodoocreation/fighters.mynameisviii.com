@@ -3,7 +3,7 @@ import setupSagas from "../utilities/setupSagas";
 import * as actions from "../actions/root.actions";
 
 describe("[sagas] Service worker", () => {
-  describe("takeLatest(actions.changeRoute.done)", () => {
+  describe("cachePageOnTransitionSaga", () => {
     describe("when the service worker is available", () => {
       afterAll(() => {
         jest.clearAllMocks();
@@ -20,7 +20,7 @@ describe("[sagas] Service worker", () => {
       });
 
       it("dispatches actions.changeRoute.done", () => {
-        dispatch(actions.changeRoute.done({ params: newRoute, result: null }));
+        dispatch(actions.changeRoute.done({ params: newRoute, result: {} }));
       });
 
       it("calls serviceWorker.postMessage with expected payload", () => {
@@ -58,9 +58,7 @@ describe("[sagas] Service worker", () => {
 
       it("dispatches actions.changeRoute.done", () => {
         try {
-          dispatch(
-            actions.changeRoute.done({ params: newRoute, result: null })
-          );
+          dispatch(actions.changeRoute.done({ params: newRoute, result: {} }));
         } catch (error) {
           isPassing = false;
         }
@@ -93,7 +91,7 @@ describe("[sagas] Service worker", () => {
 
       it("dispatches actions.changeRoute.done", () => {
         try {
-          dispatch(actions.changeRoute.done({ params: "/test", result: null }));
+          dispatch(actions.changeRoute.done({ params: "/test", result: {} }));
         } catch (error) {
           isPassing = false;
         }
@@ -109,7 +107,7 @@ describe("[sagas] Service worker", () => {
     });
   });
 
-  describe("takeLatest(actions.receiveServiceWorkerMessage)", () => {
+  describe("receiveServiceWorkerMessageSaga", () => {
     describe("when the service worker has activated", () => {
       const { dispatch, filterAction } = setupSagas();
 

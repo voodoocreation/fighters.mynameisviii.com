@@ -3,8 +3,8 @@ import setupSagas from "../utilities/setupSagas";
 import * as actions from "../actions/root.actions";
 
 describe("[sagas] Analytics", () => {
-  describe("takeLatest(actions.trackEvent)", () => {
-    describe("when tracking custom events", () => {
+  describe("trackAnalyticsEventSaga", () => {
+    describe("when tracking custom analytics events", () => {
       const event = { event: "test.event", value: "test" };
       const dataLayer: any = [];
 

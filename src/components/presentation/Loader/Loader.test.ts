@@ -8,8 +8,8 @@ const component = new ComponentTester(Loader).withDefaultProps({
 
 describe("[presentation] <Loader />", () => {
   it("renders correctly", () => {
-    const { actual } = component.render();
+    const { wrapper } = component.render();
 
-    expect(actual).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

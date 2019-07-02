@@ -9,7 +9,6 @@ interface IRequestOptions {
   url: string;
   method?: Method;
   body?: any;
-  shouldCamelizeKeys?: boolean;
 }
 
 export type TRequest = (options: IRequestOptions) => Promise<any>;

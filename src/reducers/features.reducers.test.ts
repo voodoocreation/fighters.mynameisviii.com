@@ -1,4 +1,4 @@
-import reducer, { IFeaturesReducers, initialState } from "./features.reducers";
+import reducer, { initialState, IState } from "./features.reducers";
 
 import * as actions from "../actions/root.actions";
 
@@ -8,8 +8,8 @@ describe("[reducers] Features", () => {
 
   describe("actions.addFeatures", () => {
     describe("when the payload is a string", () => {
-      let state1: IFeaturesReducers;
-      let state2: IFeaturesReducers;
+      let state1: IState;
+      let state2: IState;
 
       it("dispatches actions.addFeatures", () => {
         state1 = reducer(initialState, actions.addFeatures(feature1));
@@ -29,8 +29,8 @@ describe("[reducers] Features", () => {
     });
 
     describe("when the payload is an array", () => {
-      let state1: IFeaturesReducers;
-      let state2: IFeaturesReducers;
+      let state1: IState;
+      let state2: IState;
 
       it("dispatches actions.addFeatures", () => {
         state1 = reducer(
@@ -55,7 +55,7 @@ describe("[reducers] Features", () => {
 
   describe("actions.removeFeatures", () => {
     describe("when the payload is a string", () => {
-      let state: IFeaturesReducers;
+      let state: IState;
 
       it("dispatches actions.removeFeatures", () => {
         state = reducer(
@@ -70,7 +70,7 @@ describe("[reducers] Features", () => {
     });
 
     describe("when the payload is an array", () => {
-      let state: IFeaturesReducers;
+      let state: IState;
 
       it("dispatches actions.removeFeatures", () => {
         state = reducer(

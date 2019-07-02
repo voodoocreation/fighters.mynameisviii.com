@@ -1,5 +1,3 @@
-/* eslint-disable no-console, global-require, import/no-dynamic-require */
-
 const path = require("path");
 const glob = require("glob");
 const accepts = require("accepts");
@@ -17,12 +15,11 @@ const apiPath = "/mock-api";
 const apiURL = `http://localhost${port}${apiPath}`;
 const app = nextJS({ dev });
 const customRoutesHandler = customRoutes.getRequestHandler(app);
-console.log(port);
 const languages = glob
-  .sync("./locales/*.json")
+  .sync("./src/locales/*.json")
   .map(f => path.basename(f, ".json"));
 
-const getMessages = locale => require(`./locales/${locale}.json`);
+const getMessages = locale => require(`./src/locales/${locale}.json`);
 
 app.prepare().then(() => {
   const server = express();

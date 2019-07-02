@@ -159,7 +159,7 @@ exports[`[connected] <App /> mounts application correctly on the server 1`] = `
         </svg>
          
         <span>
-          Games
+          GAMES
         </span>
       </button>
       <a
@@ -181,7 +181,7 @@ exports[`[connected] <App /> mounts application correctly on the server 1`] = `
         </svg>
          
         <span>
-          Home
+          HOME
         </span>
       </a>
       <button
@@ -204,7 +204,7 @@ exports[`[connected] <App /> mounts application correctly on the server 1`] = `
         </svg>
          
         <span>
-          Characters
+          CHARACTERS
         </span>
       </button>
     </section>
@@ -212,7 +212,7 @@ exports[`[connected] <App /> mounts application correctly on the server 1`] = `
       class="Navigation--games"
     >
       <h2>
-        Games
+        GAMES
       </h2>
       <div
         class="Navigation--games--items"
@@ -224,7 +224,7 @@ exports[`[connected] <App /> mounts application correctly on the server 1`] = `
             href="/games/mortal-kombat"
           >
             <img
-              alt="View all moves for Mortal Kombat"
+              alt="VIEW_ALL_MOVES_FOR_GAME"
               src="/static/games/mortal-kombat/thumbnail.jpg"
             />
           </a>
@@ -236,7 +236,7 @@ exports[`[connected] <App /> mounts application correctly on the server 1`] = `
             href="/games/mortal-kombat-ii"
           >
             <img
-              alt="View all moves for Mortal Kombat II"
+              alt="VIEW_ALL_MOVES_FOR_GAME"
               src="/static/games/mortal-kombat-ii/thumbnail.jpg"
             />
           </a>

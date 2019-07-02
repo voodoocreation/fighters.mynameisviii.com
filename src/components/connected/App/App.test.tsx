@@ -69,8 +69,8 @@ const setup = async (
   };
 
   return {
-    actual: fn(<App {...props} />),
-    props
+    props,
+    wrapper: fn(<App {...props} />)
   };
 };
 
@@ -84,7 +84,7 @@ describe("[connected] <App />", () => {
   });
 
   it("mounts application correctly on the server", async () => {
-    const { actual } = await setup(
+    const { wrapper } = await setup(
       mount,
       {
         ctx: { isServer: g.isServer }
@@ -92,15 +92,15 @@ describe("[connected] <App />", () => {
       true
     );
 
-    expect(actual.render()).toMatchSnapshot();
-    actual.unmount();
+    expect(wrapper.render()).toMatchSnapshot();
+    wrapper.unmount();
   });
 
   it("mounts application correctly on the client", async () => {
-    const { actual } = await setup(mount);
+    const { wrapper } = await setup(mount);
 
-    expect(actual.render()).toMatchSnapshot();
-    actual.unmount();
+    expect(wrapper.render()).toMatchSnapshot();
+    wrapper.unmount();
   });
 
   it("gets `initialProps` from component correctly", async () => {
@@ -109,11 +109,11 @@ describe("[connected] <App />", () => {
 
     Component.getInitialProps = async () => ({ test });
 
-    const { actual, props } = await setup(mount, { Component });
+    const { props, wrapper } = await setup(mount, { Component });
 
     expect(props.initialProps.pageProps).toEqual({ test });
 
-    actual.unmount();
+    wrapper.unmount();
   });
 
   describe("when checking if the user is in the installed app", () => {
@@ -135,7 +135,7 @@ describe("[connected] <App />", () => {
       });
 
       it("unmounts the component", () => {
-        result.actual.unmount();
+        result.wrapper.unmount();
       });
     });
 
@@ -157,7 +157,7 @@ describe("[connected] <App />", () => {
       });
 
       it("unmounts the component", () => {
-        result.actual.unmount();
+        result.wrapper.unmount();
       });
     });
   });
@@ -195,7 +195,7 @@ describe("[connected] <App />", () => {
     });
 
     it("unmounts the component", () => {
-      result.actual.unmount();
+      result.wrapper.unmount();
     });
   });
 
@@ -209,32 +209,32 @@ describe("[connected] <App />", () => {
     it("handles the onRouteChangeStart event correctly", async () => {
       routes.Router.onRouteChangeStart("/");
 
-      expect(result.props.ctx.store.getState().page.transitioningTo).toBe("/");
+      expect(result.props.ctx.store.getState().app.transitioningTo).toBe("/");
     });
 
     it("handles the onRouteChangeComplete event correctly", async () => {
       routes.Router.onRouteChangeComplete("/");
 
       expect(
-        result.props.ctx.store.getState().page.transitioningTo
+        result.props.ctx.store.getState().app.transitioningTo
       ).toBeUndefined();
-      expect(result.props.ctx.store.getState().page.currentRoute).toBe("/");
+      expect(result.props.ctx.store.getState().app.currentRoute).toBe("/");
     });
 
     it("handles the onRouteChangeError event correctly", async () => {
       routes.Router.onRouteChangeError(new Error("Server error"), "/");
 
       expect(
-        result.props.ctx.store.getState().page.transitioningTo
+        result.props.ctx.store.getState().app.transitioningTo
       ).toBeUndefined();
-      expect(result.props.ctx.store.getState().page.error).toEqual({
+      expect(result.props.ctx.store.getState().app.error).toEqual({
         message: "Error: Server error",
         status: 500
       });
     });
 
     it("unmounts the component", () => {
-      result.actual.unmount();
+      result.wrapper.unmount();
     });
   });
 
@@ -243,7 +243,7 @@ describe("[connected] <App />", () => {
       let isPassing = true;
 
       try {
-        const { actual } = await setup(mount);
+        const { wrapper } = await setup(mount);
 
         const event: any = new Event("beforeinstallprompt");
         event.userChoice = new Promise(resolve =>
@@ -251,7 +251,7 @@ describe("[connected] <App />", () => {
         );
         await window.dispatchEvent(event);
 
-        actual.unmount();
+        wrapper.unmount();
       } catch (error) {
         isPassing = false;
       }
@@ -263,7 +263,7 @@ describe("[connected] <App />", () => {
       let isPassing = true;
 
       try {
-        const { actual } = await setup(mount);
+        const { wrapper } = await setup(mount);
 
         const event: any = new Event("beforeinstallprompt");
         event.userChoice = new Promise(resolve =>
@@ -271,7 +271,7 @@ describe("[connected] <App />", () => {
         );
         await window.dispatchEvent(event);
 
-        actual.unmount();
+        wrapper.unmount();
       } catch (error) {
         isPassing = false;
       }
@@ -288,10 +288,11 @@ describe("[connected] <App />", () => {
     });
 
     it("creates an instance of the service worker and registers it", () => {
-      const instance = result.actual
+      const instance = result.wrapper
         .childAt(0)
         .childAt(0)
         .instance();
+
       expect(instance.serviceWorkerContainer).toBeDefined();
       expect(instance.serviceWorkerContainer.register).toHaveBeenCalledWith({
         scope: "/"
@@ -311,11 +312,11 @@ describe("[connected] <App />", () => {
         })
       );
 
-      expect(result.props.ctx.store.getState().page.hasNewVersion).toBe(true);
+      expect(result.props.ctx.store.getState().app.hasNewVersion).toBe(true);
     });
 
     it("unmounts the component", () => {
-      result.actual.unmount();
+      result.wrapper.unmount();
     });
 
     it("unbinds the 'message' event listener from the service worker", () => {
@@ -331,7 +332,7 @@ describe("[connected] <App />", () => {
         })
       );
 
-      expect(result.props.ctx.store.getState().page.hasNewVersion).toBe(true);
+      expect(result.props.ctx.store.getState().app.hasNewVersion).toBe(true);
     });
   });
 });

@@ -48,7 +48,7 @@ const Meta: React.FC = () => (
   </React.Fragment>
 );
 
-const AnalyticsHead: React.FC<{}> = () => (
+const AnalyticsHead: React.FC = () => (
   <script
     dangerouslySetInnerHTML={{
       __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -60,7 +60,7 @@ const AnalyticsHead: React.FC<{}> = () => (
   />
 );
 
-const AnalyticsBody: React.FC<{}> = () => (
+const AnalyticsBody: React.FC = () => (
   <noscript>
     <iframe
       src="https://www.googletagmanager.com/ns.html?id=GTM-P9CMQN4"

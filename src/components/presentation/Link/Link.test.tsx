@@ -6,7 +6,7 @@ const component = new ComponentTester(Link);
 
 describe("[presentation] <Link />", () => {
   describe("when router is available and `href` prop is used", () => {
-    const { actual, props } = component
+    const { props, wrapper } = component
       .withProps({
         href: "/href",
         router: {
@@ -16,20 +16,20 @@ describe("[presentation] <Link />", () => {
       .mount();
 
     it("renders <Routes.Link />", () => {
-      expect(actual.find("Link")).toHaveLength(2);
+      expect(wrapper.find("Link")).toHaveLength(2);
     });
 
     it("renders <a />", () => {
-      expect(actual.find("a")).toHaveLength(1);
+      expect(wrapper.find("a")).toHaveLength(1);
     });
 
     it("has expected href attribute", () => {
-      expect(actual.find("a").prop("href")).toBe(props.href);
+      expect(wrapper.find("a").prop("href")).toBe(props.href);
     });
   });
 
   describe("when router is available and `route` prop is used", () => {
-    const { actual, props } = component
+    const { props, wrapper } = component
       .withProps({
         route: "/route",
         router: {
@@ -39,24 +39,24 @@ describe("[presentation] <Link />", () => {
       .mount();
 
     it("renders <LinkRoutes />", () => {
-      expect(actual.find("LinkRoutes")).toHaveLength(1);
+      expect(wrapper.find("LinkRoutes")).toHaveLength(1);
     });
 
     it("renders <NextLink />", () => {
-      expect(actual.find("Link")).toHaveLength(2);
+      expect(wrapper.find("Link")).toHaveLength(2);
     });
 
     it("renders <a />", () => {
-      expect(actual.find("a")).toHaveLength(1);
+      expect(wrapper.find("a")).toHaveLength(1);
     });
 
     it("has expected href attribute", () => {
-      expect(actual.find("a").prop("href")).toBe(props.route);
+      expect(wrapper.find("a").prop("href")).toBe(props.route);
     });
   });
 
   describe("when router is unavailable and `href` prop is used", () => {
-    const { actual, props } = component
+    const { props, wrapper } = component
       .withProps({
         href: "/href",
         router: {
@@ -66,20 +66,20 @@ describe("[presentation] <Link />", () => {
       .mount();
 
     it("doesn't render <NextLink /> or <Routes.Link />", () => {
-      expect(actual.find("Link")).toHaveLength(1);
+      expect(wrapper.find("Link")).toHaveLength(1);
     });
 
     it("renders <a />", () => {
-      expect(actual.find("a")).toHaveLength(1);
+      expect(wrapper.find("a")).toHaveLength(1);
     });
 
     it("has expected href attribute", () => {
-      expect(actual.find("a").prop("href")).toBe(props.href);
+      expect(wrapper.find("a").prop("href")).toBe(props.href);
     });
   });
 
   describe("when router is unavailable and `route` prop is used", () => {
-    const { actual, props } = component
+    const { props, wrapper } = component
       .withProps({
         route: "/",
         router: {
@@ -89,20 +89,20 @@ describe("[presentation] <Link />", () => {
       .mount();
 
     it("doesn't render <NextLink /> or <Routes.Link />", () => {
-      expect(actual.find("Link")).toHaveLength(1);
+      expect(wrapper.find("Link")).toHaveLength(1);
     });
 
     it("renders <a />", () => {
-      expect(actual.find("a")).toHaveLength(1);
+      expect(wrapper.find("a")).toHaveLength(1);
     });
 
     it("has expected href attribute", () => {
-      expect(actual.find("a").prop("href")).toBe(props.route);
+      expect(wrapper.find("a").prop("href")).toBe(props.route);
     });
   });
 
   describe("when isExternal prop is true", () => {
-    const { actual } = component
+    const { wrapper } = component
       .withProps({
         href: "/",
         isExternal: true
@@ -110,7 +110,7 @@ describe("[presentation] <Link />", () => {
       .render();
 
     it("renders <a /> with target='_blank' and rel='noopener'", () => {
-      expect(actual.attr()).toMatchObject({
+      expect(wrapper.attr()).toMatchObject({
         rel: "noopener",
         target: "_blank"
       });
@@ -118,7 +118,7 @@ describe("[presentation] <Link />", () => {
   });
 
   describe("when `href` and `route` props are undefined", () => {
-    const { actual } = component
+    const { wrapper } = component
       .withProps({
         router: {
           components: { test: "test" }
@@ -127,15 +127,15 @@ describe("[presentation] <Link />", () => {
       .mount();
 
     it("doesn't render <NextLink /> or <Routes.Link />", () => {
-      expect(actual.find("Link")).toHaveLength(1);
+      expect(wrapper.find("Link")).toHaveLength(1);
     });
 
     it("doesn't render <a />", () => {
-      expect(actual.find("a")).toHaveLength(0);
+      expect(wrapper.find("a")).toHaveLength(0);
     });
 
     it("renders <span />", () => {
-      expect(actual.find("span")).toHaveLength(1);
+      expect(wrapper.find("span")).toHaveLength(1);
     });
   });
 });

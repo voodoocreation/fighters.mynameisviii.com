@@ -8,14 +8,14 @@ const component = new ComponentTester(ButtonBar);
 
 describe("[presentation] <ButtonBar />", () => {
   it("doesn't render anything without any children", () => {
-    const { actual } = component.render();
+    const { wrapper } = component.render();
 
-    expect(actual.html()).toBeNull();
+    expect(wrapper.html()).toBeNull();
   });
 
   it("renders correctly with children", () => {
-    const { actual } = component.withChildren(<div>Button</div>).render();
+    const { wrapper } = component.withChildren(<div>Button</div>).render();
 
-    expect(actual.hasClass("ButtonBar")).toBe(true);
+    expect(wrapper.hasClass("ButtonBar")).toBe(true);
   });
 });

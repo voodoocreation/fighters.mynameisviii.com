@@ -13,16 +13,16 @@ import { createApi } from "../services/configureApi";
 import { configureHttpClient } from "../services/configureHttpClient";
 import { configurePorts, IPorts } from "../services/configurePorts";
 
-import rootReducer, { IRootReducers } from "../reducers/root.reducers";
+import rootReducer, { IStoreState } from "../reducers/root.reducers";
 import rootSaga from "../sagas/root.sagas";
 
-export type TStore = Store<IRootReducers> & {
+export type TStore = Store<IStoreState> & {
   sagaTask?: Task;
   runSagaTask?: () => void;
 };
 
 export const configureStore = (
-  initialState: DeepPartial<IRootReducers>,
+  initialState: DeepPartial<IStoreState>,
   ports: IPorts,
   extraMiddlewares: Middleware[] = []
 ) => {
@@ -51,16 +51,15 @@ export const configureStore = (
   );
 
   // Redux sagas
-  const sagas = rootSaga(ports);
   store.runSagaTask = () => {
-    store.sagaTask = sagaMiddleware.run(sagas);
+    store.sagaTask = sagaMiddleware.run(rootSaga, ports);
   };
   store.runSagaTask();
 
   return store;
 };
 
-export const createStore = (initialState: DeepPartial<IRootReducers> = {}) => {
+export const createStore = (initialState: DeepPartial<IStoreState> = {}) => {
   const dataLayer = !isServer() ? window.dataLayer : [];
   const features = !isServer() ? window.features : [];
 

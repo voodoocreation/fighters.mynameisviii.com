@@ -6,16 +6,16 @@ const component = new ComponentTester(IndexRoute, true);
 
 describe("[routes] <IndexRoute />", () => {
   describe("when the user is in the installed app", () => {
-    const { actual } = component
+    const { wrapper } = component
       .withReduxState({
-        page: {
+        app: {
           isInInstalledApp: true
         }
       })
       .render();
 
     it("doesn't render the install section", () => {
-      expect(actual.find(".Home--install")).toHaveLength(0);
+      expect(wrapper.find(".Home--install")).toHaveLength(0);
     });
   });
 
@@ -23,20 +23,20 @@ describe("[routes] <IndexRoute />", () => {
     const beforeInstallPromptEvent: any = new Event("beforeinstallprompt");
     beforeInstallPromptEvent.prompt = jest.fn();
 
-    const { actual } = component
+    const { wrapper } = component
       .withReduxState({
-        page: {
+        app: {
           isInInstalledApp: false
         }
       })
       .mount();
 
     it("renders the install section", () => {
-      expect(actual.find(".Home--install")).toHaveLength(1);
+      expect(wrapper.find(".Home--install")).toHaveLength(1);
     });
 
     it("doesn't render the install button yet", () => {
-      expect(actual.find(".Home--installButton")).toHaveLength(0);
+      expect(wrapper.find(".Home--installButton")).toHaveLength(0);
     });
 
     it("dispatches beforeinstallprompt event", () => {
@@ -44,13 +44,13 @@ describe("[routes] <IndexRoute />", () => {
     });
 
     it("renders the install button", () => {
-      expect(actual.update().find("button.Home--installButton")).toHaveLength(
+      expect(wrapper.update().find("button.Home--installButton")).toHaveLength(
         1
       );
     });
 
     it("clicks the install button", () => {
-      actual
+      wrapper
         .update()
         .find("button.Home--installButton")
         .simulate("click");
@@ -61,7 +61,7 @@ describe("[routes] <IndexRoute />", () => {
     });
 
     it("unmounts the component", () => {
-      actual.unmount();
+      wrapper.unmount();
     });
   });
 });

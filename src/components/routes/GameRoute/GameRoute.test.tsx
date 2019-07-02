@@ -29,15 +29,15 @@ describe("[routes] <GameRoute />", () => {
   });
 
   describe("when there's no current game", () => {
-    const { actual } = component.mount();
+    const { wrapper } = component.mount();
 
     it("renders an <ErrorPage />", () => {
-      expect(actual.find("ErrorPage")).toHaveLength(1);
+      expect(wrapper.find("ErrorPage")).toHaveLength(1);
     });
   });
 
   describe("when there is a current game", () => {
-    const { actual } = component
+    const { wrapper } = component
       .withReduxState({
         games: {
           currentSlug: testGame.slug,
@@ -47,7 +47,7 @@ describe("[routes] <GameRoute />", () => {
       .mount();
 
     it("renders a <Game />", () => {
-      expect(actual.find("Game")).toHaveLength(1);
+      expect(wrapper.find("Game")).toHaveLength(1);
     });
 
     it("adds the game-specific class to the body element", () => {
@@ -57,7 +57,7 @@ describe("[routes] <GameRoute />", () => {
     });
 
     it("unmounts correctly", () => {
-      actual.unmount();
+      wrapper.unmount();
     });
 
     it("removes the game-specific class from the body element", () => {

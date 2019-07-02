@@ -6,7 +6,7 @@ import { isServer } from "../../../helpers/dom";
 
 import injectIntlIntoPage from "../../../helpers/injectIntlIntoPage";
 import { IGame } from "../../../models/game.models";
-import { IRootReducers } from "../../../reducers/root.reducers";
+import { IStoreState } from "../../../reducers/root.reducers";
 import { absoluteUrl } from "../../../transformers/data.transformers";
 
 import ErrorPage from "../../presentation/ErrorPage/ErrorPage";
@@ -78,7 +78,7 @@ class GameRoute extends React.Component<IProps> {
   };
 }
 
-const mapState = (state: IRootReducers) => ({
+const mapState = (state: IStoreState) => ({
   game: selectors.getCurrentGame(state)
 });
 

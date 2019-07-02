@@ -1,7 +1,7 @@
 import actionCreatorFactory from "typescript-fsa";
 
-const actionCreator = actionCreatorFactory("SERVICE_WORKER");
+const createAction = actionCreatorFactory("SERVICE_WORKER");
 
-export const receiveServiceWorkerMessage = actionCreator<IServiceWorkerMessage>(
+export const receiveServiceWorkerMessage = createAction<IServiceWorkerMessage>(
   "RECEIVE_MESSAGE"
 );

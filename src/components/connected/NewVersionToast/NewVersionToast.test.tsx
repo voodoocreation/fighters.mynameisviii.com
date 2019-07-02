@@ -6,30 +6,30 @@ const component = new ComponentTester(NewVersionToast, true);
 
 describe("[connected] <NewVersionToast />", () => {
   describe("when there's no new version available", () => {
-    const { actual } = component
+    const { wrapper } = component
       .withReduxState({
-        page: {
+        app: {
           hasNewVersion: false
         }
       })
       .render();
 
     it("doesn't render the toast", () => {
-      expect(actual.html()).toBeNull();
+      expect(wrapper.html()).toBeNull();
     });
   });
 
   describe("when there's a new version available", () => {
-    const { actual } = component
+    const { wrapper } = component
       .withReduxState({
-        page: {
+        app: {
           hasNewVersion: true
         }
       })
       .mount();
 
     it("renders the toast", () => {
-      expect(actual.find(".Toast")).toHaveLength(1);
+      expect(wrapper.find(".Toast")).toHaveLength(1);
     });
 
     describe("when clicking the refresh button", () => {
@@ -38,7 +38,7 @@ describe("[connected] <NewVersionToast />", () => {
       });
 
       it("clicks the button", () => {
-        actual
+        wrapper
           .find("Button.HasNewVersionToast--refreshButton")
           .simulate("click");
       });

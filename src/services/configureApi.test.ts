@@ -12,9 +12,9 @@ describe("[services] API", () => {
       expect(Object.keys(api)).toEqual(Object.keys(apiMethods));
     });
 
-    it("binds the methods correctly", () => {
+    it("binds the methods correctly", async () => {
       for (const method of Object.values(api)) {
-        const response = method();
+        const response = await method();
 
         expect(response).toHaveProperty("data");
         expect(response).toHaveProperty("ok");

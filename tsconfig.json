@@ -17,5 +17,11 @@
     "baseUrl": ".",
     "outDir": "dist"
   },
-  "exclude": ["**/dist/*", "**/locales/*", "**/node_modules/*"]
+  "exclude": [
+    "**/coverage/*",
+    "**/dist/*",
+    "**/out/*",
+    "**/locales/*",
+    "**/node_modules/*"
+  ]
 }

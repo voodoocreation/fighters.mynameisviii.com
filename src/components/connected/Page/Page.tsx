@@ -4,7 +4,7 @@ import * as React from "react";
 import { InjectedIntlProps, injectIntl } from "react-intl";
 import { connect } from "react-redux";
 
-import { IRootReducers } from "../../../reducers/root.reducers";
+import { IStoreState } from "../../../reducers/root.reducers";
 import * as selectors from "../../../selectors/root.selectors";
 
 import Loader from "../../presentation/Loader/Loader";
@@ -44,8 +44,8 @@ class Page extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: IRootReducers) => ({
-  isLoading: selectors.getPageIsLoading(state)
+const mapStateToProps = (state: IStoreState) => ({
+  isLoading: selectors.isLoadingApp(state)
 });
 
 const PageWrapped = injectIntl(connect(mapStateToProps)(Page));

@@ -5,31 +5,27 @@ import { ActionCreator, AnyAction } from "typescript-fsa";
 
 import rootReducer, {
   initialState as rootInitialState,
-  IRootReducers
+  IStoreState
 } from "../reducers/root.reducers";
 import rootSaga from "../sagas/root.sagas";
 import {
   configureTestPorts,
   IPorts,
-  ITestPorts
+  ITestPortsParam
 } from "../services/configurePorts";
 
 export default (
-  fromTestStore: DeepPartial<IRootReducers> = {},
-  fromTestPorts: Partial<ITestPorts> = {}
+  fromTestStore: DeepPartial<IStoreState> = {},
+  fromTestPorts: ITestPortsParam = {}
 ) => {
-  const initialState: IRootReducers = merge(
-    {},
-    rootInitialState,
-    fromTestStore
-  );
+  const initialState: IStoreState = merge({}, rootInitialState, fromTestStore);
   const ports: unknown = configureTestPorts(fromTestPorts);
 
   const sagaTester = new SagaTester({
     initialState,
     reducers: rootReducer
   });
-  sagaTester.start(rootSaga(ports as IPorts));
+  sagaTester.start(rootSaga, ports as IPorts);
 
   return {
     dispatch: (action: AnyAction) => sagaTester.dispatch(action),
@@ -39,6 +35,6 @@ export default (
       >,
     ports,
     sagaTester,
-    store: () => sagaTester.getState() as IRootReducers
+    store: () => sagaTester.getState() as IStoreState
   };
 };

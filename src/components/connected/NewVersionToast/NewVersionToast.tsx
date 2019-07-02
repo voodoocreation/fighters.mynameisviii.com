@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormattedMessage, InjectedIntlProps, injectIntl } from "react-intl";
 import { connect } from "react-redux";
 
-import { IRootReducers } from "../../../reducers/root.reducers";
+import { IStoreState } from "../../../reducers/root.reducers";
 import * as selectors from "../../../selectors/root.selectors";
 
 import Button from "../../presentation/Button/Button";
@@ -40,7 +40,7 @@ class NewVersionToast extends React.Component<IProps> {
   };
 }
 
-const mapStateToProps = (state: IRootReducers) => ({
+const mapStateToProps = (state: IStoreState) => ({
   hasNewVersion: selectors.hasNewVersion(state)
 });
 

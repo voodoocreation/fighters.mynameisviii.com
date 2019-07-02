@@ -24,23 +24,23 @@ const component = new ComponentTester(GameListing).withDefaultProps({
 
 describe("[presentation] <GameListing />", () => {
   describe("when the listing isn't selected", () => {
-    const { actual, props } = component.mount();
+    const { props, wrapper } = component.mount();
 
     beforeAll(() => {
       jest.clearAllMocks();
     });
 
     it("renders without the isSelected class", () => {
-      expect(actual.find(".isSelected")).toHaveLength(0);
+      expect(wrapper.find(".isSelected")).toHaveLength(0);
     });
 
     it("renders correct link route", () => {
-      expect(actual.find("Link").prop("route")).toBe("/games/test-game");
+      expect(wrapper.find("Link").prop("route")).toBe("/games/test-game");
     });
 
     describe("when clicking the listing", () => {
       it("clicks the link", () => {
-        actual.find("Link").simulate("click");
+        wrapper.find("Link").simulate("click");
       });
 
       it("calls the onClick prop", () => {
@@ -49,12 +49,12 @@ describe("[presentation] <GameListing />", () => {
     });
 
     it("matches snapshot", () => {
-      expect(actual.render()).toMatchSnapshot();
+      expect(wrapper.render()).toMatchSnapshot();
     });
   });
 
   describe("when the listing is selected", () => {
-    const { actual, props } = component
+    const { props, wrapper } = component
       .withProps({
         isSelected: true
       })
@@ -65,16 +65,16 @@ describe("[presentation] <GameListing />", () => {
     });
 
     it("renders with the isSelected class", () => {
-      expect(actual.find(".isSelected")).toHaveLength(1);
+      expect(wrapper.find(".isSelected")).toHaveLength(1);
     });
 
     it("renders correct link route", () => {
-      expect(actual.find("Link").prop("route")).toBeUndefined();
+      expect(wrapper.find("Link").prop("route")).toBeUndefined();
     });
 
     describe("when clicking the listing", () => {
       it("clicks the link", () => {
-        actual.find("Link").simulate("click");
+        wrapper.find("Link").simulate("click");
       });
 
       it("calls the onClick prop", () => {
@@ -83,7 +83,7 @@ describe("[presentation] <GameListing />", () => {
     });
 
     it("matches snapshot", () => {
-      expect(actual.render()).toMatchSnapshot();
+      expect(wrapper.render()).toMatchSnapshot();
     });
   });
 });

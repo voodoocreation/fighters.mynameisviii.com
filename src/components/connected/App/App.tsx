@@ -52,7 +52,7 @@ const getIntlProps = (ctx: NextContext) => {
 
   return {
     initialNow: Date.now(),
-    intlMessages: intlMessages || require("../../../../locales/en-NZ.json"),
+    intlMessages: intlMessages || require("../../../locales/en-NZ.json"),
     locale: locale || "en-NZ"
   };
 };
@@ -64,8 +64,8 @@ class App<P extends IProps> extends NextApp<P> {
     const unsubscribe = ctx.store.subscribe(() => {
       const state = ctx.store.getState();
 
-      if (state.page.error && ctx.res) {
-        ctx.res.statusCode = state.page.error.status;
+      if (state.app.error && ctx.res) {
+        ctx.res.statusCode = state.app.error.status;
         unsubscribe();
       }
     });
@@ -199,7 +199,7 @@ class App<P extends IProps> extends NextApp<P> {
   private onRouteChangeComplete = (path: string) => {
     const { store } = this.props;
 
-    store.dispatch(actions.changeRoute.done({ params: path, result: null }));
+    store.dispatch(actions.changeRoute.done({ params: path, result: {} }));
   };
 
   private onRouteChangeError = (error: Error, path: string) => {

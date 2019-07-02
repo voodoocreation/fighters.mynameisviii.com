@@ -1,10 +1,10 @@
 import { createSelector } from "reselect";
 
-import { IRootReducers } from "../reducers/root.reducers";
+import { IStoreState } from "../reducers/root.reducers";
 
-export const getGames = (state: IRootReducers) => state.games.items;
+export const getGames = (state: IStoreState) => state.games.items;
 
-export const getCurrentGameSlug = (state: IRootReducers) =>
+export const getCurrentGameSlug = (state: IStoreState) =>
   state.games.currentSlug;
 
 export const getCurrentGame = createSelector(

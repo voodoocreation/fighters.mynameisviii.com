@@ -1,5 +1,13 @@
 import actionCreatorFactory from "typescript-fsa";
 
-const actionCreator = actionCreatorFactory("ANALYTICS");
+const createAction = actionCreatorFactory("ANALYTICS");
 
-export const trackEvent = actionCreator<IAnalyticsEvent>("TRACK_EVENT");
+interface IAnalyticsEvent {
+  event: string;
+  params?: {
+    [index: string]: string | number;
+  };
+  value?: string;
+}
+
+export const trackEvent = createAction<IAnalyticsEvent>("TRACK_EVENT");

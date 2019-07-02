@@ -1,5 +1,5 @@
 import actionCreatorFactory from "typescript-fsa";
 
-const actionCreator = actionCreatorFactory("GAMES");
+const createAction = actionCreatorFactory("GAMES");
 
-export const setCurrentGameSlug = actionCreator<string>("SET_CURRENT_SLUG");
+export const setCurrentGameSlug = createAction<string>("SET_CURRENT_SLUG");

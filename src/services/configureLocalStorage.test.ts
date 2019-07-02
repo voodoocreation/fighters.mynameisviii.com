@@ -13,7 +13,7 @@ const store: { [index: string]: string | null } = {};
 describe("[services] Local storage", () => {
   const testValue = "__localStorageTest__";
 
-  describe("when feature is available", () => {
+  describe("when the local storage feature is available", () => {
     beforeAll(() => {
       Object.defineProperty(global, "localStorage", {
         value: {
@@ -40,7 +40,7 @@ describe("[services] Local storage", () => {
       });
     });
 
-    it("detects local storage feature correctly when available", () => {
+    it("detects the local storage feature correctly when available", () => {
       expect(isLocalStorageAvailable()).toBe(true);
     });
 
@@ -69,7 +69,7 @@ describe("[services] Local storage", () => {
     });
   });
 
-  describe("when feature is unavailable", () => {
+  describe("when the local storage feature is unavailable", () => {
     beforeAll(() => {
       Object.defineProperty(global, "localStorage", {
         value: undefined,
@@ -84,21 +84,21 @@ describe("[services] Local storage", () => {
       });
     });
 
-    it("detects absence of feature correctly", () => {
+    it("detects absence of the feature correctly", () => {
       expect(isLocalStorageAvailable()).toBe(false);
     });
 
-    it("setLocalStorage() returns error correctly", () => {
+    it("setLocalStorage() returns a failure", () => {
       const result = setLocalStorage(testValue, testValue);
       expect(result).toEqual(failure("unavailable"));
     });
 
-    it("getLocalStorage() returns error correctly", () => {
+    it("getLocalStorage() returns a failure", () => {
       const result = getLocalStorage(testValue);
       expect(result).toEqual(failure("unavailable"));
     });
 
-    it("removeLocalStorage() returns error correctly", () => {
+    it("removeLocalStorage() returns a failure", () => {
       const result = removeLocalStorage(testValue);
       expect(result).toEqual(failure("unavailable"));
     });

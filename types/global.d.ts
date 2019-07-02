@@ -38,11 +38,3 @@ interface IServiceWorkerMessage {
   type: string;
   payload?: any;
 }
-
-interface IAnalyticsEvent {
-  event: string;
-  params?: {
-    [index: string]: string | number;
-  };
-  value?: string;
-}

@@ -5,7 +5,7 @@ import { TRequest } from "./configureHttpClient";
 export const createApi = (request: TRequest) => {
   const bindMethods = <M>(methods: M) => {
     const boundMethods: {
-      [key in keyof M]: TCurriedReturn<M[key]>
+      [key in keyof M]: TCurriedReturn<M[key]>;
     } = {} as any;
 
     for (const index of Object.keys(methods) as Array<keyof M>) {
