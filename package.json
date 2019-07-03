@@ -23,14 +23,12 @@
     "build:export": "npm-run-all build export",
     "export": "next export",
     "clean": "rimraf dist",
-    "fmt": "prettier --write \"**/*.{js,jsx,json,ts,tsx}\"",
-    "fmt:p": "prettier-package-json --write",
+    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx}\"",
     "start": "cross-env pm2 start start.config.json --env=production",
     "stop": "cross-env pm2 kill",
     "lint": "npm-run-all --parallel lint:*",
     "lint:scss": "stylelint --config .stylelintrc \"src/**/*.+(css|scss)\"",
     "lint:ts": "tslint \"./{types,src,pages}/**/*.ts?(x)\"",
-    "precommit": "lint-staged",
     "test": "cross-env NODE_ENV=test NODE_ICU_DATA=node_modules/full-icu jest --no-cache --config ./jest.config.js",
     "test:all": "npm-run-all fmt typecheck lint test:coverage",
     "test:coverage": "cross-env NODE_ENV=test NODE_ICU_DATA=node_modules/full-icu jest --no-cache --coverage --config ./jest.config.js",
@@ -88,7 +86,6 @@
     "pm2": "^3.5.1",
     "postcss-easy-import": "^3.0.0",
     "prettier": "^1.18.2",
-    "prettier-package-json": "^2.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -118,15 +115,5 @@
     "yaml-jest": "^1.0.5",
     "yaml-loader": "^0.5.0",
     "yarn": "^1.16.0"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,json,jsx}": [
-      "prettier --write",
-      "git add"
-    ],
-    "package.json": [
-      "prettier-package-json --write",
-      "git add"
-    ]
   }
 }
