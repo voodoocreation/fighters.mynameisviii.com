@@ -19,10 +19,23 @@ export const findMockCall = (mockFn: any, ...args: any[]) =>
     args.reduce((acc, curr, index) => acc && call[index] === curr, true)
   );
 
-export const mockWithData = <T>(data: T) => jest.fn(() => success(data));
+export const resolvedPromise = <T>(data: T) =>
+  new Promise<T>(resolve => resolve(data));
 
-export const mockWithError = (message: string) =>
-  jest.fn(() => failure(message));
+export const rejectedPromise = (message: string) =>
+  new Promise<any>((_, reject) => reject(new Error(message)));
 
-export const mockWithPayload = () =>
-  jest.fn(<P>(payload: P) => success(payload));
+export const mockWithResolvedPromise = <T>(data: T) =>
+  jest.fn(() => resolvedPromise(data));
+
+export const mockWithRejectedPromise = (message: string) =>
+  jest.fn(() => rejectedPromise(message));
+
+export const mockWithSuccess = <T>(data: T) =>
+  jest.fn(() => resolvedPromise(success(data)));
+
+export const mockWithFailure = (message: string) =>
+  jest.fn(() => resolvedPromise(failure(message)));
+
+export const mockWithSuccessPayload = () =>
+  jest.fn(<P>(payload: P) => resolvedPromise(success(payload)));

@@ -1,15 +1,14 @@
-import { failure, success } from "../models/response.models";
-import { mockWithError } from "../utilities/mocks";
+import { failure } from "../models/response.models";
+import { mockWithFailure, mockWithResolvedPromise } from "../utilities/mocks";
 import * as apiMethods from "./api/root.api";
-import { createApi } from "./configureApi";
-import { TRequest } from "./configureHttpClient";
+import { configureApi } from "./configureApi";
 import { configurePorts, configureTestPorts } from "./configurePorts";
 
 describe("[services] Ports", () => {
   describe("when creating the ports object, with all ports defined", () => {
-    const mockRequest: TRequest = () => Promise.resolve({});
+    const mockRequest = mockWithResolvedPromise({});
     const ports = configurePorts({
-      api: createApi(mockRequest),
+      api: configureApi(mockRequest),
       dataLayer: [],
       features: []
     });
@@ -33,7 +32,7 @@ describe("[services] Ports", () => {
 
   describe("when creating the ports object, with no dataLayer or features defined", () => {
     const ports = configurePorts({
-      api: createApi(() => Promise.resolve())
+      api: configureApi(mockWithResolvedPromise({}))
     });
 
     it("has all ports defined", () => {
@@ -56,7 +55,7 @@ describe("[services] Ports", () => {
   describe("when creating the mock ports object, with all ports defined", () => {
     const ports = configureTestPorts({
       api: {
-        saveSettings: mockWithError("Server error")
+        saveSettings: mockWithFailure("Server error")
       },
       dataLayer: [],
       features: []
@@ -78,8 +77,8 @@ describe("[services] Ports", () => {
       expect(ports.dataLayer).toContainEqual({ event: "test.event" });
     });
 
-    it("merges API methods correctly", () => {
-      expect(ports.api.saveSettings()).toEqual(failure("Server error"));
+    it("merges API methods correctly", async () => {
+      expect(await ports.api.saveSettings()).toEqual(failure("Server error"));
     });
   });
 
@@ -102,10 +101,12 @@ describe("[services] Ports", () => {
       expect(ports.dataLayer).toContainEqual({ event: "test.event" });
     });
 
-    it("default mocked API methods function correctly", () => {
+    it("default mocked API methods function correctly", async () => {
       const payload = { isSuccessful: true };
 
-      expect(ports.api.saveSettings(payload)).toEqual(success(payload));
+      expect(await ports.api.saveSettings(payload)).toEqual(
+        failure("API method 'saveSettings' not implemented.")
+      );
     });
   });
 });

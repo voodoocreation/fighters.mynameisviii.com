@@ -20,19 +20,20 @@ const component = new ComponentTester(Navigation, true).withDefaultReduxState({
 
 describe("[connected] <Navigation />", () => {
   describe("when there are no games and no game is selected", () => {
-    const { wrapper } = component.render();
+    const { wrapper } = component.mount();
+    const rendered = wrapper.render();
 
     it("doesn't render the games section", () => {
-      expect(wrapper.find(".Navigation--games")).toHaveLength(0);
+      expect(rendered.find(".Navigation--games")).toHaveLength(0);
     });
 
     it("doesn't render the characters section", () => {
-      expect(wrapper.find(".Navigation--characters")).toHaveLength(0);
+      expect(rendered.find(".Navigation--characters")).toHaveLength(0);
     });
 
     it("disables the characters nav item", () => {
       expect(
-        wrapper.find(".Navigation--primary--characters").prop("disabled")
+        rendered.find(".Navigation--primary--characters").prop("disabled")
       ).toBe(true);
     });
   });

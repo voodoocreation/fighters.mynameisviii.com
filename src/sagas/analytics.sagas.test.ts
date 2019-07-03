@@ -1,4 +1,4 @@
-import setupSagas from "../utilities/setupSagas";
+import SagaTester from "../utilities/SagaTester";
 
 import * as actions from "../actions/root.actions";
 
@@ -9,10 +9,10 @@ describe("[sagas] Analytics", () => {
       const dataLayer: any = [];
 
       dataLayer.push = jest.fn();
-      const { dispatch } = setupSagas({}, { dataLayer });
+      const saga = new SagaTester({}, { dataLayer });
 
       it("dispatches actions.trackEvent", () => {
-        dispatch(actions.trackEvent(event));
+        saga.dispatch(actions.trackEvent(event));
       });
 
       it("pushes event payload to dataLayer", () => {

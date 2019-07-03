@@ -1,8 +1,11 @@
-import { mockWithPayload } from "../utilities/mocks";
+import { mockWithFailure } from "../utilities/mocks";
 import * as apiMethods from "./api/root.api";
 import { TRequest } from "./configureHttpClient";
 
-export const createApi = (request: TRequest) => {
+export type TApi = ReturnType<typeof configureApi>;
+export type TMockApi = ReturnType<typeof configureMockApi>;
+
+export const configureApi = (request: TRequest) => {
   const bindMethods = <M>(methods: M) => {
     const boundMethods: {
       [key in keyof M]: TCurriedReturn<M[key]>;
@@ -19,12 +22,16 @@ export const createApi = (request: TRequest) => {
   return bindMethods(apiMethods);
 };
 
-export const createMockApi = () => {
+export const configureMockApi = () => {
   const mockApiMethods = <M>(methods: M) => {
-    const mockMethods: { [key in keyof M]: jest.Mock<any> } = {} as any;
+    const mockMethods: {
+      [key in keyof M]: jest.Mock<Promise<any>>;
+    } = {} as any;
 
     for (const index of Object.keys(methods) as Array<keyof M>) {
-      mockMethods[index] = mockWithPayload();
+      mockMethods[index] = mockWithFailure(
+        `API method '${index}' not implemented.`
+      );
     }
 
     return mockMethods;
@@ -32,6 +39,3 @@ export const createMockApi = () => {
 
   return mockApiMethods(apiMethods);
 };
-
-export type TApi = ReturnType<typeof createApi>;
-export type TMockApi = ReturnType<typeof createMockApi>;

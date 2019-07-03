@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 import * as dom from "../../../helpers/dom";
 import { IGame } from "../../../models/game.models";
-import { IStoreState } from "../../../reducers/root.reducers";
+import { TStoreState } from "../../../reducers/root.reducers";
 
 import Button from "../../presentation/Button/Button";
 import CharacterListing from "../../presentation/CharacterListing/CharacterListing";
@@ -154,7 +154,7 @@ class Navigation extends React.Component<IProps, IState> {
   };
 }
 
-const mapState = (state: IStoreState) => ({
+const mapState = (state: TStoreState) => ({
   currentGame: selectors.getCurrentGame(state),
   games: selectors.getGames(state)
 });

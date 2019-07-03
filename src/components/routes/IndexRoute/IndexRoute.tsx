@@ -5,7 +5,7 @@ import { FormattedMessage, InjectedIntlProps } from "react-intl";
 import { connect } from "react-redux";
 
 import injectIntlIntoPage from "../../../helpers/injectIntlIntoPage";
-import { IStoreState } from "../../../reducers/root.reducers";
+import { TStoreState } from "../../../reducers/root.reducers";
 import * as selectors from "../../../selectors/root.selectors";
 import { absoluteUrl } from "../../../transformers/data.transformers";
 import Button from "../../presentation/Button/Button";
@@ -150,7 +150,7 @@ class IndexRoute extends React.Component<IProps, IState> {
   };
 }
 
-const mapState = (state: IStoreState) => ({
+const mapState = (state: TStoreState) => ({
   isInInstalledApp: selectors.isInInstalledApp(state)
 });
 

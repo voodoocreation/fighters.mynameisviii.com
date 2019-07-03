@@ -12,10 +12,10 @@ describe("[connected] <NewVersionToast />", () => {
           hasNewVersion: false
         }
       })
-      .render();
+      .mount();
 
     it("doesn't render the toast", () => {
-      expect(wrapper.html()).toBeNull();
+      expect(wrapper.render().html()).toBeNull();
     });
   });
 

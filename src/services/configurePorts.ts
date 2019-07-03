@@ -1,4 +1,4 @@
-import { createMockApi, TApi, TMockApi } from "./configureApi";
+import { configureMockApi, TApi, TMockApi } from "./configureApi";
 
 export interface IPorts {
   api: TApi;
@@ -35,7 +35,7 @@ export interface ITestPortsParam {
 
 export const configureTestPorts = (ports: ITestPortsParam): ITestPorts => {
   const dataLayer: any[] = ports.dataLayer ? ports.dataLayer : [];
-  const api: TMockApi = { ...createMockApi(), ...(ports.api as any) };
+  const api: TMockApi = { ...configureMockApi(), ...(ports.api as any) };
 
   return {
     api,

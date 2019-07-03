@@ -13,14 +13,15 @@ const component = new ComponentTester(Page, true)
 
 describe("[connected] <Page />", () => {
   describe("when the app isn't loading", () => {
-    const { wrapper } = component.render();
+    const { wrapper } = component.mount();
+    const rendered = wrapper.render();
 
     it("doesn't render with isLoading class", () => {
-      expect(wrapper.hasClass("isLoading")).toBe(false);
+      expect(rendered.hasClass("isLoading")).toBe(false);
     });
 
     it("renders children instead of loader", () => {
-      expect(wrapper.find(".Page--body").html()).toBe("Page");
+      expect(rendered.find(".Page--body").html()).toBe("Page");
     });
   });
 
@@ -29,14 +30,15 @@ describe("[connected] <Page />", () => {
       .withReduxState({
         app: { isLoading: true }
       })
-      .render();
+      .mount();
+    const rendered = wrapper.render();
 
     it("renders with isLoading class", () => {
-      expect(wrapper.hasClass("isLoading")).toBe(true);
+      expect(rendered.hasClass("isLoading")).toBe(true);
     });
 
     it("renders loader instead of children", () => {
-      expect(wrapper.find(".Loader")).toHaveLength(1);
+      expect(rendered.find(".Loader")).toHaveLength(1);
     });
   });
 });
