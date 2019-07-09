@@ -9,7 +9,8 @@ import NextApp, {
   NextAppContext
 } from "next/app";
 import * as React from "react";
-import { addLocaleData, IntlProvider } from "react-intl";
+import { addLocaleData } from "react-intl";
+import { IntlProvider } from "react-intl-redux";
 import { Provider } from "react-redux";
 
 import routes from "../../../../next.routes";
@@ -38,7 +39,6 @@ export type TAppContext<Q extends DefaultQuery> = NextAppContext & {
 interface IProps extends DefaultAppIProps, AppProps {
   intlProps: {
     locale: string;
-    intlMessages: {};
     initialNow: Date;
   };
   store: TStore;
@@ -48,11 +48,10 @@ const getIntlProps = (ctx: NextContext) => {
   const requestProps = isServer()
     ? ctx.req
     : window.__NEXT_DATA__.props.initialProps.intlProps;
-  const { locale, intlMessages } = requestProps;
+  const { locale } = requestProps;
 
   return {
     initialNow: Date.now(),
-    intlMessages: intlMessages || require("../../../locales/en-NZ.json"),
     locale: locale || "en-NZ"
   };
 };
@@ -152,9 +151,8 @@ class App<P extends IProps> extends NextApp<P> {
       <Container>
         <Provider store={store}>
           <IntlProvider
+            defaultLocale="en-NZ"
             initialNow={intlProps.initialNow}
-            messages={intlProps.intlMessages}
-            locale={intlProps.locale}
             textComponent={React.Fragment}
           >
             <Page>

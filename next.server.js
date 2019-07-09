@@ -16,10 +16,8 @@ const apiURL = `http://localhost${port}${apiPath}`;
 const app = nextJS({ dev });
 const customRoutesHandler = customRoutes.getRequestHandler(app);
 const languages = glob
-  .sync("./src/locales/*.json")
-  .map(f => path.basename(f, ".json"));
-
-const getMessages = locale => require(`./src/locales/${locale}.json`);
+  .sync("./src/locales/*.ts")
+  .map(f => path.basename(f, ".ts"));
 
 app.prepare().then(() => {
   const server = express();
@@ -60,7 +58,6 @@ app.prepare().then(() => {
     const locale = accept.language(languages);
 
     req.locale = locale || "en-NZ";
-    req.intlMessages = getMessages(locale || "en-NZ");
 
     customRoutesHandler(req, res);
   });

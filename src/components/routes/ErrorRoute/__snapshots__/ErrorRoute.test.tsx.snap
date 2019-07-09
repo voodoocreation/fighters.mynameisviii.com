@@ -11,7 +11,7 @@ exports[`[routes] <ErrorRoute /> renders correctly 1`] = `
     class="ErrorPage--content container"
   >
     <p>
-      An error has occurred, please try again.
+      An error has occurred; please try again.
     </p>
   </div>
 </article>
