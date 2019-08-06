@@ -4,6 +4,7 @@ const util = require("util");
 const ServiceWorkerPlugin = require("serviceworker-webpack-plugin");
 const withSass = require("@zeit/next-sass");
 const PluginLodashModuleReplacement = require("lodash-webpack-plugin");
+const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 const getPages = () => {
   const paths = {
@@ -39,6 +40,7 @@ const getFiles = (dir, files = []) => {
 
 module.exports = withSass({
   distDir: "dist",
+  exportTrailingSlash: true,
   poweredByHeader: false,
   exportPathMap: async (_, { distDir, outDir }) => {
     if (outDir) {
@@ -68,8 +70,12 @@ module.exports = withSass({
     config.plugins.push(
       new PluginLodashModuleReplacement(),
 
+      new FilterWarningsPlugin({
+        exclude: /Conflicting order between:/
+      }),
+
       new ServiceWorkerPlugin({
-        entry: path.join(__dirname, "src/services/appService.ts"),
+        entry: path.join(__dirname, "appService.js"),
         filename: "appService.js",
         transformOptions: swOptions => ({
           ...swOptions,
