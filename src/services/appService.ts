@@ -1,3 +1,4 @@
+// @ts-ignore
 const g: any = global;
 const s: any = self;
 const { assets, buildId, staticFiles } = g.serviceWorkerOption;

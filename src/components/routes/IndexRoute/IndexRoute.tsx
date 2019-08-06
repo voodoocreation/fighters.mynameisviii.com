@@ -4,10 +4,10 @@ import { FaBoxOpen, FaGithub } from "react-icons/fa";
 import { FormattedMessage, InjectedIntlProps } from "react-intl";
 import { connect } from "react-redux";
 
+import { absoluteUrl } from "../../../helpers/dataTransformers";
 import injectIntlIntoPage from "../../../helpers/injectIntlIntoPage";
 import { TStoreState } from "../../../reducers/root.reducers";
 import * as selectors from "../../../selectors/root.selectors";
-import { absoluteUrl } from "../../../transformers/data.transformers";
 import Button from "../../presentation/Button/Button";
 import ButtonBar from "../../presentation/ButtonBar/ButtonBar";
 import Link from "../../presentation/Link/Link";

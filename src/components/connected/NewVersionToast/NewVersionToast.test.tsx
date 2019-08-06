@@ -38,9 +38,7 @@ describe("[connected] <NewVersionToast />", () => {
       });
 
       it("clicks the button", () => {
-        wrapper
-          .find("Button.HasNewVersionToast--refreshButton")
-          .simulate("click");
+        wrapper.find("Button.NewVersionToast--refreshButton").simulate("click");
       });
 
       it("triggers a hard refresh", () => {

@@ -2,7 +2,7 @@ import Head from "next/head";
 import * as React from "react";
 import { InjectedIntlProps, injectIntl } from "react-intl";
 
-import { absoluteUrl } from "../../../transformers/data.transformers";
+import { absoluteUrl } from "../../../helpers/dataTransformers";
 
 import "./ErrorPage.scss";
 

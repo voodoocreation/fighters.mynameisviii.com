@@ -6,9 +6,6 @@ declare module "*.svg";
 declare module "*.yml";
 declare module "*.yaml";
 
-declare module "jest-mock-axios";
-declare module "lodash.merge";
-declare module "react-relative-time";
 declare module "serviceworker-webpack-plugin/lib/runtime";
 declare module "service-worker-mock";
 declare module "service-worker-mock/fetch";

@@ -1,15 +1,18 @@
 import { mount } from "enzyme";
-import merge from "lodash.merge";
 import * as React from "react";
 
-import { findMockCall } from "../../../utilities/mocks";
-
-import App from "./App";
+import * as actions from "../../../actions/root.actions";
+import { error } from "../../../models/root.models";
+import MockPageContext from "../../../utilities/MockPageContext";
+import {
+  findMockCall,
+  mockWithResolvedPromise
+} from "../../../utilities/mocks";
+import { App } from "./App";
 
 jest.mock("serviceworker-webpack-plugin/lib/runtime", () => ({
-  register: jest.fn(() => new Promise(resolve => resolve()))
+  register: mockWithResolvedPromise({})
 }));
-
 jest.mock("../../../../next.routes", () => ({
   Router: {
     route: ""
@@ -18,321 +21,365 @@ jest.mock("../../../../next.routes", () => ({
 
 import routes from "../../../../next.routes";
 
-import * as selectors from "../../../selectors/root.selectors";
+class MockPageComponent extends React.Component {
+  public static async getInitialProps() {
+    return {
+      mockPageComponentProp: "test"
+    };
+  }
 
-const g: any = global;
+  public render() {
+    return <div className="MockPageComponent" />;
+  }
+}
 
-const setup = async (
-  fn: any,
-  fromTestProps?: any,
-  isServer = false,
-  isInInstalledApp = false
-) => {
-  jest.clearAllMocks();
-
-  g.matchMedia = jest.fn(() => ({ matches: isInInstalledApp }));
-
-  g.isServer = isServer;
-  g.__NEXT_DATA__ = {
-    props: {
-      initialProps: {
-        intlProps: {}
-      }
-    }
-  };
-
-  const Component = () => <div className="PageComponent" />;
-  const appProps = merge(
-    {
-      Component,
-      asPath: "",
-      ctx: {
-        isServer: false,
-        pathname: "",
-        query: {},
-        req: {
-          intlMessages: {},
-          locale: "en-NZ"
-        },
-        res: {}
+const defineGlobals = (isServer: boolean, locale?: string) => {
+  Object.defineProperties(window, {
+    __NEXT_DATA__: {
+      value: {
+        props: {
+          initialProps: {
+            intlProps: {
+              locale
+            }
+          }
+        }
       },
-      router: {
-        pathname: ""
+      writable: true
+    },
+    isServer: {
+      value: isServer,
+      writable: true
+    },
+    matchMedia: {
+      value: jest.fn(() => ({ matches: true })),
+      writable: true
+    }
+  });
+};
+
+const setup = async (context: any, Component: any, locale?: string) => {
+  const appContext: any = {
+    Component,
+    ctx: {
+      ...context,
+      req: {
+        locale
       }
     },
-    fromTestProps
-  );
-  const initialProps = await App.getInitialProps(appProps);
+    router: {
+      pathname: ""
+    },
+    store: context.store
+  };
+
+  const initialProps = await App.getInitialProps(appContext);
   const props = {
-    ...appProps,
+    ...appContext,
     ...initialProps
   };
 
   return {
     props,
-    wrapper: fn(<App {...props} />)
+    wrapper: mount(<App {...props} />)
   };
 };
 
 describe("[connected] <App />", () => {
-  const addEventListener = g.addEventListener;
-  const removeEventListener = g.removeEventListener;
+  describe("getInitialProps", () => {
+    const context = new MockPageContext();
 
-  beforeAll(() => {
-    g.addEventListener = jest.fn((...args) => addEventListener(...args));
-    g.removeEventListener = jest.fn((...args) => removeEventListener(...args));
-  });
+    describe("when on the server", () => {
+      let props: any;
+      const locale = "en-US";
 
-  it("mounts application correctly on the server", async () => {
-    const { wrapper } = await setup(
-      mount,
-      {
-        ctx: { isServer: g.isServer }
-      },
-      true
-    );
+      const ctx = context
+        .withReduxState({
+          app: {
+            error: error({ message: "Error", status: 404 })
+          }
+        })
+        .toObject(true);
 
-    expect(wrapper.render()).toMatchSnapshot();
-    wrapper.unmount();
-  });
+      const appContext: any = {
+        Component: MockPageComponent,
+        ctx: {
+          ...ctx,
+          req: {
+            locale
+          },
+          res: {
+            statusCode: 200
+          }
+        },
+        router: {
+          pathname: ""
+        },
+        store: ctx.store
+      };
 
-  it("mounts application correctly on the client", async () => {
-    const { wrapper } = await setup(mount);
-
-    expect(wrapper.render()).toMatchSnapshot();
-    wrapper.unmount();
-  });
-
-  it("gets `initialProps` from component correctly", async () => {
-    const test = "Test";
-    const Component: any = () => <div className="PageComponent" />;
-
-    Component.getInitialProps = async () => ({ test });
-
-    const { props, wrapper } = await setup(mount, { Component });
-
-    expect(props.initialProps.pageProps).toEqual({ test });
-
-    wrapper.unmount();
-  });
-
-  describe("when checking if the user is in the installed app", () => {
-    describe("when the display mode is 'standalone'", () => {
-      let result: any;
-
-      it("mounts the component", async () => {
-        result = await setup(mount, {}, false, true);
+      beforeAll(() => {
+        defineGlobals(true, locale);
       });
 
-      it("makes a call to window.matchMedia", () => {
-        expect(g.matchMedia).toHaveBeenCalledTimes(1);
+      it("calls getInitialProps method", async () => {
+        props = await App.getInitialProps(appContext);
       });
 
-      it("isInInstalledApp is true in the store", () => {
-        expect(
-          selectors.isInInstalledApp(result.props.ctx.store.getState())
-        ).toBe(true);
+      it("defines pageProps correctly", async () => {
+        expect(props.pageProps).toEqual(
+          await MockPageComponent.getInitialProps()
+        );
       });
 
-      it("unmounts the component", () => {
-        result.wrapper.unmount();
+      it("defines the response's statusCode correctly", () => {
+        ctx.store.dispatch({ type: "ANY" });
+
+        expect(appContext.ctx.res.statusCode).toBe(404);
+      });
+
+      it("defines locale correctly", () => {
+        expect(props.intlProps.locale).toBe(locale);
       });
     });
 
-    describe("when the display mode isn't 'standalone'", () => {
-      let result: any;
+    describe("when on the client", () => {
+      const locale = "en-US";
 
-      it("mounts the component", async () => {
-        result = await setup(mount, {}, false, false);
+      beforeAll(() => {
+        defineGlobals(false, locale);
       });
 
-      it("makes a call to window.matchMedia", () => {
-        expect(g.matchMedia).toHaveBeenCalledTimes(1);
+      let props: any;
+
+      const ctx = context.toObject(false);
+
+      const appContext: any = {
+        Component: MockPageComponent,
+        ctx: {
+          ...ctx,
+          req: {
+            locale: "en-US"
+          }
+        },
+        router: {
+          pathname: ""
+        },
+        store: ctx.store
+      };
+
+      it("calls getInitialProps method", async () => {
+        props = await App.getInitialProps(appContext);
       });
 
-      it("isInInstalledApp is false in the store", () => {
-        expect(
-          selectors.isInInstalledApp(result.props.ctx.store.getState())
-        ).toBe(false);
+      it("defines pageProps correctly", async () => {
+        expect(props.pageProps).toEqual(
+          await MockPageComponent.getInitialProps()
+        );
       });
 
-      it("unmounts the component", () => {
-        result.wrapper.unmount();
+      it("defines locale correctly", () => {
+        expect(props.intlProps.locale).toBe(locale);
       });
     });
   });
 
-  describe("when receiving features from the feature event", () => {
-    const feature1 = "feature-1";
-    const feature2 = "feature-2";
+  describe("when mounting on the server", () => {
+    const context = new MockPageContext();
+
     let result: any;
+    const locale = "en-US";
+
+    beforeEach(() => {
+      defineGlobals(true, locale);
+    });
 
     it("mounts the component", async () => {
-      result = await setup(mount);
+      result = await setup(context.toObject(true), MockPageComponent, locale);
     });
 
-    it("receives a single feature correctly", async () => {
-      window.dispatchEvent(new CustomEvent("feature", { detail: feature1 }));
+    it("dispatches actions.initApp.started with expected payload", () => {
+      const matchingActions = context.reduxHistory.filter(
+        actions.initApp.started.match
+      );
 
+      expect(matchingActions).toHaveLength(1);
+      expect(matchingActions[0].payload).toEqual({
+        locale
+      });
+    });
+
+    it("matches snapshot", () => {
+      expect(result.wrapper.render()).toMatchSnapshot();
+    });
+
+    it("unmounts correctly", () => {
+      result.wrapper.unmount();
+    });
+  });
+
+  describe("when mounting on the client", () => {
+    let result: any;
+    const context = new MockPageContext();
+
+    const locale = "en-US";
+
+    beforeAll(() => {
+      jest.spyOn(window, "removeEventListener");
+
+      defineGlobals(false, locale);
+    });
+
+    it("mounts the component", async () => {
+      result = await setup(context.toObject(false), MockPageComponent, locale);
+    });
+
+    it("dispatch actions.setCurrentRoute", () => {
       expect(
-        selectors.hasFeature(result.props.ctx.store.getState(), feature1)
-      ).toBe(true);
+        context.reduxHistory.filter(actions.setCurrentRoute.match)
+      ).toHaveLength(1);
     });
 
-    it("receives multiple features correctly", async () => {
+    it("dispatches actions.setIsInInstalledApp", () => {
+      expect(
+        context.reduxHistory.filter(actions.setIsInInstalledApp.match)
+      ).toHaveLength(1);
+    });
+
+    it("dispatches actions.initApp.started with expected payload", () => {
+      const matchingActions = context.reduxHistory.filter(
+        actions.initApp.started.match
+      );
+
+      expect(matchingActions).toHaveLength(1);
+      expect(matchingActions[0].payload).toEqual({
+        locale
+      });
+    });
+
+    it("handles feature event correctly", () => {
+      const features = ["test"];
+
       window.dispatchEvent(
         new CustomEvent("feature", {
-          detail: [feature1, feature2]
+          detail: features
         })
       );
 
-      expect(
-        selectors.hasFeature(result.props.ctx.store.getState(), feature1)
-      ).toBe(true);
-      expect(
-        selectors.hasFeature(result.props.ctx.store.getState(), feature2)
-      ).toBe(true);
+      const matchingEvents = context.reduxHistory.filter(
+        actions.addFeatures.match
+      );
+
+      expect(matchingEvents).toHaveLength(1);
+      expect(matchingEvents[0].payload).toEqual(features);
     });
 
-    it("unmounts the component", () => {
-      result.wrapper.unmount();
-    });
-  });
+    it("handles service worker message events correctly", () => {
+      const data = { type: "serviceWorker.activate" };
 
-  describe("when navigating within the app", () => {
-    let result: any;
+      navigator.serviceWorker.dispatchEvent(
+        new MessageEvent("message", { data })
+      );
 
-    it("mounts the component", async () => {
-      result = await setup(mount);
-    });
+      const matchingEvents = context.reduxHistory.filter(
+        actions.receiveServiceWorkerMessage.match
+      );
 
-    it("handles the onRouteChangeStart event correctly", async () => {
-      routes.Router.onRouteChangeStart("/");
-
-      expect(result.props.ctx.store.getState().app.transitioningTo).toBe("/");
+      expect(matchingEvents).toHaveLength(1);
+      expect(matchingEvents[0].payload).toEqual(data);
     });
 
-    it("handles the onRouteChangeComplete event correctly", async () => {
-      routes.Router.onRouteChangeComplete("/");
+    it("handles beforeinstallprompt event correctly", async () => {
+      const outcome = "dismissed";
 
-      expect(
-        result.props.ctx.store.getState().app.transitioningTo
-      ).toBeUndefined();
-      expect(result.props.ctx.store.getState().app.currentRoute).toBe("/");
-    });
+      const event: any = new Event("beforeinstallprompt");
+      event.userChoice = { outcome };
+      await window.dispatchEvent(event);
 
-    it("handles the onRouteChangeError event correctly", async () => {
-      routes.Router.onRouteChangeError(new Error("Server error"), "/");
+      const matchingActions = context.reduxHistory.filter(
+        actions.trackEvent.match
+      );
 
-      expect(
-        result.props.ctx.store.getState().app.transitioningTo
-      ).toBeUndefined();
-      expect(result.props.ctx.store.getState().app.error).toEqual({
-        message: "Error: Server error",
-        status: 500
+      expect(matchingActions).toHaveLength(1);
+      expect(matchingActions[0].payload).toEqual({
+        event: "page.addToHomeScreen.outcome",
+        value: outcome
       });
     });
 
-    it("unmounts the component", () => {
-      result.wrapper.unmount();
-    });
-  });
+    describe("routing events", () => {
+      const route = "/";
 
-  describe("when the browser prompts the user to install the app", () => {
-    it("handles dismissed outcome correctly", async () => {
-      let isPassing = true;
+      it("triggers onRouteChangeStart", () => {
+        routes.Router.onRouteChangeStart(route);
+      });
 
-      try {
-        const { wrapper } = await setup(mount);
-
-        const event: any = new Event("beforeinstallprompt");
-        event.userChoice = new Promise(resolve =>
-          resolve({ outcome: "dismissed" })
+      it("dispatches actions.changeRoute.started with expected payload", () => {
+        const matchingActions = context.reduxHistory.filter(
+          actions.changeRoute.started.match
         );
-        await window.dispatchEvent(event);
 
-        wrapper.unmount();
-      } catch (error) {
-        isPassing = false;
-      }
+        expect(matchingActions).toHaveLength(1);
+        expect(matchingActions[0].payload).toBe(route);
+      });
 
-      expect(isPassing).toBe(true);
-    });
+      it("triggers onRouteChangeComplete", async () => {
+        routes.Router.onRouteChangeComplete(route);
+      });
 
-    it("handles accepted outcome correctly", async () => {
-      let isPassing = true;
-
-      try {
-        const { wrapper } = await setup(mount);
-
-        const event: any = new Event("beforeinstallprompt");
-        event.userChoice = new Promise(resolve =>
-          resolve({ outcome: "accepted" })
+      it("dispatches actions.changeRoute.done with expected payload", async () => {
+        const matchingActions = context.reduxHistory.filter(
+          actions.changeRoute.done.match
         );
-        await window.dispatchEvent(event);
 
-        wrapper.unmount();
-      } catch (error) {
-        isPassing = false;
-      }
+        expect(matchingActions).toHaveLength(1);
+        expect(matchingActions[0].payload.params).toBe(route);
+      });
 
-      expect(isPassing).toBe(true);
-    });
-  });
+      it("triggers onRouteChangeError", async () => {
+        routes.Router.onRouteChangeError(new Error("Server error"), route);
+      });
 
-  describe("when registering the service worker", () => {
-    let result: any;
+      it("dispatches actions.changeRoute.failed with expected error", async () => {
+        const matchingActions = context.reduxHistory.filter(
+          actions.changeRoute.failed.match
+        );
 
-    it("mounts the component", async () => {
-      result = await setup(mount);
-    });
-
-    it("creates an instance of the service worker and registers it", () => {
-      const instance = result.wrapper
-        .childAt(0)
-        .childAt(0)
-        .instance();
-
-      expect(instance.serviceWorkerContainer).toBeDefined();
-      expect(instance.serviceWorkerContainer.register).toHaveBeenCalledWith({
-        scope: "/"
+        expect(matchingActions).toHaveLength(1);
+        expect(matchingActions[0].payload.error).toBe("Server error");
       });
     });
 
-    it("binds the 'message' event listener to the service worker", () => {
-      expect(
-        findMockCall(navigator.serviceWorker.addEventListener, "message")
-      ).toBeDefined();
+    it("matches snapshot", () => {
+      expect(result.wrapper.render()).toMatchSnapshot();
     });
 
-    it("receives messages from service worker correctly", () => {
-      navigator.serviceWorker.dispatchEvent(
-        new MessageEvent("message", {
-          data: { type: "serviceWorker.activate" }
-        })
-      );
-
-      expect(result.props.ctx.store.getState().app.hasNewVersion).toBe(true);
-    });
-
-    it("unmounts the component", () => {
+    it("unmounts correctly", () => {
       result.wrapper.unmount();
-    });
 
-    it("unbinds the 'message' event listener from the service worker", () => {
+      expect(findMockCall(window.removeEventListener, "feature")).toBeDefined();
       expect(
-        findMockCall(navigator.serviceWorker.removeEventListener, "message")
+        findMockCall(window.removeEventListener, "beforeinstallprompt")
       ).toBeDefined();
     });
+  });
 
-    it("doesn't receive any messages after the component unmounts", () => {
-      navigator.serviceWorker.dispatchEvent(
-        new MessageEvent("message", {
-          data: { type: "serviceWorker.activate" }
-        })
-      );
+  describe("when mounting when the page has no getInitialProps method", () => {
+    let result: any;
+    const context = new MockPageContext();
 
-      expect(result.props.ctx.store.getState().app.hasNewVersion).toBe(true);
+    it("mounts the component", async () => {
+      result = await setup(context.toObject(false), () => (
+        <div className="MockPageComponent" />
+      ));
+    });
+
+    it("matches snapshot", () => {
+      expect(result.wrapper.render()).toMatchSnapshot();
+    });
+
+    it("unmounts correctly", () => {
+      result.wrapper.unmount();
     });
   });
 });

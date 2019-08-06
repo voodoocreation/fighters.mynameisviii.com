@@ -1,6 +1,6 @@
 import { DeepPartial } from "redux";
 
-import { createSlugFromString } from "../transformers/data.transformers";
+import { createSlugFromString } from "../helpers/dataTransformers";
 import { IMoveset, moveset } from "./moveset.models";
 
 export interface ICharacter {

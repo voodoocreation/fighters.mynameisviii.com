@@ -1,3 +1,3 @@
 import { success } from "../../models/root.models";
 
-export const saveSettings = () => () => success(true);
+export const saveSettings = () => async () => success(true);

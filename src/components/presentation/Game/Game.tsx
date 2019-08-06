@@ -15,9 +15,7 @@ export default class Game extends React.Component<IProps> {
   };
 
   private scrollTimeout: NodeJS.Timeout | undefined = undefined;
-  private readonly charactersRef: React.RefObject<
-    HTMLElement
-  > = React.createRef();
+  private readonly charactersRef = React.createRef<HTMLElement>();
 
   public render() {
     const { characters, title } = this.props;

@@ -6,15 +6,13 @@ Enzyme.configure({ adapter: new Adapter() });
 
 MockDate.set("2018-01-01T00:00:00", 0);
 
-const serviceWorkerEvents: any = {};
-
-Object.defineProperties(global, {
+Object.defineProperties(window, {
   dataLayer: {
     value: [],
     writable: true
   },
   requestAnimationFrame: {
-    value: (callback: () => void) => setTimeout(callback, 0),
+    value: callback => setTimeout(callback, 0),
     writable: true
   },
   scrollTo: {
@@ -28,9 +26,10 @@ Object.defineProperty(window.location, "assign", {
   writable: true
 });
 
+const serviceWorkerEvents = {};
 Object.defineProperty(window.navigator, "serviceWorker", {
   value: {
-    addEventListener: jest.fn((event: any, handler: any) => {
+    addEventListener: jest.fn((event, handler) => {
       if (!serviceWorkerEvents[event]) {
         serviceWorkerEvents[event] = [];
       }
@@ -40,17 +39,17 @@ Object.defineProperty(window.navigator, "serviceWorker", {
       postMessage: jest.fn(),
       state: "activated"
     },
-    dispatchEvent: jest.fn((event: any) => {
+    dispatchEvent: jest.fn(event => {
       if (serviceWorkerEvents[event.type]) {
-        serviceWorkerEvents[event.type].forEach((handler: any) => {
+        serviceWorkerEvents[event.type].forEach(handler => {
           handler(event);
         });
       }
     }),
     register: jest.fn(),
-    removeEventListener: jest.fn((event: any, handler: any) => {
+    removeEventListener: jest.fn((event, handler) => {
       if (serviceWorkerEvents[event]) {
-        serviceWorkerEvents[event].forEach((boundHandler: any, index: any) => {
+        serviceWorkerEvents[event].forEach((boundHandler, index) => {
           if (handler === boundHandler) {
             serviceWorkerEvents[event].splice(index, 1);
           }

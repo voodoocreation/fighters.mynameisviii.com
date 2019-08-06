@@ -4,10 +4,11 @@ import { InjectedIntlProps } from "react-intl";
 import { connect } from "react-redux";
 import { isServer } from "../../../helpers/dom";
 
+import { absoluteUrl } from "../../../helpers/dataTransformers";
 import injectIntlIntoPage from "../../../helpers/injectIntlIntoPage";
 import { IGame } from "../../../models/game.models";
 import { TStoreState } from "../../../reducers/root.reducers";
-import { absoluteUrl } from "../../../transformers/data.transformers";
+import { IPageContext } from "../../connected/App/App";
 
 import ErrorPage from "../../presentation/ErrorPage/ErrorPage";
 import Game from "../../presentation/Game/Game";
@@ -21,10 +22,11 @@ interface IProps extends InjectedIntlProps {
 }
 
 class GameRoute extends React.Component<IProps> {
-  public static async getInitialProps(context: any) {
+  public static async getInitialProps(context: IPageContext) {
     const { query, store } = context;
+    const slug = query.slug as string;
 
-    store.dispatch(actions.setCurrentGameSlug(query.slug));
+    store.dispatch(actions.setCurrentGameSlug(slug));
   }
 
   public componentDidMount() {

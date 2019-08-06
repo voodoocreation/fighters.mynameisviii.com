@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { configureHttpClient } from "./configureHttpClient";
+import { configureHttpClient, ServerError } from "./configureHttpClient";
 
 jest.mock("axios", () => ({
   __esModule: true,
@@ -18,7 +18,8 @@ jest.mock("axios", () => ({
           response: {
             data: {
               IsSuccessful: false
-            }
+            },
+            status: 500
           }
         });
 
@@ -78,7 +79,7 @@ describe("[services] HTTP client", () => {
 
     it("makes the request", async () => {
       response = await request({
-        body: data,
+        data,
         method,
         url
       });
@@ -112,12 +113,12 @@ describe("[services] HTTP client", () => {
     it("makes the request", async () => {
       try {
         response = await request({
-          body: data,
+          data,
           method,
           url
         });
       } catch (error) {
-        response = JSON.parse(error.message);
+        response = error;
       }
     });
 
@@ -132,9 +133,17 @@ describe("[services] HTTP client", () => {
     });
 
     it("has the expected response", () => {
-      expect(response).toEqual({
-        isSuccessful: false
-      });
+      const mockError = new ServerError(
+        "Request failed with status code 500.",
+        { status: 500 } as any,
+        {
+          isSuccessful: false
+        }
+      );
+
+      expect(response.data).toEqual(mockError.data);
+      expect(response.message).toBe(mockError.message);
+      expect(response.response).toMatchObject(mockError.response);
     });
   });
 
@@ -149,7 +158,7 @@ describe("[services] HTTP client", () => {
     it("makes the request", async () => {
       try {
         response = await request({
-          body: data,
+          data,
           method,
           url
         });
@@ -184,7 +193,7 @@ describe("[services] HTTP client", () => {
     it("makes the request", async () => {
       try {
         response = await request({
-          body: data,
+          data,
           method,
           url
         });

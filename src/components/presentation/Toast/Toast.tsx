@@ -28,8 +28,8 @@ class Toast extends React.Component<IProps, IState> {
     isVisible: true
   };
 
-  private dismissTimeOut: number | undefined = undefined;
-  private visibilityTimeout: number | undefined = undefined;
+  private dismissTimeOut: any = undefined;
+  private visibilityTimeout: any = undefined;
 
   constructor(props: IProps) {
     super(props);
@@ -79,21 +79,17 @@ class Toast extends React.Component<IProps, IState> {
       [isVisible ? "isRendered" : "isVisible"]: isVisible
     } as any);
 
-    if (this.visibilityTimeout) {
-      window.clearTimeout(this.visibilityTimeout);
-    }
+    clearTimeout(this.visibilityTimeout);
 
-    this.visibilityTimeout = window.setTimeout(() => {
+    this.visibilityTimeout = setTimeout(() => {
       this.setState({
         [isVisible ? "isVisible" : "isRendered"]: isVisible
       } as any);
 
       if (isVisible && this.props.hasAutoDismiss) {
-        if (this.dismissTimeOut) {
-          window.clearTimeout(this.dismissTimeOut);
-        }
+        clearTimeout(this.dismissTimeOut);
 
-        this.dismissTimeOut = window.setTimeout(
+        this.dismissTimeOut = setTimeout(
           this.onClose,
           this.props.autoDismissDelay
         );

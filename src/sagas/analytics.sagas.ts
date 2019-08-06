@@ -8,6 +8,6 @@ import * as actions from "../actions/root.actions";
 export const trackAnalyticsEventSaga = (ports: IPorts) =>
   function*(): SagaIterator {
     yield takeLatest(actions.trackEvent, function*(action): SagaIterator {
-      yield call(ports.dataLayer.push, action.payload);
+      yield call(ports.dataLayer.push.bind(ports.dataLayer), action.payload);
     });
   };

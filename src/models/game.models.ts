@@ -1,6 +1,6 @@
 import { DeepPartial } from "redux";
 
-import { createSlugFromString } from "../transformers/data.transformers";
+import { createSlugFromString } from "../helpers/dataTransformers";
 import { character, ICharacter } from "./character.models";
 
 export interface IGame {

@@ -16,7 +16,7 @@ class NewVersionToast extends React.Component<IProps> {
   public render() {
     return (
       <Toast
-        className="HasNewVersionToast"
+        className="NewVersionToast"
         hasAutoDismiss={false}
         isVisible={this.props.hasNewVersion}
       >
@@ -25,7 +25,7 @@ class NewVersionToast extends React.Component<IProps> {
         </p>
 
         <Button
-          className="HasNewVersionToast--refreshButton"
+          className="NewVersionToast--refreshButton"
           isStyled={true}
           onClick={this.onRefreshClick}
         >
