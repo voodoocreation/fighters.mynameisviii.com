@@ -25,7 +25,7 @@ class ErrorPage extends React.Component<IProps> {
     const pageDescription = this.getMessage();
 
     return (
-      <React.Fragment>
+      <>
         <Head>
           <title>{pageTitle}</title>
           <meta content={pageDescription} name="description" />
@@ -44,7 +44,7 @@ class ErrorPage extends React.Component<IProps> {
             <p>{this.getMessage()}</p>
           </div>
         </article>
-      </React.Fragment>
+      </>
     );
   }
 

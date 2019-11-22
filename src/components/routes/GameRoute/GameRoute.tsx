@@ -52,7 +52,7 @@ class GameRoute extends React.Component<IProps> {
     );
 
     return (
-      <React.Fragment>
+      <>
         <Head>
           <title>{pageTitle}</title>
           <meta content={pageDescription} name="description" />
@@ -66,7 +66,7 @@ class GameRoute extends React.Component<IProps> {
         </Head>
 
         <Game {...game} />
-      </React.Fragment>
+      </>
     );
   }
 
