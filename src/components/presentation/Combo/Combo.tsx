@@ -1,9 +1,9 @@
 import * as React from "react";
-import { InjectedIntlProps, injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 
 import ComboButton from "../ComboButton/ComboButton";
 
-interface IProps extends InjectedIntlProps {
+interface IProps extends WrappedComponentProps {
   children: string;
 }
 

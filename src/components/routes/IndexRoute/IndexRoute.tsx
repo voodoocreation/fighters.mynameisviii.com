@@ -1,7 +1,7 @@
 import Head from "next/head";
 import * as React from "react";
 import { FaBoxOpen, FaGithub } from "react-icons/fa";
-import { FormattedMessage, InjectedIntlProps } from "react-intl";
+import { FormattedMessage, WrappedComponentProps } from "react-intl";
 import { connect } from "react-redux";
 
 import { absoluteUrl } from "../../../helpers/dataTransformers";
@@ -15,7 +15,7 @@ import Logo from "../../presentation/Logo/Logo";
 
 import "./IndexRoute.scss";
 
-interface IProps extends InjectedIntlProps {
+interface IProps extends WrappedComponentProps {
   isInInstalledApp: boolean;
 }
 

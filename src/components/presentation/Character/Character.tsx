@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedIntlProps, injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 
 import { ICharacter, IMoveset } from "../../../models/root.models";
 
@@ -7,7 +7,7 @@ import Combo from "../Combo/Combo";
 
 import "./Character.scss";
 
-interface IProps extends ICharacter, InjectedIntlProps {}
+interface IProps extends ICharacter, WrappedComponentProps {}
 
 class Character extends React.Component<IProps> {
   public render() {

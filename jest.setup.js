@@ -26,6 +26,10 @@ Object.defineProperty(window.location, "assign", {
   writable: true
 });
 
+Object.defineProperty(navigator, "language", {
+  value: "en-NZ"
+});
+
 const serviceWorkerEvents = {};
 Object.defineProperty(window.navigator, "serviceWorker", {
   value: {

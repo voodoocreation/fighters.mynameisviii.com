@@ -1,6 +1,6 @@
 import Head from "next/head";
 import * as React from "react";
-import { InjectedIntlProps } from "react-intl";
+import { WrappedComponentProps } from "react-intl";
 import { connect } from "react-redux";
 import { isServer } from "../../../helpers/dom";
 
@@ -16,7 +16,7 @@ import Game from "../../presentation/Game/Game";
 import * as actions from "../../../actions/root.actions";
 import * as selectors from "../../../selectors/root.selectors";
 
-interface IProps extends InjectedIntlProps {
+interface IProps extends WrappedComponentProps {
   game?: IGame;
   setCurrentGameSlug: typeof actions.setCurrentGameSlug;
 }
@@ -85,10 +85,7 @@ const mapState = (state: TStoreState) => ({
 });
 
 const GameRouteWrapped = injectIntlIntoPage(
-  connect(
-    mapState,
-    actions
-  )(GameRoute)
+  connect(mapState, actions)(GameRoute)
 );
 
 export default GameRouteWrapped;

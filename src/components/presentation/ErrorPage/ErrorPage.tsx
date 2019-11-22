@@ -1,12 +1,12 @@
 import Head from "next/head";
 import * as React from "react";
-import { InjectedIntlProps, injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 
 import { absoluteUrl } from "../../../helpers/dataTransformers";
 
 import "./ErrorPage.scss";
 
-interface IProps extends InjectedIntlProps {
+interface IProps extends WrappedComponentProps {
   message?: string;
   status?: number;
 }

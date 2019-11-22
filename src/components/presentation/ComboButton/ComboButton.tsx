@@ -6,11 +6,15 @@ import {
   FaArrowRight,
   FaArrowUp
 } from "react-icons/fa";
-import { FormattedMessage, InjectedIntlProps, injectIntl } from "react-intl";
+import {
+  FormattedMessage,
+  injectIntl,
+  WrappedComponentProps
+} from "react-intl";
 
 import "./ComboButton.scss";
 
-interface IProps extends InjectedIntlProps {
+interface IProps extends WrappedComponentProps {
   children: string;
   isHeld?: boolean;
   isSeparator?: boolean;

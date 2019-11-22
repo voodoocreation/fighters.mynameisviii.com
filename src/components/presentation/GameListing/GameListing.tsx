@@ -1,13 +1,13 @@
 import cn from "classnames";
 import * as React from "react";
-import { InjectedIntlProps, injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 
 import { IGame } from "../../../models/game.models";
 import Link from "../Link/Link";
 
 import "./GameListing.scss";
 
-interface IProps extends IGame, InjectedIntlProps {
+interface IProps extends IGame, WrappedComponentProps {
   isSelected?: boolean;
   onClick: () => void;
 }

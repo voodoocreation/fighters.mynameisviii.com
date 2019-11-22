@@ -1,17 +1,14 @@
 import { mount, render, shallow } from "enzyme";
 import merge from "lodash.merge";
 import * as React from "react";
-import { IntlProvider, intlShape } from "react-intl";
+import { IntlProvider } from "react-intl";
 import { IntlProvider as ReduxIntlProvider } from "react-intl-redux";
 import { Provider } from "react-redux";
 import { DeepPartial, Dispatch, Middleware } from "redux";
 import { AnyAction } from "typescript-fsa";
 
-import * as messages from "../locales/en-NZ";
-import {
-  initialState as rootInitialState,
-  TStoreState
-} from "../reducers/root.reducers";
+import messages from "../locales/en-NZ";
+import { TStoreState } from "../reducers/root.reducers";
 import {
   configureTestPorts,
   IPorts,
@@ -140,20 +137,31 @@ export default class ComponentTester<
 
     let wrapper: ReturnType<M>;
     let result: IConnectedReturn<M, P> | IReturn<M, P>;
+    const defaultLocale = "en-NZ";
+    const locale = navigator.language;
 
     if (this.isConnected) {
       const { ports, store } = this.configureStore();
 
-      wrapper = method(
+      const WrappingComponent: React.FC = ({ children }) => (
         <Provider store={store}>
-          <ReduxIntlProvider
-            defaultLocale="en-NZ"
-            textComponent={React.Fragment}
-          >
-            <this.Component {...mergedProps} />
+          <ReduxIntlProvider defaultLocale="en-NZ" locale={locale}>
+            {children}
           </ReduxIntlProvider>
         </Provider>
       );
+
+      if (method === mount) {
+        wrapper = method(<this.Component {...mergedProps} />, {
+          wrappingComponent: WrappingComponent
+        });
+      } else {
+        wrapper = method(
+          <WrappingComponent>
+            <this.Component {...mergedProps} />
+          </WrappingComponent>
+        );
+      }
 
       result = {
         dispatch: store.dispatch,
@@ -163,24 +171,27 @@ export default class ComponentTester<
         wrapper
       };
     } else {
-      const intlProvider = new IntlProvider(
-        {
-          defaultLocale: "en-NZ",
-          locale: "en-NZ",
-          messages,
-          textComponent: React.Fragment
-        },
-        {}
+      const WrappingComponent: React.FC = ({ children }) => (
+        <IntlProvider
+          defaultLocale={defaultLocale}
+          locale={locale}
+          messages={messages}
+        >
+          {children}
+        </IntlProvider>
       );
-      const { intl } = intlProvider.getChildContext();
 
-      wrapper = method(
-        React.cloneElement(<this.Component {...mergedProps} />, { intl }),
-        {
-          childContextTypes: { intl: intlShape },
-          context: { intl }
-        }
-      );
+      if (method === mount) {
+        wrapper = method(<this.Component {...mergedProps} />, {
+          wrappingComponent: WrappingComponent
+        });
+      } else {
+        wrapper = method(
+          <WrappingComponent>
+            <this.Component {...mergedProps} />
+          </WrappingComponent>
+        );
+      }
 
       result = {
         props: mergedProps,
@@ -209,11 +220,11 @@ export default class ComponentTester<
       this.defaultPorts,
       this.ports
     ) as ITestPortsParam;
-    const mergedReduxState: DeepPartial<TStoreState> = {
-      ...rootInitialState,
-      ...this.defaultReduxState,
-      ...this.reduxState
-    };
+    const mergedReduxState: DeepPartial<TStoreState> = merge(
+      {},
+      this.defaultReduxState,
+      this.reduxState
+    );
 
     const ports: any = configureTestPorts(mergedPorts);
 

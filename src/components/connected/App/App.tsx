@@ -1,9 +1,10 @@
+import "../../../../polyfills";
+
 import { NextPageContext } from "next";
 import withReduxSaga from "next-redux-saga";
 import withRedux from "next-redux-wrapper";
-import NextApp, { AppContext, AppProps, Container } from "next/app";
+import NextApp, { AppContext, AppProps } from "next/app";
 import * as React from "react";
-import { addLocaleData } from "react-intl";
 import { IntlProvider } from "react-intl-redux";
 import { Provider } from "react-redux";
 
@@ -14,11 +15,7 @@ import * as selectors from "../../../selectors/root.selectors";
 import { createStore, TStore } from "../../../store/root.store";
 import Page from "../Page/Page";
 
-import en from "react-intl/locale-data/en";
-
 import "../../../scss/index.scss";
-
-addLocaleData([...en]);
 
 export interface IPageContext extends NextPageContext {
   store: TStore;
@@ -33,7 +30,6 @@ export interface IAppContext extends AppContext {
 interface IProps extends AppProps {
   intlProps: {
     locale: string;
-    initialNow: Date;
   };
   store: TStore;
 }
@@ -45,7 +41,6 @@ const getIntlProps = (ctx: NextPageContext) => {
   const { locale } = requestProps;
 
   return {
-    initialNow: Date.now(),
     locale
   };
 };
@@ -149,19 +144,13 @@ export class App extends NextApp<IProps> {
     const { Component, intlProps, pageProps, store } = this.props;
 
     return (
-      <Container>
-        <Provider store={store}>
-          <IntlProvider
-            defaultLocale="en-NZ"
-            initialNow={intlProps.initialNow}
-            textComponent={React.Fragment}
-          >
-            <Page>
-              <Component {...pageProps} />
-            </Page>
-          </IntlProvider>
-        </Provider>
-      </Container>
+      <Provider store={store}>
+        <IntlProvider defaultLocale="en-NZ" locale={intlProps.locale}>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </IntlProvider>
+      </Provider>
     );
   }
 

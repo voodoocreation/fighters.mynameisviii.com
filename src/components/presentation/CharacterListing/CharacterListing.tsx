@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InjectedIntlProps, injectIntl } from "react-intl";
+import { injectIntl, WrappedComponentProps } from "react-intl";
 
 import { ICharacter, IGame } from "../../../models/root.models";
 
@@ -7,7 +7,7 @@ import Link from "../Link/Link";
 
 import "./CharacterListing.scss";
 
-interface IProps extends ICharacter, InjectedIntlProps {
+interface IProps extends ICharacter, WrappedComponentProps {
   game: IGame;
   onClick: () => void;
 }

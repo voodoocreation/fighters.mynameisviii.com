@@ -1,7 +1,11 @@
 import cn from "classnames";
 import * as React from "react";
 import { FaGamepad, FaHome, FaUsers } from "react-icons/fa";
-import { FormattedMessage, InjectedIntlProps, injectIntl } from "react-intl";
+import {
+  FormattedMessage,
+  injectIntl,
+  WrappedComponentProps
+} from "react-intl";
 import { connect } from "react-redux";
 
 import * as dom from "../../../helpers/dom";
@@ -19,7 +23,7 @@ import "./Navigation.scss";
 
 type TNavOption = "games" | "characters" | undefined;
 
-interface IProps extends InjectedIntlProps {
+interface IProps extends WrappedComponentProps {
   currentGame?: IGame;
   games: IGame[];
 }
