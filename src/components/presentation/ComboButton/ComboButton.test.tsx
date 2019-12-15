@@ -1,12 +1,12 @@
-import ComponentTester from "../../../utilities/ComponentTester";
+import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
 
 import ComboButton from "./ComboButton";
 
-const component = new ComponentTester(ComboButton);
+const component = new WrapperWithIntl(ComboButton);
 
 describe("[presentation] <ComboButton />", () => {
   const rendersIcon = (str: string, icon: string) => {
-    const { wrapper } = component.withChildren(str).mount();
+    const wrapper = component.withChildren(str).mount();
 
     return (
       wrapper.find("svg.ComboButton--icon").length === 1 &&
@@ -39,7 +39,7 @@ describe("[presentation] <ComboButton />", () => {
   });
 
   it("renders text fallback for unhandled strings", () => {
-    const { wrapper } = component.withChildren("LP").render();
+    const wrapper = component.withChildren("LP").render();
     const text = wrapper.find(".ComboButton--text");
 
     expect(text).toHaveLength(1);
@@ -47,7 +47,7 @@ describe("[presentation] <ComboButton />", () => {
   });
 
   it("renders a separator correctly", () => {
-    const { wrapper } = component
+    const wrapper = component
       .withChildren("F")
       .withProps({
         isSeparator: true
@@ -58,7 +58,7 @@ describe("[presentation] <ComboButton />", () => {
   });
 
   it("renders a held button correctly", () => {
-    const { wrapper } = component
+    const wrapper = component
       .withChildren("F")
       .withProps({
         isHeld: true

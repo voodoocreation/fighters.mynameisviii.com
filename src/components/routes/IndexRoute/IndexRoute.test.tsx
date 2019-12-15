@@ -1,21 +1,24 @@
-import ComponentTester from "../../../utilities/ComponentTester";
-
+import WrapperWithRedux from "../../../utilities/WrapperWithRedux";
 import IndexRoute from "./IndexRoute";
 
-const component = new ComponentTester(IndexRoute, true);
+const component = new WrapperWithRedux(IndexRoute);
 
 describe("[routes] <IndexRoute />", () => {
   describe("when the user is in the installed app", () => {
-    const { wrapper } = component
+    const wrapper = component
       .withReduxState({
         app: {
           isInInstalledApp: true
         }
       })
-      .render();
+      .mount();
 
     it("doesn't render the install section", () => {
       expect(wrapper.find(".Home--install")).toHaveLength(0);
+    });
+
+    it("unmounts the component", () => {
+      wrapper.unmount();
     });
   });
 
@@ -23,7 +26,7 @@ describe("[routes] <IndexRoute />", () => {
     const beforeInstallPromptEvent: any = new Event("beforeinstallprompt");
     beforeInstallPromptEvent.prompt = jest.fn();
 
-    const { wrapper } = component
+    const wrapper = component
       .withReduxState({
         app: {
           isInInstalledApp: false

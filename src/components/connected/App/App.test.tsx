@@ -2,6 +2,7 @@ import { mount } from "enzyme";
 import * as React from "react";
 
 import * as actions from "../../../actions/root.actions";
+import games from "../../../data/games";
 import { error } from "../../../models/root.models";
 import MockPageContext from "../../../utilities/MockPageContext";
 import {
@@ -205,6 +206,7 @@ describe("[connected] <App />", () => {
 
       expect(matchingActions).toHaveLength(1);
       expect(matchingActions[0].payload).toEqual({
+        games,
         locale
       });
     });
@@ -253,6 +255,7 @@ describe("[connected] <App />", () => {
 
       expect(matchingActions).toHaveLength(1);
       expect(matchingActions[0].payload).toEqual({
+        games,
         locale
       });
     });

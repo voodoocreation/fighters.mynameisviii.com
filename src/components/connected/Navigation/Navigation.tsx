@@ -163,6 +163,4 @@ const mapState = (state: TStoreState) => ({
   games: selectors.getGames(state)
 });
 
-const NavigationWrapped = injectIntl(connect(mapState)(Navigation));
-
-export default NavigationWrapped;
+export default injectIntl(connect(mapState)(Navigation));

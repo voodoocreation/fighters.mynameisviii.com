@@ -45,10 +45,8 @@ class Page extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: TStoreState) => ({
+const mapState = (state: TStoreState) => ({
   isLoading: selectors.isLoadingApp(state)
 });
 
-const PageWrapped = injectIntl(connect(mapStateToProps)(Page));
-
-export default PageWrapped;
+export default injectIntl(connect(mapState)(Page));

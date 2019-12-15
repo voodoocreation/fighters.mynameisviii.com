@@ -44,12 +44,8 @@ class NewVersionToast extends React.Component<IProps> {
   };
 }
 
-const mapStateToProps = (state: TStoreState) => ({
+const mapState = (state: TStoreState) => ({
   hasNewVersion: selectors.hasNewVersion(state)
 });
 
-const NewVersionToastWrapped = injectIntl(
-  connect(mapStateToProps)(NewVersionToast)
-);
-
-export default NewVersionToastWrapped;
+export default injectIntl(connect(mapState)(NewVersionToast));

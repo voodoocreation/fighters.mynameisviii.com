@@ -1,12 +1,11 @@
-import ComponentTester from "../../../utilities/ComponentTester";
-
+import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
 import Combo from "./Combo";
 
-const component = new ComponentTester(Combo);
+const component = new WrapperWithIntl(Combo);
 
 describe("[presentation] <Combo />", () => {
   describe("when rendering a combo with no extra spaces", () => {
-    const { wrapper } = component.withChildren("Hold BL+B,LP,-,HP").render();
+    const wrapper = component.withChildren("Hold BL+B,LP,-,HP").render();
 
     it("renders the correct number of ComboButtons", () => {
       expect(wrapper.find(".ComboButton:not(.isSeparator)")).toHaveLength(4);
@@ -22,9 +21,7 @@ describe("[presentation] <Combo />", () => {
   });
 
   describe("when rendering a combo with extra spaces", () => {
-    const { wrapper } = component
-      .withChildren("Hold BL + B, LP, -, HP")
-      .render();
+    const wrapper = component.withChildren("Hold BL + B, LP, -, HP").render();
 
     it("renders the correct number of ComboButtons", () => {
       expect(wrapper.find(".ComboButton:not(.isSeparator)")).toHaveLength(4);

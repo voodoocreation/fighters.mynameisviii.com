@@ -1,5 +1,5 @@
 import { character, game } from "../../../models/root.models";
-import ComponentTester from "../../../utilities/ComponentTester";
+import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
 
 import GameListing from "./GameListing";
 
@@ -17,14 +17,14 @@ const testGame = game({
   title: "Test Game"
 });
 
-const component = new ComponentTester(GameListing).withDefaultProps({
+const component = new WrapperWithIntl(GameListing).withDefaultProps({
   ...testGame,
   onClick: jest.fn()
 });
 
 describe("[presentation] <GameListing />", () => {
   describe("when the listing isn't selected", () => {
-    const { props, wrapper } = component.mount();
+    const wrapper = component.mount();
 
     beforeAll(() => {
       jest.clearAllMocks();
@@ -44,7 +44,7 @@ describe("[presentation] <GameListing />", () => {
       });
 
       it("calls the onClick prop", () => {
-        expect(props.onClick).toHaveBeenCalledTimes(1);
+        expect(component.props.onClick).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -54,7 +54,7 @@ describe("[presentation] <GameListing />", () => {
   });
 
   describe("when the listing is selected", () => {
-    const { props, wrapper } = component
+    const wrapper = component
       .withProps({
         isSelected: true
       })
@@ -78,7 +78,7 @@ describe("[presentation] <GameListing />", () => {
       });
 
       it("calls the onClick prop", () => {
-        expect(props.onClick).toHaveBeenCalledTimes(1);
+        expect(component.props.onClick).toHaveBeenCalledTimes(1);
       });
     });
 

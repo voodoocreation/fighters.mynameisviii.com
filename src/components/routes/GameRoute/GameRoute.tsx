@@ -84,8 +84,4 @@ const mapState = (state: TStoreState) => ({
   game: selectors.getCurrentGame(state)
 });
 
-const GameRouteWrapped = injectIntlIntoPage(
-  connect(mapState, actions)(GameRoute)
-);
-
-export default GameRouteWrapped;
+export default injectIntlIntoPage(connect(mapState, actions)(GameRoute));

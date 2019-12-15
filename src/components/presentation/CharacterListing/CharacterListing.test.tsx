@@ -1,5 +1,5 @@
 import { character, game } from "../../../models/root.models";
-import ComponentTester from "../../../utilities/ComponentTester";
+import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
 
 import CharacterListing from "./CharacterListing";
 
@@ -13,14 +13,14 @@ const testCharacter = character({
   name: "Character Name"
 });
 
-const component = new ComponentTester(CharacterListing).withDefaultProps({
+const component = new WrapperWithIntl(CharacterListing).withDefaultProps({
   ...testCharacter,
   game: testGame,
   onClick: jest.fn()
 });
 
 describe("[presentation] <CharacterListing />", () => {
-  const { props, wrapper } = component.mount();
+  const wrapper = component.mount();
 
   it("renders with the correct link href when unselected", () => {
     expect(wrapper.find("Link").prop("href")).toBe("#character-name");
@@ -32,7 +32,7 @@ describe("[presentation] <CharacterListing />", () => {
     });
 
     it("calls the onClick prop", () => {
-      expect(props.onClick).toHaveBeenCalledTimes(1);
+      expect(component.props.onClick).toHaveBeenCalledTimes(1);
     });
   });
 

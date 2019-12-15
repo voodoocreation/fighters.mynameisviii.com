@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { character, game } from "../../../models/root.models";
-import ComponentTester from "../../../utilities/ComponentTester";
+import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
 
 import Game from "./Game";
 
@@ -18,11 +18,11 @@ const testGame = game({
   title: "Test Game"
 });
 
-const component = new ComponentTester(Game).withDefaultProps(testGame);
+const component = new WrapperWithIntl(Game).withDefaultProps(testGame);
 
 describe("[presentation] <Game />", () => {
   const scrollToMock = jest.fn();
-  const { wrapper } = component.mount();
+  const wrapper = component.mount();
 
   jest.useFakeTimers();
 

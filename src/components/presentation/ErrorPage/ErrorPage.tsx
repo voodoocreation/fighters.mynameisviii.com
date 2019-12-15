@@ -75,6 +75,4 @@ class ErrorPage extends React.Component<IProps> {
   }
 }
 
-const ErrorPageWrapped = injectIntl(ErrorPage);
-
-export default ErrorPageWrapped;
+export default injectIntl(ErrorPage);

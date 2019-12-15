@@ -60,6 +60,4 @@ class Combo extends React.Component<IProps> {
   };
 }
 
-const ComboWrapped = injectIntl(Combo);
-
-export default ComboWrapped;
+export default injectIntl(Combo);

@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 
 import routes from "../../../../next.routes";
 import * as actions from "../../../actions/root.actions";
+import games from "../../../data/games";
 import { isServer } from "../../../helpers/dom";
 import * as selectors from "../../../selectors/root.selectors";
 import { createStore, TStore } from "../../../store/root.store";
@@ -89,6 +90,7 @@ export class App extends NextApp<IProps> {
 
     props.store.dispatch(
       actions.initApp.started({
+        games,
         locale: props.intlProps.locale
       })
     );

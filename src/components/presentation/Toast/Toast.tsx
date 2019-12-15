@@ -110,6 +110,4 @@ class Toast extends React.Component<IProps, IState> {
   };
 }
 
-const ToastWrapped = injectIntl(Toast);
-
-export default ToastWrapped;
+export default injectIntl(Toast);

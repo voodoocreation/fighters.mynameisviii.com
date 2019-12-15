@@ -1,5 +1,5 @@
 import * as models from "../../../models/root.models";
-import ComponentTester from "../../../utilities/ComponentTester";
+import WrapperWithRedux from "../../../utilities/WrapperWithRedux";
 
 import Navigation from "./Navigation";
 
@@ -12,7 +12,7 @@ const game = models.game({
   slug: "test-game"
 });
 
-const component = new ComponentTester(Navigation, true).withDefaultReduxState({
+const component = new WrapperWithRedux(Navigation).withDefaultReduxState({
   games: {
     items: []
   }
@@ -20,7 +20,7 @@ const component = new ComponentTester(Navigation, true).withDefaultReduxState({
 
 describe("[connected] <Navigation />", () => {
   describe("when there are no games and no game is selected", () => {
-    const { wrapper } = component.mount();
+    const wrapper = component.mount();
     const rendered = wrapper.render();
 
     it("doesn't render the games section", () => {
@@ -39,7 +39,7 @@ describe("[connected] <Navigation />", () => {
   });
 
   describe("when a game is selected", () => {
-    const { wrapper } = component
+    const wrapper = component
       .withReduxState({
         games: {
           currentSlug: game.slug,

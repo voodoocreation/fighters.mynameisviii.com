@@ -2,7 +2,6 @@ import * as React from "react";
 import { injectIntl, WrappedComponentProps } from "react-intl";
 
 import { ICharacter, IMoveset } from "../../../models/root.models";
-
 import Combo from "../Combo/Combo";
 
 import "./Character.scss";
@@ -53,6 +52,4 @@ class Character extends React.Component<IProps> {
   );
 }
 
-const CharacterWrapped = injectIntl(Character);
-
-export default CharacterWrapped;
+export default injectIntl(Character);

@@ -154,6 +154,4 @@ const mapState = (state: TStoreState) => ({
   isInInstalledApp: selectors.isInInstalledApp(state)
 });
 
-const IndexRouteWrapped = injectIntlIntoPage(connect(mapState)(IndexRoute));
-
-export default IndexRouteWrapped;
+export default injectIntlIntoPage(connect(mapState)(IndexRoute));

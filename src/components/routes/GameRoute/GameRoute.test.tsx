@@ -1,12 +1,10 @@
 import { game } from "../../../models/root.models";
-import { createStore } from "../../../store/root.store";
-import ComponentTester from "../../../utilities/ComponentTester";
-
 import * as selectors from "../../../selectors/root.selectors";
-
+import { createStore } from "../../../store/root.store";
+import WrapperWithRedux from "../../../utilities/WrapperWithRedux";
 import GameRoute from "./GameRoute";
 
-const component = new ComponentTester(GameRoute, true);
+const component = new WrapperWithRedux(GameRoute);
 
 const testGame = game({
   title: "Test game"
@@ -29,7 +27,7 @@ describe("[routes] <GameRoute />", () => {
   });
 
   describe("when there's no current game", () => {
-    const { wrapper } = component.mount();
+    const wrapper = component.mount();
 
     it("renders an <ErrorPage />", () => {
       expect(wrapper.find("ErrorPage")).toHaveLength(1);
@@ -37,7 +35,7 @@ describe("[routes] <GameRoute />", () => {
   });
 
   describe("when there is a current game", () => {
-    const { wrapper } = component
+    const wrapper = component
       .withReduxState({
         games: {
           currentSlug: testGame.slug,

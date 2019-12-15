@@ -1,5 +1,5 @@
 import { character, move, moveset } from "../../../models/root.models";
-import ComponentTester from "../../../utilities/ComponentTester";
+import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
 
 import Character from "./Character";
 
@@ -29,12 +29,12 @@ const testCharacter = character({
   name: "Character Name"
 });
 
-const component = new ComponentTester(Character).withDefaultProps(
+const component = new WrapperWithIntl(Character).withDefaultProps(
   testCharacter
 );
 
 describe("[presentation] <Character />", () => {
-  const { wrapper } = component.render();
+  const wrapper = component.render();
 
   it("renders the correct id on the heading", () => {
     expect(wrapper.find("h2").attr("id")).toBe("character-name");

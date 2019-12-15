@@ -1,14 +1,14 @@
-import ComponentTester from "../../../utilities/ComponentTester";
+import { Wrapper } from "react-test-wrapper";
 
 import Loader from "./Loader";
 
-const component = new ComponentTester(Loader).withDefaultProps({
+const component = new Wrapper(Loader).withDefaultProps({
   className: "TestLoader"
 });
 
 describe("[presentation] <Loader />", () => {
   it("renders correctly", () => {
-    const { wrapper } = component.render();
+    const wrapper = component.render();
 
     expect(wrapper).toMatchSnapshot();
   });

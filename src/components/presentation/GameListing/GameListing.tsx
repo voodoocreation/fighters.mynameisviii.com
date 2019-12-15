@@ -40,6 +40,4 @@ class GameListing extends React.Component<IProps> {
   }
 }
 
-const GameListingWrapped = injectIntl(GameListing);
-
-export default GameListingWrapped;
+export default injectIntl(GameListing);

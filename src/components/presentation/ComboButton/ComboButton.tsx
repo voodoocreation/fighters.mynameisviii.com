@@ -76,6 +76,4 @@ class ComboButton extends React.Component<IProps> {
   };
 }
 
-const ComboButtonWrapped = injectIntl(ComboButton);
-
-export default ComboButtonWrapped;
+export default injectIntl(ComboButton);

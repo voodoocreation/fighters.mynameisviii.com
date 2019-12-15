@@ -1,6 +1,5 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import items from "../data/games";
 import { IGame } from "../models/game.models";
 
 import * as actions from "../actions/root.actions";
@@ -12,10 +11,15 @@ export interface IState {
 
 export const initialState: IState = {
   currentSlug: "",
-  items
+  items: []
 };
 
 export default reducerWithInitialState(initialState)
+  .case(actions.initApp.started, (state, payload) => ({
+    ...state,
+    items: payload.games ? payload.games : state.items
+  }))
+
   .case(actions.setCurrentGameSlug, (state, payload) => ({
     ...state,
     currentSlug: payload

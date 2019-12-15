@@ -2,7 +2,6 @@ import * as React from "react";
 import { injectIntl, WrappedComponentProps } from "react-intl";
 
 import { ICharacter, IGame } from "../../../models/root.models";
-
 import Link from "../Link/Link";
 
 import "./CharacterListing.scss";
@@ -33,6 +32,4 @@ class CharacterListing extends React.Component<IProps> {
   }
 }
 
-const CharacterListingWrapped = injectIntl(CharacterListing);
-
-export default CharacterListingWrapped;
+export default injectIntl(CharacterListing);
