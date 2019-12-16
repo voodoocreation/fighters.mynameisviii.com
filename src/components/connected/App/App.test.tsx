@@ -1,14 +1,12 @@
 import { mount } from "enzyme";
+import { findCall, mockWithResolvedPromise } from "jest-mocks";
 import * as React from "react";
 
 import * as actions from "../../../actions/root.actions";
 import games from "../../../data/games";
 import { error } from "../../../models/root.models";
 import MockPageContext from "../../../utilities/MockPageContext";
-import {
-  findMockCall,
-  mockWithResolvedPromise
-} from "../../../utilities/mocks";
+
 import { App } from "./App";
 
 jest.mock("serviceworker-webpack-plugin/lib/runtime", () => ({
@@ -360,9 +358,11 @@ describe("[connected] <App />", () => {
     it("unmounts correctly", () => {
       result.wrapper.unmount();
 
-      expect(findMockCall(window.removeEventListener, "feature")).toBeDefined();
       expect(
-        findMockCall(window.removeEventListener, "beforeinstallprompt")
+        findCall(window.removeEventListener as jest.Mock, "feature")
+      ).toBeDefined();
+      expect(
+        findCall(window.removeEventListener as jest.Mock, "beforeinstallprompt")
       ).toBeDefined();
     });
   });
