@@ -60,11 +60,18 @@ export class App extends NextApp<IProps> {
       }
     });
 
+    const intlProps = getIntlProps(ctx);
+
+    ctx.store.dispatch(
+      actions.initApp.started({
+        games,
+        locale: intlProps.locale
+      })
+    );
+
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-
-    const intlProps = getIntlProps(ctx);
 
     return { pageProps, intlProps };
   }
@@ -87,13 +94,6 @@ export class App extends NextApp<IProps> {
     routes.Router.onRouteChangeStart = this.onRouteChangeStart;
     routes.Router.onRouteChangeComplete = this.onRouteChangeComplete;
     routes.Router.onRouteChangeError = this.onRouteChangeError;
-
-    props.store.dispatch(
-      actions.initApp.started({
-        games,
-        locale: props.intlProps.locale
-      })
-    );
   }
 
   public componentDidMount() {
