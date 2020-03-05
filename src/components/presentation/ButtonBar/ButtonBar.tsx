@@ -3,7 +3,7 @@ import * as React from "react";
 
 import "./ButtonBar.scss";
 
-interface IProps extends React.HTMLProps<HTMLDivElement> {}
+type IProps = React.HTMLProps<HTMLDivElement>;
 
 const ButtonBar: React.FC<IProps> = ({ children, className, ...props }) =>
   children ? (

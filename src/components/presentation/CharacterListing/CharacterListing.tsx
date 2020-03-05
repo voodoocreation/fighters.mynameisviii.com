@@ -11,25 +11,25 @@ interface IProps extends ICharacter, WrappedComponentProps {
   onClick: () => void;
 }
 
-class CharacterListing extends React.Component<IProps> {
-  public render() {
-    const { imageUrl, game, name, slug } = this.props;
-    const { formatMessage } = this.props.intl;
-
-    return (
-      <article className="CharacterListing">
-        <Link href={`#${slug}`} onClick={this.props.onClick}>
-          <img
-            src={imageUrl}
-            alt={formatMessage(
-              { id: "VIEW_MOVES_FOR_CHARACTER_FROM_GAME" },
-              { character: name, game: game.title }
-            )}
-          />
-        </Link>
-      </article>
-    );
-  }
-}
+const CharacterListing: React.FC<IProps> = ({
+  imageUrl,
+  game,
+  intl,
+  name,
+  onClick,
+  slug
+}) => (
+  <article className="CharacterListing">
+    <Link href={`#${slug}`} onClick={onClick}>
+      <img
+        alt={intl.formatMessage(
+          { id: "VIEW_MOVES_FOR_CHARACTER_FROM_GAME" },
+          { character: name, game: game.title }
+        )}
+        src={imageUrl}
+      />
+    </Link>
+  </article>
+);
 
 export default injectIntl(CharacterListing);

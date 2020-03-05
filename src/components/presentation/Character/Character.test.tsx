@@ -1,6 +1,5 @@
 import { character, move, moveset } from "../../../models/root.models";
 import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
-
 import Character from "./Character";
 
 const testCharacter = character({

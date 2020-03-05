@@ -1,6 +1,5 @@
-import SagaTester from "../utilities/SagaTester";
-
 import * as actions from "../actions/root.actions";
+import SagaTester from "../utilities/SagaTester";
 
 describe("[sagas] Service worker", () => {
   describe("cachePageOnTransitionSaga", () => {

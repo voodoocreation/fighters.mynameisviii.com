@@ -1,5 +1,8 @@
+/* eslint-disable react/no-danger */
+
 // istanbul ignore file
 import { IncomingMessage } from "http";
+
 import Document, {
   DocumentContext,
   DocumentProps,
@@ -18,34 +21,34 @@ const Meta: React.FC = () => (
       name="viewport"
     />
 
-    <link rel="manifest" href="/static/manifest.json" />
+    <link href="/static/manifest.json" rel="manifest" />
 
     <link
+      href="/static/favicon/apple-touch-icon.png"
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/static/favicon/apple-touch-icon.png"
     />
     <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
       href="/static/favicon/favicon-32x32.png"
-    />
-    <link
       rel="icon"
+      sizes="32x32"
       type="image/png"
-      sizes="16x16"
-      href="/static/favicon/favicon-16x16.png"
     />
     <link
-      rel="mask-icon"
-      href="/static/favicon/safari-pinned-tab.svg"
-      color="#000000"
+      href="/static/favicon/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
     />
-    <link rel="shortcut icon" href="/static/favicon/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#000000" />
-    <meta name="msapplication-config" content="/static/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <link
+      color="#000000"
+      href="/static/favicon/safari-pinned-tab.svg"
+      rel="mask-icon"
+    />
+    <link href="/static/favicon/favicon.ico" rel="shortcut icon" />
+    <meta content="#000000" name="msapplication-TileColor" />
+    <meta content="/static/browserconfig.xml" name="msapplication-config" />
+    <meta content="#ffffff" name="theme-color" />
   </>
 );
 
@@ -64,10 +67,11 @@ const AnalyticsHead: React.FC = () => (
 const AnalyticsBody: React.FC = () => (
   <noscript>
     <iframe
-      src="https://www.googletagmanager.com/ns.html?id=GTM-P9CMQN4"
       height="0"
-      width="0"
+      src="https://www.googletagmanager.com/ns.html?id=GTM-P9CMQN4"
       style={{ display: "none", visibility: "hidden" }}
+      title="gtm"
+      width="0"
     />
   </noscript>
 );
@@ -77,7 +81,7 @@ interface IProps extends DocumentProps {
 }
 
 export default class<P extends IProps> extends Document<P> {
-  public static async getInitialProps(context: DocumentContext) {
+  public static getInitialProps = async (context: DocumentContext) => {
     const initialProps = await Document.getInitialProps(context);
     const props = await context.renderPage();
     const req = context.req as IncomingMessage & {
@@ -89,7 +93,7 @@ export default class<P extends IProps> extends Document<P> {
       ...props,
       locale: req.locale || "en-NZ"
     };
-  }
+  };
 
   public render() {
     const { locale } = this.props as P;

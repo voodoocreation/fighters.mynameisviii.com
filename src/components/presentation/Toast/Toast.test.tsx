@@ -1,5 +1,4 @@
 import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
-
 import Toast from "./Toast";
 
 const component = new WrapperWithIntl(Toast);

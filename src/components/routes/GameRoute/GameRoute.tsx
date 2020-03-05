@@ -2,19 +2,17 @@ import Head from "next/head";
 import * as React from "react";
 import { WrappedComponentProps } from "react-intl";
 import { connect } from "react-redux";
-import { isServer } from "../../../helpers/dom";
 
+import * as actions from "../../../actions/root.actions";
 import { absoluteUrl } from "../../../helpers/dataTransformers";
+import { isServer } from "../../../helpers/dom";
 import injectIntlIntoPage from "../../../helpers/injectIntlIntoPage";
 import { IGame } from "../../../models/game.models";
 import { TStoreState } from "../../../reducers/root.reducers";
+import * as selectors from "../../../selectors/root.selectors";
 import { IPageContext } from "../../connected/App/App";
-
 import ErrorPage from "../../presentation/ErrorPage/ErrorPage";
 import Game from "../../presentation/Game/Game";
-
-import * as actions from "../../../actions/root.actions";
-import * as selectors from "../../../selectors/root.selectors";
 
 interface IProps extends WrappedComponentProps {
   game?: IGame;
@@ -22,12 +20,12 @@ interface IProps extends WrappedComponentProps {
 }
 
 class GameRoute extends React.Component<IProps> {
-  public static async getInitialProps(context: IPageContext) {
+  public static getInitialProps = async (context: IPageContext) => {
     const { query, store } = context;
     const slug = query.slug as string;
 
     store.dispatch(actions.setCurrentGameSlug(slug));
-  }
+  };
 
   public componentDidMount() {
     this.toggleBodyClass(true);
@@ -56,13 +54,13 @@ class GameRoute extends React.Component<IProps> {
         <Head>
           <title>{pageTitle}</title>
           <meta content={pageDescription} name="description" />
-          <meta property="og:title" content={pageTitle} />
-          <meta property="og:description" content={pageDescription} />
+          <meta content={pageTitle} property="og:title" />
+          <meta content={pageDescription} property="og:description" />
           <meta
-            property="og:url"
             content={absoluteUrl(`/games/${game.slug}/`)}
+            property="og:url"
           />
-          <meta property="og:image" content={absoluteUrl(game.imageUrl)} />
+          <meta content={absoluteUrl(game.imageUrl)} property="og:image" />
         </Head>
 
         <Game {...game} />

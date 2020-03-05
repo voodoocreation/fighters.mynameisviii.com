@@ -2,14 +2,14 @@ import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
 import Link from "./Link";
 
 const component = new WrapperWithIntl(Link)
-  .withDefaultChildren("Link text")
   .withDefaultProps({
     router: {
       components: {
         test: ""
       }
     }
-  } as any);
+  } as any)
+  .withDefaultChildren("Link text");
 
 describe("[presentation] <Link />", () => {
   describe("when the router is available and route is defined", () => {
@@ -92,7 +92,7 @@ describe("[presentation] <Link />", () => {
 
     it("external attributes are defined on the <a>", () => {
       expect(wrapper.find("a").props()).toMatchObject({
-        rel: "noopener",
+        rel: "noopener noreferrer",
         target: "_blank"
       });
     });

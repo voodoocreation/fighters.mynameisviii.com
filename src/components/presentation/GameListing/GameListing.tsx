@@ -12,32 +12,30 @@ interface IProps extends IGame, WrappedComponentProps {
   onClick: () => void;
 }
 
-class GameListing extends React.Component<IProps> {
-  public static defaultProps = {
-    isSelected: false
-  };
+const GameListing: React.FC<IProps> = ({
+  imageUrl,
+  isSelected,
+  intl,
+  onClick,
+  slug,
+  title
+}) => (
+  <article className={cn("GameListing", { isSelected })}>
+    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+    <Link route={!isSelected ? `/games/${slug}` : undefined} onClick={onClick}>
+      <img
+        alt={intl.formatMessage(
+          { id: "VIEW_ALL_MOVES_FOR_GAME" },
+          { game: title }
+        )}
+        src={imageUrl}
+      />
+    </Link>
+  </article>
+);
 
-  public render() {
-    const { imageUrl, isSelected, title } = this.props;
-    const { formatMessage } = this.props.intl;
-
-    return (
-      <article className={cn("GameListing", { isSelected })}>
-        <Link
-          route={!isSelected ? `/games/${this.props.slug}` : undefined}
-          onClick={this.props.onClick}
-        >
-          <img
-            src={imageUrl}
-            alt={formatMessage(
-              { id: "VIEW_ALL_MOVES_FOR_GAME" },
-              { game: title }
-            )}
-          />
-        </Link>
-      </article>
-    );
-  }
-}
+GameListing.defaultProps = {
+  isSelected: false
+};
 
 export default injectIntl(GameListing);

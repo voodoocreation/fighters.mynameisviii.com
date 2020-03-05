@@ -1,6 +1,5 @@
 import messages from "../../../locales/en-NZ";
 import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
-
 import ErrorPage from "./ErrorPage";
 
 const component = new WrapperWithIntl(ErrorPage);

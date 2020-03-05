@@ -15,6 +15,7 @@ const Button: React.FC<IProps> = ({
   isStyled,
   ...props
 }) => (
+  // eslint-disable-next-line react/button-has-type
   <button
     className={cn("Button", className, { isActive }, { isStyled })}
     {...props}

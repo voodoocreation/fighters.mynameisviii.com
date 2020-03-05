@@ -1,8 +1,7 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 
-import { IGame } from "../models/game.models";
-
 import * as actions from "../actions/root.actions";
+import { IGame } from "../models/game.models";
 
 export interface IState {
   currentSlug: string;

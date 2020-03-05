@@ -48,7 +48,27 @@ const getIntlProps = (ctx: NextPageContext) => {
 
 // @ts-ignore-next-line
 export class App extends NextApp<IProps> {
-  public static async getInitialProps({ ctx, Component }: IAppContext) {
+  public readonly serviceWorkerContainer: any = undefined;
+
+  constructor(props: IProps) {
+    super(props);
+
+    if (
+      !isServer() &&
+      "serviceWorker" in navigator &&
+      (window.location.protocol === "https:" ||
+        window.location.hostname === "localhost")
+    ) {
+      // eslint-disable-next-line
+      this.serviceWorkerContainer = require("serviceworker-webpack-plugin/lib/runtime");
+    }
+
+    routes.Router.onRouteChangeStart = this.onRouteChangeStart;
+    routes.Router.onRouteChangeComplete = this.onRouteChangeComplete;
+    routes.Router.onRouteChangeError = this.onRouteChangeError;
+  }
+
+  public static getInitialProps = async ({ ctx, Component }: IAppContext) => {
     let pageProps = {};
 
     const unsubscribe = ctx.store.subscribe(() => {
@@ -73,28 +93,8 @@ export class App extends NextApp<IProps> {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps, intlProps };
-  }
-
-  public readonly serviceWorkerContainer: any = undefined;
-
-  constructor(props: IProps) {
-    super(props);
-
-    if (
-      !isServer() &&
-      "serviceWorker" in navigator &&
-      (window.location.protocol === "https:" ||
-        window.location.hostname === "localhost")
-    ) {
-      // tslint:disable-next-line
-      this.serviceWorkerContainer = require("serviceworker-webpack-plugin/lib/runtime");
-    }
-
-    routes.Router.onRouteChangeStart = this.onRouteChangeStart;
-    routes.Router.onRouteChangeComplete = this.onRouteChangeComplete;
-    routes.Router.onRouteChangeError = this.onRouteChangeError;
-  }
+    return { intlProps, pageProps };
+  };
 
   public componentDidMount() {
     const { store } = this.props;

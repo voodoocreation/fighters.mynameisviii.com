@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { character, game } from "../../../models/root.models";
 import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
-
 import Game from "./Game";
 
 const testGame = game({

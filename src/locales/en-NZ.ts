@@ -7,9 +7,9 @@ export default {
   ERROR_404_TITLE: "Page not found",
   ERROR_MESSAGE: "An error has occurred, please try again.",
   ERROR_TITLE: "An error has occurred",
-  GAMES: "Games",
   GAME_DESCRIPTION: "Complete moves list for {game}.",
   GAME_TITLE: "{game} moves list",
+  GAMES: "Games",
   HOLD: "Hold",
   HOME: "Home",
   INDEX_AUTHOR_1:

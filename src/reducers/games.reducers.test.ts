@@ -1,7 +1,6 @@
+import * as actions from "../actions/root.actions";
 import { game } from "../models/root.models";
 import reducer, { initialState } from "./games.reducers";
-
-import * as actions from "../actions/root.actions";
 
 describe("[reducers] Games", () => {
   describe("actions.initApp.started", () => {

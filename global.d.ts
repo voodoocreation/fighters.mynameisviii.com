@@ -10,7 +10,7 @@ declare module "serviceworker-webpack-plugin/lib/runtime";
 declare module "service-worker-mock";
 declare module "service-worker-mock/fetch";
 
-// tslint:disable-next-line
+// eslint-disable-next-line
 interface Window {
   __NEXT_DATA__: {
     initialProps: any;

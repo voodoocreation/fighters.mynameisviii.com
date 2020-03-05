@@ -11,13 +11,11 @@ import { connect } from "react-redux";
 import * as dom from "../../../helpers/dom";
 import { IGame } from "../../../models/game.models";
 import { TStoreState } from "../../../reducers/root.reducers";
-
+import * as selectors from "../../../selectors/root.selectors";
 import Button from "../../presentation/Button/Button";
 import CharacterListing from "../../presentation/CharacterListing/CharacterListing";
 import GameListing from "../../presentation/GameListing/GameListing";
 import Link from "../../presentation/Link/Link";
-
-import * as selectors from "../../../selectors/root.selectors";
 
 import "./Navigation.scss";
 
@@ -63,10 +61,11 @@ class Navigation extends React.Component<IProps, IState> {
           </span>
         </Button>
 
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <Link
           className="Navigation--primary--home"
-          onClick={this.onClick()}
           route="/"
+          onClick={this.onClick()}
         >
           <FaHome />{" "}
           <span>
@@ -104,11 +103,11 @@ class Navigation extends React.Component<IProps, IState> {
           {this.props.games.map(game => (
             <GameListing
               {...game}
-              key={game.slug}
               isSelected={
                 this.props.currentGame &&
                 game.slug === this.props.currentGame.slug
               }
+              key={game.slug}
               onClick={this.onClick()}
             />
           ))}
@@ -148,11 +147,11 @@ class Navigation extends React.Component<IProps, IState> {
 
     dom.unlockScroll();
 
-    this.setState({
+    this.setState(() => ({
       activeNav
-    });
+    }));
 
-    if (!!activeNav) {
+    if (activeNav) {
       dom.lockScroll();
     }
   };

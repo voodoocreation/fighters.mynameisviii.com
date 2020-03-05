@@ -1,5 +1,6 @@
 import * as React from "react";
 import { injectIntl, WrappedComponentProps } from "react-intl";
+import { v4 as uuid } from "uuid";
 
 import ComboButton from "../ComboButton/ComboButton";
 
@@ -11,8 +12,8 @@ class Combo extends React.Component<IProps> {
   public render() {
     return (
       <div className="Combo">
-        {this.renderButtons().map((button, index) =>
-          React.cloneElement(button, { key: `button-${index}` })
+        {this.renderButtons().map(button =>
+          React.cloneElement(button, { key: `button-${uuid()}` })
         )}
       </div>
     );
@@ -32,11 +33,8 @@ class Combo extends React.Component<IProps> {
     for (const button of combo.split(/,|\s/g)) {
       if (button === "HOLD") {
         isHeld = true;
-        continue;
-      }
-
-      if (button === "-") {
-        buttons.push(<ComboButton isSeparator={true}>-</ComboButton>);
+      } else if (button === "-") {
+        buttons.push(<ComboButton isSeparator>-</ComboButton>);
 
         isHeld = false;
       } else if (button.includes("+")) {
@@ -44,7 +42,7 @@ class Combo extends React.Component<IProps> {
           buttons.push(
             <ComboButton isHeld={isHeld}>{multiButton}</ComboButton>
           );
-          buttons.push(<ComboButton isSeparator={true}>+</ComboButton>);
+          buttons.push(<ComboButton isSeparator>+</ComboButton>);
         }
 
         delete buttons[buttons.length - 1];

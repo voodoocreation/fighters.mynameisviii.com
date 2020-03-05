@@ -1,6 +1,5 @@
 import * as models from "../../../models/root.models";
 import WrapperWithRedux from "../../../utilities/WrapperWithRedux";
-
 import Navigation from "./Navigation";
 
 const game = models.game({

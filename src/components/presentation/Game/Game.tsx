@@ -2,12 +2,11 @@ import cn from "classnames";
 import * as React from "react";
 
 import { IGame } from "../../../models/root.models";
-
 import Character from "../Character/Character";
 
 import "./Game.scss";
 
-interface IProps extends IGame {}
+type IProps = IGame;
 
 export default class Game extends React.Component<IProps> {
   public readonly state = {
@@ -27,10 +26,10 @@ export default class Game extends React.Component<IProps> {
 
         <section
           className={cn("Game--characters", { isTouching })}
-          onScroll={this.onScroll}
-          onTouchStart={this.onTouchStart}
-          onTouchEnd={this.onTouchEnd}
           ref={this.charactersRef}
+          onScroll={this.onScroll}
+          onTouchEnd={this.onTouchEnd}
+          onTouchStart={this.onTouchStart}
         >
           <div
             className="Game--characters--items"
@@ -52,7 +51,7 @@ export default class Game extends React.Component<IProps> {
     const { slug } = this.props.characters[index];
 
     if (window.location.hash !== `#${slug}`) {
-      window.location.hash = slug;
+      window.location.hash = `#${slug}`;
     }
 
     const characterNode = container.querySelector(

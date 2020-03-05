@@ -116,7 +116,8 @@ describe("[helpers] Data transformers", () => {
           value: {
             host: "localhost",
             port: "1234"
-          }
+          },
+          writable: true
         });
 
         expect(data.absoluteUrl("/news/article-slug")).toEqual(

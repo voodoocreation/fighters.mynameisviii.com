@@ -67,8 +67,8 @@ class Toast extends React.Component<IProps, IState> {
 
           <Button
             className="Toast--closeButton"
-            onClick={this.onClose}
             title={formatMessage({ id: "CLOSE" })}
+            onClick={this.onClose}
           >
             <MdClose />
           </Button>

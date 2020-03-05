@@ -52,12 +52,12 @@ class IndexRoute extends React.Component<IProps, IState> {
         <Head>
           <title>{pageTitle}</title>
           <meta content={pageDescription} name="description" />
-          <meta property="og:title" content={pageTitle} />
-          <meta property="og:description" content={pageDescription} />
-          <meta property="og:url" content={absoluteUrl("/")} />
+          <meta content={pageTitle} property="og:title" />
+          <meta content={pageDescription} property="og:description" />
+          <meta content={absoluteUrl("/")} property="og:url" />
           <meta
-            property="og:image"
             content={absoluteUrl("/static/index-og.jpg")}
+            property="og:image"
           />
         </Head>
 
@@ -76,7 +76,7 @@ class IndexRoute extends React.Component<IProps, IState> {
               <Link
                 className="Button isStyled"
                 href="https://github.com/voodoocreation/fighters.mynameisviii.com"
-                isExternal={true}
+                isExternal
               >
                 <FaGithub /> <FormattedMessage id="VIEW_ON_GITHUB" />
               </Link>
@@ -97,7 +97,7 @@ class IndexRoute extends React.Component<IProps, IState> {
                 <ButtonBar>
                   <Button
                     className="Home--installButton"
-                    isStyled={true}
+                    isStyled
                     onClick={this.onInstallClick}
                   >
                     <FaBoxOpen /> <FormattedMessage id="INSTALL_THE_APP" />
@@ -121,7 +121,7 @@ class IndexRoute extends React.Component<IProps, IState> {
                 id="INDEX_AUTHOR_1"
                 values={{
                   xero: (
-                    <Link isExternal={true} href="https://www.xero.com">
+                    <Link href="https://www.xero.com" isExternal>
                       <FormattedMessage id="XERO" />
                     </Link>
                   )

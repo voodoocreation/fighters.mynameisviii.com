@@ -1,6 +1,5 @@
 import { character, game } from "../../../models/root.models";
 import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
-
 import GameListing from "./GameListing";
 
 const testGame = game({

@@ -19,7 +19,7 @@ describe("[utilities] SagaTester", () => {
     });
 
     it("merges the initial state with the full root initial state", () => {
-      expect(saga.state).toEqual(merge({}, initialState, testState));
+      expect(saga.state).toEqual(merge(initialState, testState));
     });
 
     it("merges the ports with the default mocks correctly", async () => {
@@ -38,7 +38,7 @@ describe("[utilities] SagaTester", () => {
 
     it("has default mock ports defined", async () => {
       expect(await saga.ports.api.saveSettings()).toEqual(
-        failure(`API method 'saveSettings' not implemented.`)
+        failure(`API method 'saveSettings' not implemented in test.`)
       );
     });
   });

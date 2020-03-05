@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 
 import { TStoreState } from "../../../reducers/root.reducers";
 import * as selectors from "../../../selectors/root.selectors";
-
 import Button from "../../presentation/Button/Button";
 import Toast from "../../presentation/Toast/Toast";
 
@@ -30,7 +29,7 @@ class NewVersionToast extends React.Component<IProps> {
 
         <Button
           className="NewVersionToast--refreshButton"
-          isStyled={true}
+          isStyled
           onClick={this.onRefreshClick}
         >
           <FormattedMessage id="LOAD_THE_NEW_VERSION" />

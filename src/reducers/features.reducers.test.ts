@@ -1,6 +1,5 @@
-import reducer, { initialState, IState } from "./features.reducers";
-
 import * as actions from "../actions/root.actions";
+import reducer, { initialState, IState } from "./features.reducers";
 
 describe("[reducers] Features", () => {
   const feature1 = "has-test-feature-1";

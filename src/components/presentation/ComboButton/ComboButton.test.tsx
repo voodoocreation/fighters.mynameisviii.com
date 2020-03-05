@@ -1,5 +1,4 @@
 import WrapperWithIntl from "../../../utilities/WrapperWithIntl";
-
 import ComboButton from "./ComboButton";
 
 const component = new WrapperWithIntl(ComboButton);
