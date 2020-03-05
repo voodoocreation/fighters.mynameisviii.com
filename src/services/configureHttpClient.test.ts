@@ -85,6 +85,34 @@ describe("[services] HTTP client", () => {
     });
   });
 
+  describe("when making a request with only invalid params defined, regardless of the response", () => {
+    const fetch = createFetch(true, 200);
+    const request = configureHttpClient({ fetch });
+
+    beforeAll(() => {
+      jest.clearAllMocks();
+    });
+
+    it("makes the request", async () => {
+      response = await request(url, {
+        params: {
+          invalid1: undefined,
+          invalid2: undefined
+        }
+      });
+    });
+
+    it("makes the fetch request correctly with all default options defined", () => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledWith(url, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        method: "GET"
+      });
+    });
+  });
+
   describe("when making a request, with a successful reponse", () => {
     const fetch = createFetch(true, 200, mockResponse);
     const request = configureHttpClient({ fetch });

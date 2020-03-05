@@ -32,14 +32,19 @@ export class ServerError extends Error {
   }
 }
 
-const parseParams = (params: Record<string, string | number | undefined>) =>
-  Object.keys(params).reduce<Record<string, string>>(
+const parseParams = (params: Record<string, string | number | undefined>) => {
+  const filteredParams = Object.keys(params).reduce<Record<string, string>>(
     (result, key) =>
       params![key] !== undefined
         ? { ...result, [key]: `${params![key]}` }
         : result,
     {}
   );
+
+  return Object.keys(filteredParams).length > 0
+    ? `?${new URLSearchParams(filteredParams)}`
+    : "";
+};
 
 export const configureHttpClient = (
   config: IHttpClientConfig
@@ -56,7 +61,7 @@ export const configureHttpClient = (
 
   let query = "";
   if (params) {
-    query = `?${new URLSearchParams(parseParams(params)).toString()}`;
+    query = parseParams(params);
   }
 
   if (body) {
