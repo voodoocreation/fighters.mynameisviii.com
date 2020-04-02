@@ -9,5 +9,5 @@ export interface IMove {
 export const move = (options: DeepPartial<IMove> = {}): IMove => ({
   combo: options.combo || "",
   conditions: options.conditions || undefined,
-  name: options.name || ""
+  name: options.name || "",
 });

@@ -27,7 +27,7 @@ const Button: React.FC<IProps> = ({
 Button.defaultProps = {
   isActive: false,
   isStyled: false,
-  type: "button"
+  type: "button",
 };
 
 export default Button;

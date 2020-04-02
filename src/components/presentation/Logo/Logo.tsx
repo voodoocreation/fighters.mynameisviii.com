@@ -7,7 +7,7 @@ const Logo: React.FC = () => (
     <svg viewBox="0 0 909.25 773" xmlns="http://www.w3.org/2000/svg">
       <style
         dangerouslySetInnerHTML={{
-          __html: `.st0{fill:#FF0000;} .st1{fill:#E1BFAE;} .st2{fill:#C9A197;} .st3{fill:#F4E2DF;} .st4{fill:#FFFFFF;}`
+          __html: `.st0{fill:#FF0000;} .st1{fill:#E1BFAE;} .st2{fill:#C9A197;} .st3{fill:#F4E2DF;} .st4{fill:#FFFFFF;}`,
         }}
         type="text/css"
       />

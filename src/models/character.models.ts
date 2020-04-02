@@ -16,5 +16,5 @@ export const character = (
   imageUrl: options.imageUrl || "",
   movesets: options.movesets ? options.movesets.map(moveset) : [],
   name: options.name || "",
-  slug: options.slug || createSlugFromString(options.name || "")
+  slug: options.slug || createSlugFromString(options.name || ""),
 });

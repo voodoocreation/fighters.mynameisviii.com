@@ -6,13 +6,13 @@ module.exports = {
       branches: 100,
       functions: 100,
       lines: 100,
-      statements: 100
-    }
+      statements: 100,
+    },
   },
   moduleDirectories: ["node_modules"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "yaml", "yml", "json"],
   moduleNameMapper: {
-    "\\.(jpg|jpeg|gif|png|svg|scss)$": "<rootDir>/src/__mocks__/dummyMock.ts"
+    "\\.(jpg|jpeg|gif|png|svg|scss)$": "<rootDir>/src/__mocks__/dummyMock.ts",
   },
   roots: ["<rootDir>/src"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
@@ -20,8 +20,8 @@ module.exports = {
   testURL: "http://localhost",
   transform: {
     "^.+\\.(yaml|yml)$": "yaml-jest",
-    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
   },
   testMatch: ["**/*.test.(js|jsx|ts|tsx)"],
-  verbose: true
+  verbose: true,
 };

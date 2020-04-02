@@ -9,5 +9,5 @@ export interface IMoveset {
 
 export const moveset = (options: DeepPartial<IMoveset> = {}): IMoveset => ({
   moves: options.moves ? options.moves.map(move) : [],
-  name: options.name || ""
+  name: options.name || "",
 });

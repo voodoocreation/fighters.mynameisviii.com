@@ -17,7 +17,7 @@ const CharacterListing: React.FC<IProps> = ({
   intl,
   name,
   onClick,
-  slug
+  slug,
 }) => (
   <article className="CharacterListing">
     <Link href={`#${slug}`} onClick={onClick}>

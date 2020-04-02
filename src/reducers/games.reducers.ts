@@ -10,21 +10,21 @@ export interface IState {
 
 export const initialState: IState = {
   currentSlug: "",
-  items: []
+  items: [],
 };
 
 export default reducerWithInitialState(initialState)
   .case(actions.initApp.started, (state, payload) => ({
     ...state,
-    items: payload.games ? payload.games : state.items
+    items: payload.games ? payload.games : state.items,
   }))
 
   .case(actions.setCurrentGameSlug, (state, payload) => ({
     ...state,
-    currentSlug: payload
+    currentSlug: payload,
   }))
 
-  .case(actions.changeRoute.started, state => ({
+  .case(actions.changeRoute.started, (state) => ({
     ...state,
-    currentSlug: ""
+    currentSlug: "",
   }));

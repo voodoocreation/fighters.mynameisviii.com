@@ -7,14 +7,14 @@ import Game from "./Game";
 const testGame = game({
   characters: [
     character({
-      name: "Test character 1"
+      name: "Test character 1",
     }),
     character({
-      name: "Test character 2"
-    })
+      name: "Test character 2",
+    }),
   ],
   imageUrl: "imageUrl",
-  title: "Test Game"
+  title: "Test Game",
 });
 
 const component = new WrapperWithIntl(Game).withDefaultProps(testGame);
@@ -28,17 +28,17 @@ describe("[presentation] <Game />", () => {
   beforeAll(() => {
     Object.defineProperties(wrapper.find(".Game--characters").instance(), {
       clientWidth: {
-        value: 200
+        value: 200,
       },
       querySelector: {
-        value: () => <div />
+        value: () => <div />,
       },
       scrollLeft: {
-        value: 200
+        value: 200,
       },
       scrollTo: {
-        value: scrollToMock
-      }
+        value: scrollToMock,
+      },
     });
   });
 
@@ -50,7 +50,7 @@ describe("[presentation] <Game />", () => {
     expect(
       wrapper.find(".Game--characters--items").prop("style")
     ).toMatchObject({
-      width: `${100 * testGame.characters.length}%`
+      width: `${100 * testGame.characters.length}%`,
     });
   });
 

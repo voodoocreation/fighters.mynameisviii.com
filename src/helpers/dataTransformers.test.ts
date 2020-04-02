@@ -20,7 +20,7 @@ describe("[helpers] Data transformers", () => {
       expect(transformed).toEqual({
         "test-1": valid[0],
         "test-2": valid[1],
-        "test-3": valid[2]
+        "test-3": valid[2],
       });
       expect(isPassing).toBe(true);
     });
@@ -37,7 +37,7 @@ describe("[helpers] Data transformers", () => {
 
       expect(transformed).toEqual({
         "test-1": valid[0],
-        "test-3": valid[2]
+        "test-3": valid[2],
       });
       expect(isPassing).toBe(true);
     });
@@ -115,9 +115,9 @@ describe("[helpers] Data transformers", () => {
         Object.defineProperty(window, "location", {
           value: {
             host: "localhost",
-            port: "1234"
+            port: "1234",
           },
-          writable: true
+          writable: true,
         });
 
         expect(data.absoluteUrl("/news/article-slug")).toEqual(

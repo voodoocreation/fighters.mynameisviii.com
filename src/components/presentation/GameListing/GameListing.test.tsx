@@ -5,20 +5,20 @@ import GameListing from "./GameListing";
 const testGame = game({
   characters: [
     character({
-      name: "Test character 1"
+      name: "Test character 1",
     }),
     character({
-      name: "Test character 2"
-    })
+      name: "Test character 2",
+    }),
   ],
   imageUrl: "imageUrl",
   slug: "test-game",
-  title: "Test Game"
+  title: "Test Game",
 });
 
 const component = new WrapperWithIntl(GameListing).withDefaultProps({
   ...testGame,
-  onClick: jest.fn()
+  onClick: jest.fn(),
 });
 
 describe("[presentation] <GameListing />", () => {
@@ -55,7 +55,7 @@ describe("[presentation] <GameListing />", () => {
   describe("when the listing is selected", () => {
     const wrapper = component
       .withProps({
-        isSelected: true
+        isSelected: true,
       })
       .mount();
 

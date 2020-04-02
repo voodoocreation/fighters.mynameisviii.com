@@ -4,7 +4,7 @@ import { FaGamepad, FaHome, FaUsers } from "react-icons/fa";
 import {
   FormattedMessage,
   injectIntl,
-  WrappedComponentProps
+  WrappedComponentProps,
 } from "react-intl";
 import { connect } from "react-redux";
 
@@ -32,7 +32,7 @@ interface IState {
 
 class Navigation extends React.Component<IProps, IState> {
   public readonly state: IState = {
-    activeNav: undefined
+    activeNav: undefined,
   };
 
   public render() {
@@ -92,7 +92,7 @@ class Navigation extends React.Component<IProps, IState> {
     this.props.games.length > 0 ? (
       <section
         className={cn("Navigation--games", {
-          isOpen: this.state.activeNav === "games"
+          isOpen: this.state.activeNav === "games",
         })}
       >
         <h2>
@@ -100,7 +100,7 @@ class Navigation extends React.Component<IProps, IState> {
         </h2>
 
         <div className="Navigation--games--items">
-          {this.props.games.map(game => (
+          {this.props.games.map((game) => (
             <GameListing
               {...game}
               isSelected={
@@ -121,7 +121,7 @@ class Navigation extends React.Component<IProps, IState> {
     return currentGame ? (
       <section
         className={cn("Navigation--characters", {
-          isOpen: this.state.activeNav === "characters"
+          isOpen: this.state.activeNav === "characters",
         })}
       >
         <h2>
@@ -129,7 +129,7 @@ class Navigation extends React.Component<IProps, IState> {
         </h2>
 
         <div className="Navigation--characters--items">
-          {currentGame.characters.map(character => (
+          {currentGame.characters.map((character) => (
             <CharacterListing
               {...character}
               game={currentGame}
@@ -148,7 +148,7 @@ class Navigation extends React.Component<IProps, IState> {
     dom.unlockScroll();
 
     this.setState(() => ({
-      activeNav
+      activeNav,
     }));
 
     if (activeNav) {
@@ -159,7 +159,7 @@ class Navigation extends React.Component<IProps, IState> {
 
 const mapState = (state: TStoreState) => ({
   currentGame: selectors.getCurrentGame(state),
-  games: selectors.getGames(state)
+  games: selectors.getGames(state),
 });
 
 export default injectIntl(connect(mapState)(Navigation));

@@ -18,7 +18,7 @@ const GameListing: React.FC<IProps> = ({
   intl,
   onClick,
   slug,
-  title
+  title,
 }) => (
   <article className={cn("GameListing", { isSelected })}>
     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -35,7 +35,7 @@ const GameListing: React.FC<IProps> = ({
 );
 
 GameListing.defaultProps = {
-  isSelected: false
+  isSelected: false,
 };
 
 export default injectIntl(GameListing);

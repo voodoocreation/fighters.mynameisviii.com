@@ -10,7 +10,7 @@ type IProps = IGame;
 
 export default class Game extends React.Component<IProps> {
   public readonly state = {
-    isTouching: false
+    isTouching: false,
   };
 
   private scrollTimeout: NodeJS.Timeout | undefined = undefined;
@@ -35,7 +35,7 @@ export default class Game extends React.Component<IProps> {
             className="Game--characters--items"
             style={{ width: `${100 * characters.length}%` }}
           >
-            {characters.map(character => (
+            {characters.map((character) => (
               <Character {...character} key={character.name} />
             ))}
           </div>

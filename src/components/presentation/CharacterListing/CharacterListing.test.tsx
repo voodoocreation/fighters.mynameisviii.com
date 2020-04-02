@@ -4,18 +4,18 @@ import CharacterListing from "./CharacterListing";
 
 const testGame = game({
   slug: "game-title",
-  title: "Game title"
+  title: "Game title",
 });
 
 const testCharacter = character({
   imageUrl: "imageUrl",
-  name: "Character Name"
+  name: "Character Name",
 });
 
 const component = new WrapperWithIntl(CharacterListing).withDefaultProps({
   ...testCharacter,
   game: testGame,
-  onClick: jest.fn()
+  onClick: jest.fn(),
 });
 
 describe("[presentation] <CharacterListing />", () => {

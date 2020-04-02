@@ -6,7 +6,7 @@ describe("[models] Character", () => {
       characters: [],
       imageUrl: "",
       slug: "",
-      title: ""
+      title: "",
     });
   });
 
@@ -14,29 +14,29 @@ describe("[models] Character", () => {
     const options = {
       characters: [
         {
-          name: "Character Name"
-        }
+          name: "Character Name",
+        },
       ],
       imageUrl: "imageUrl",
       slug: "test-game",
-      title: "Game Title"
+      title: "Game Title",
     };
 
     expect(game(options)).toEqual({
       characters: [
         character({
-          name: options.characters[0].name
-        })
+          name: options.characters[0].name,
+        }),
       ],
       imageUrl: options.imageUrl,
       slug: options.slug,
-      title: options.title
+      title: options.title,
     });
   });
 
   it("generates a slug from the title when no slug is defined", () => {
     expect(game({ title: "Game Title" })).toMatchObject({
-      slug: "game-title"
+      slug: "game-title",
     });
   });
 });

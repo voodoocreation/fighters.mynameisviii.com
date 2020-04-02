@@ -33,7 +33,7 @@ class Character extends React.Component<IProps> {
       <h3>{moveset.name}</h3>
 
       <dl>
-        {moveset.moves.map(move => (
+        {moveset.moves.map((move) => (
           <React.Fragment key={move.name}>
             <dl>
               <span>{move.name}</span>{" "}

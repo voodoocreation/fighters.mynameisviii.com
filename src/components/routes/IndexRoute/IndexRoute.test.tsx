@@ -8,8 +8,8 @@ describe("[routes] <IndexRoute />", () => {
     const wrapper = component
       .withReduxState({
         app: {
-          isInInstalledApp: true
-        }
+          isInInstalledApp: true,
+        },
       })
       .mount();
 
@@ -29,8 +29,8 @@ describe("[routes] <IndexRoute />", () => {
     const wrapper = component
       .withReduxState({
         app: {
-          isInInstalledApp: false
-        }
+          isInInstalledApp: false,
+        },
       })
       .mount();
 
@@ -53,10 +53,7 @@ describe("[routes] <IndexRoute />", () => {
     });
 
     it("clicks the install button", () => {
-      wrapper
-        .update()
-        .find("button.Home--installButton")
-        .simulate("click");
+      wrapper.update().find("button.Home--installButton").simulate("click");
     });
 
     it("prompts the user to install the app", () => {

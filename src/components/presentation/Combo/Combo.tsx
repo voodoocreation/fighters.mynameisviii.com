@@ -12,7 +12,7 @@ class Combo extends React.Component<IProps> {
   public render() {
     return (
       <div className="Combo">
-        {this.renderButtons().map(button =>
+        {this.renderButtons().map((button) =>
           React.cloneElement(button, { key: `button-${uuid()}` })
         )}
       </div>

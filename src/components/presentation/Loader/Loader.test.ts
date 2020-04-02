@@ -3,7 +3,7 @@ import { Wrapper } from "react-test-wrapper";
 import Loader from "./Loader";
 
 const component = new Wrapper(Loader).withDefaultProps({
-  className: "TestLoader"
+  className: "TestLoader",
 });
 
 describe("[presentation] <Loader />", () => {

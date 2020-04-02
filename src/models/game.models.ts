@@ -14,5 +14,5 @@ export const game = (options: DeepPartial<IGame> = {}): IGame => ({
   characters: options.characters ? options.characters.map(character) : [],
   imageUrl: options.imageUrl || "",
   slug: options.slug || createSlugFromString(options.title || ""),
-  title: options.title || ""
+  title: options.title || "",
 });

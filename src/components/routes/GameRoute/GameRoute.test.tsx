@@ -7,20 +7,20 @@ import GameRoute from "./GameRoute";
 const component = new WrapperWithRedux(GameRoute);
 
 const testGame = game({
-  title: "Test game"
+  title: "Test game",
 });
 
 describe("[routes] <GameRoute />", () => {
   it("is set up correctly by getInitialProps()", async () => {
     const store = createStore({
       games: {
-        items: [testGame]
-      }
+        items: [testGame],
+      },
     });
 
     await GameRoute.getInitialProps({
       query: { slug: testGame.slug },
-      store
+      store,
     } as any);
 
     expect(selectors.getCurrentGameSlug(store.getState())).toBe(testGame.slug);
@@ -39,8 +39,8 @@ describe("[routes] <GameRoute />", () => {
       .withReduxState({
         games: {
           currentSlug: testGame.slug,
-          items: [testGame]
-        }
+          items: [testGame],
+        },
       })
       .mount();
 

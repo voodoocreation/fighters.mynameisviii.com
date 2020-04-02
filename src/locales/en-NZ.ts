@@ -34,5 +34,5 @@ export default {
   VIEW_ALL_MOVES_FOR_GAME: "View all moves for {game}",
   VIEW_MOVES_FOR_CHARACTER_FROM_GAME: "View moves for {character} from {game}",
   VIEW_ON_GITHUB: "View on GitHub",
-  XERO: "Xero"
+  XERO: "Xero",
 };

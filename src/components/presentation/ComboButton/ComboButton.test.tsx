@@ -49,7 +49,7 @@ describe("[presentation] <ComboButton />", () => {
     const wrapper = component
       .withChildren("F")
       .withProps({
-        isSeparator: true
+        isSeparator: true,
       })
       .render();
 
@@ -60,7 +60,7 @@ describe("[presentation] <ComboButton />", () => {
     const wrapper = component
       .withChildren("F")
       .withProps({
-        isHeld: true
+        isHeld: true,
       })
       .render();
 

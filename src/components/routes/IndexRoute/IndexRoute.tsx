@@ -25,7 +25,7 @@ interface IState {
 
 class IndexRoute extends React.Component<IProps, IState> {
   public readonly state = {
-    isInstallAvailable: false
+    isInstallAvailable: false,
   };
 
   private deferredInstallPromptEvent: any = undefined;
@@ -124,7 +124,7 @@ class IndexRoute extends React.Component<IProps, IState> {
                     <Link href="https://www.xero.com" isExternal>
                       <FormattedMessage id="XERO" />
                     </Link>
-                  )
+                  ),
                 }}
               />
             </p>
@@ -141,7 +141,7 @@ class IndexRoute extends React.Component<IProps, IState> {
     this.deferredInstallPromptEvent = event;
 
     this.setState({
-      isInstallAvailable: true
+      isInstallAvailable: true,
     });
   };
 
@@ -151,7 +151,7 @@ class IndexRoute extends React.Component<IProps, IState> {
 }
 
 const mapState = (state: TStoreState) => ({
-  isInInstalledApp: selectors.isInInstalledApp(state)
+  isInInstalledApp: selectors.isInInstalledApp(state),
 });
 
 export default injectIntlIntoPage(connect(mapState)(IndexRoute));

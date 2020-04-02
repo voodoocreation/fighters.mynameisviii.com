@@ -7,14 +7,14 @@ const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 const getPages = () => {
   const paths = {
-    "/": { page: "/" }
+    "/": { page: "/" },
   };
 
-  fs.readdirSync(path.join(__dirname, "src/data/games")).forEach(file => {
+  fs.readdirSync(path.join(__dirname, "src/data/games")).forEach((file) => {
     const slug = file.split(".")[0];
     paths[`/games/${slug}/`] = {
       page: "/games",
-      query: { slug }
+      query: { slug },
     };
   });
 
@@ -54,40 +54,40 @@ module.exports = withSass({
     config.module.rules.push(
       {
         test: /\.(svg)$/,
-        use: "svg-loader"
+        use: "svg-loader",
       },
       {
         test: /\.(jpg|jpeg|png)$/,
-        use: "file-loader"
+        use: "file-loader",
       },
       {
         test: /\.(yml|yaml)$/,
-        use: ["json-loader", "yaml-loader"]
+        use: ["json-loader", "yaml-loader"],
       }
     );
 
     config.plugins.push(
       new FilterWarningsPlugin({
-        exclude: /Conflicting order between:/
+        exclude: /Conflicting order between:/,
       }),
 
       new ServiceWorkerPlugin({
         entry: path.join(__dirname, "appService.js"),
         filename: "appService.js",
-        transformOptions: swOptions => ({
+        transformOptions: (swOptions) => ({
           ...swOptions,
           assets: swOptions.assets
-            .map(asset => `/_next${asset.replace(/\\/g, "/")}`)
-            .filter(asset => asset.startsWith("/_next/static/")),
+            .map((asset) => `/_next${asset.replace(/\\/g, "/")}`)
+            .filter((asset) => asset.startsWith("/_next/static/")),
           staticFiles: [
             ...getFiles(path.join(__dirname, "static")),
-            ...Object.keys(getPages())
+            ...Object.keys(getPages()),
           ],
-          buildId
-        })
+          buildId,
+        }),
       })
     );
 
     return config;
-  }
+  },
 });

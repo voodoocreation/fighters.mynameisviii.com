@@ -4,12 +4,12 @@ import {
   FaArrowDown,
   FaArrowLeft,
   FaArrowRight,
-  FaArrowUp
+  FaArrowUp,
 } from "react-icons/fa";
 import {
   FormattedMessage,
   injectIntl,
-  WrappedComponentProps
+  WrappedComponentProps,
 } from "react-intl";
 
 import "./ComboButton.scss";
@@ -23,7 +23,7 @@ interface IProps extends WrappedComponentProps {
 class ComboButton extends React.Component<IProps> {
   public static defaultProps = {
     isHeld: false,
-    isSeparator: false
+    isSeparator: false,
   };
 
   public render() {
@@ -52,7 +52,7 @@ class ComboButton extends React.Component<IProps> {
     const { children } = this.props;
 
     const iconProps = {
-      className: "ComboButton--icon"
+      className: "ComboButton--icon",
     };
 
     switch (children.toUpperCase()) {

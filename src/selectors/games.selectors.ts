@@ -10,5 +10,5 @@ export const getCurrentGameSlug = (state: TStoreState) =>
 export const getCurrentGame = createSelector(
   getGames,
   getCurrentGameSlug,
-  (games, slug) => games.find(game => game.slug === slug)
+  (games, slug) => games.find((game) => game.slug === slug)
 );

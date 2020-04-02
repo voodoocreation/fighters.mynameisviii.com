@@ -10,22 +10,22 @@ const testCharacter = character({
         move({
           combo: "D,F,LP",
           conditions: "conditions",
-          name: "Move 1"
-        })
+          name: "Move 1",
+        }),
       ],
-      name: "Moveset with conditions"
+      name: "Moveset with conditions",
     }),
     moveset({
       moves: [
         move({
           combo: "D,F,LP",
-          name: "Move 2"
-        })
+          name: "Move 2",
+        }),
       ],
-      name: "Moveset without conditions"
-    })
+      name: "Moveset without conditions",
+    }),
   ],
-  name: "Character Name"
+  name: "Character Name",
 });
 
 const component = new WrapperWithIntl(Character).withDefaultProps(

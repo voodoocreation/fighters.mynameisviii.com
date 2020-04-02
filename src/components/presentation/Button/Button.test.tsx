@@ -16,7 +16,7 @@ describe("[presentation] <Button />", () => {
   describe("when isActive prop is true", () => {
     const wrapper = component
       .withProps({
-        isActive: true
+        isActive: true,
       })
       .render();
 

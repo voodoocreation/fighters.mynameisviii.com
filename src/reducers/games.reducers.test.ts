@@ -10,7 +10,7 @@ describe("[reducers] Games", () => {
       const state = reducer(
         initialState,
         actions.initApp.started({
-          games
+          games,
         })
       );
 
@@ -21,7 +21,7 @@ describe("[reducers] Games", () => {
       const state = reducer(
         {
           ...initialState,
-          items: games
+          items: games,
         },
         actions.initApp.started({})
       );
@@ -42,7 +42,7 @@ describe("[reducers] Games", () => {
     const state = reducer(
       {
         ...initialState,
-        currentSlug: slug
+        currentSlug: slug,
       },
       actions.changeRoute.started("/")
     );

@@ -9,7 +9,7 @@ import Document, {
   Head,
   Html,
   Main,
-  NextScript
+  NextScript,
 } from "next/document";
 import * as React from "react";
 
@@ -59,7 +59,7 @@ const AnalyticsHead: React.FC = () => (
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-P9CMQN4');`
+      })(window,document,'script','dataLayer','GTM-P9CMQN4');`,
     }}
   />
 );
@@ -91,7 +91,7 @@ export default class<P extends IProps> extends Document<P> {
     return {
       ...initialProps,
       ...props,
-      locale: req.locale || "en-NZ"
+      locale: req.locale || "en-NZ",
     };
   };
 
@@ -104,7 +104,7 @@ export default class<P extends IProps> extends Document<P> {
           <AnalyticsHead />
           <script
             dangerouslySetInnerHTML={{
-              __html: `document.documentElement.classList.add("isClientRendered");`
+              __html: `document.documentElement.classList.add("isClientRendered");`,
             }}
           />
           <Meta />

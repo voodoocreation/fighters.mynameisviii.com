@@ -79,7 +79,7 @@ class GameRoute extends React.Component<IProps> {
 }
 
 const mapState = (state: TStoreState) => ({
-  game: selectors.getCurrentGame(state)
+  game: selectors.getCurrentGame(state),
 });
 
 export default injectIntlIntoPage(connect(mapState, actions)(GameRoute));

@@ -6,7 +6,7 @@ describe("[models] Character", () => {
       imageUrl: "",
       movesets: [],
       name: "",
-      slug: ""
+      slug: "",
     });
   });
 
@@ -15,28 +15,28 @@ describe("[models] Character", () => {
       imageUrl: "imageUrl",
       movesets: [
         {
-          name: "Moveset name"
-        }
+          name: "Moveset name",
+        },
       ],
       name: "Character Name",
-      slug: "test-character"
+      slug: "test-character",
     };
 
     expect(character(options)).toEqual({
       imageUrl: options.imageUrl,
       movesets: [
         moveset({
-          name: options.movesets[0].name
-        })
+          name: options.movesets[0].name,
+        }),
       ],
       name: options.name,
-      slug: options.slug
+      slug: options.slug,
     });
   });
 
   it("generates a slug from the name when no slug is defined", () => {
     expect(character({ name: "Character Name" })).toMatchObject({
-      slug: "character-name"
+      slug: "character-name",
     });
   });
 });

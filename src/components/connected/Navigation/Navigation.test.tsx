@@ -5,16 +5,16 @@ import Navigation from "./Navigation";
 const game = models.game({
   characters: [
     models.character({
-      name: "Test character"
-    })
+      name: "Test character",
+    }),
   ],
-  slug: "test-game"
+  slug: "test-game",
 });
 
 const component = new WrapperWithRedux(Navigation).withDefaultReduxState({
   games: {
-    items: []
-  }
+    items: [],
+  },
 });
 
 describe("[connected] <Navigation />", () => {
@@ -42,8 +42,8 @@ describe("[connected] <Navigation />", () => {
       .withReduxState({
         games: {
           currentSlug: game.slug,
-          items: [game]
-        }
+          items: [game],
+        },
       })
       .mount();
 
